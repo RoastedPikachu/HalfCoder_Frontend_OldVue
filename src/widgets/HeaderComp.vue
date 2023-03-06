@@ -1,0 +1,70 @@
+<template>
+  <header>
+    <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
+    <nav>
+      <router-link to="/" class="route">Главная</router-link>
+      <router-link to="/events" class="route">События</router-link>
+      <button>
+        <img src="@/assets/grey_settings_icon.svg" alt="Настройки">
+      </button>
+      <button>
+        <img src="@/assets/grey_notifications_icon.svg" alt="Уведомления">
+      </button>
+      <button>
+        <img src="@/assets/profile_icon.svg" alt="Профиль">
+      </button>
+    </nav>
+  </header>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'HeaderComp'
+})
+</script>
+
+<style lang="scss" scoped>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 7.5%;
+    width: 85%;
+    height: 60px;
+    background-color: #111111;
+    font-weight: 700;
+    outline: none;
+    h1 {
+      display: flex;
+      color: #ffffff;
+      font-size: 36px;
+      font-family: 'Space Grotesk', sans-serif;
+      p {
+        color: #3d5aff;
+      }
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 300px;
+      height: 26px;
+      font-family: 'Inter', sans-serif;
+      .route {
+        color: #747474;
+        font-size: 16px;
+        text-decoration: none;
+      }
+      button {
+        width: 34px;
+        height: 34px;
+        background-color: #1e1e1e;
+        border: 0px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+</style>
