@@ -1,8 +1,8 @@
 <template>
   <section id="RecommendedCategories">
-    <p class="recomendation" v-for="recomend of recomends" :key="recomend.id">
+    <router-link :to="recomend.link" class="recomendation" v-for="recomend of recomends" :key="recomend.id">
       {{ recomend.categoryName }}
-    </p>
+    </router-link>
     <button>
       <img src="@/assets/grey_arrow_icon.svg" alt="Стрелка">
     </button>
@@ -19,47 +19,58 @@ export default defineComponent({
       recomends: [
         {
           id: 0, 
-          categoryName: 'Python'
+          categoryName: 'Python',
+          link: '/python',
         }, 
         {
           id: 1,
-          categoryName: 'JS'
+          categoryName: 'JS',
+          link: '/js',
         },
         {
           id: 2,
-          categoryName: 'ML'
+          categoryName: 'ML',
+          link: '/machLearn',
         },
         {
           id: 3,
-          categoryName: 'News'
+          categoryName: 'News',
+          link: '/news',
         },
         {
           id: 4,
-          categoryName: 'Java'
+          categoryName: 'Java',
+          link: '/java',
         },
         {
           id: 5,
-          categoryName: 'Programming'
+          categoryName: 'Programming',
+          link: '/programming',
         },
         {
           id: 6,
-          categoryName: 'UI'
+          categoryName: 'UI',
+          link: '/userinterf',
         }, 
         {
           id: 7,
-          categoryName: 'Business'
+          categoryName: 'Business',
+          link: '/business',
         },
         {
           id: 8,
-          categoryName: 'UX'
+          categoryName: 'UX',
+          link: '/userexper',
         },
         {
           id: 9,
-          categoryName: 'IoT'
+          categoryName: 'IoT',
+          link: '/iot',
         },
         {
           id: 10,
-          categoryName: 'Android'
+          categoryName: 'Android',
+          link: '/android',
         }
       ],
     }
@@ -79,11 +90,17 @@ export default defineComponent({
     background-color: #141414;
     border: 2px solid #747474;
     border-radius: 5px;
-    p {
+    .recomendation {
       color: #747474;
       font-size: 16px;
       font-family: 'Space Grotesk', sans-serif;
+      text-decoration: none;
+      transition: 500ms ease;
+      outline: none;
       cursor: pointer;
+    }
+    .recomendation:hover {
+      color: #3d5aff;
     }
     button {
       margin-left: -12px;
@@ -91,6 +108,7 @@ export default defineComponent({
       height: 18px;
       background-color: #141414;
       border: 0;
+      outline: none;
       cursor: pointer;
     }
   }

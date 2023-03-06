@@ -4,9 +4,9 @@
     <nav>
       <router-link to="/" class="route">Главная</router-link>
       <router-link to="/events" class="route">События</router-link>
-      <button>
+      <router-link to="/settings" class="route">
         <img src="@/assets/grey_settings_icon.svg" alt="Настройки">
-      </button>
+      </router-link>
       <button>
         <img src="@/assets/grey_notifications_icon.svg" alt="Уведомления">
       </button>
@@ -56,6 +56,21 @@ export default defineComponent({
         color: #747474;
         font-size: 16px;
         text-decoration: none;
+        transition: 500ms ease;
+        outline: none;
+      }
+      .route:nth-child(3) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 34px;
+        height: 34px;
+        background-color: #1e1e1e;
+        border: 0px;
+        border-radius: 10px;
+      }
+      .route:hover {
+        color: #3d5aff;
       }
       button {
         width: 34px;
@@ -63,6 +78,7 @@ export default defineComponent({
         background-color: #1e1e1e;
         border: 0px;
         border-radius: 10px;
+        outline: none;
         cursor: pointer;
       }
     }

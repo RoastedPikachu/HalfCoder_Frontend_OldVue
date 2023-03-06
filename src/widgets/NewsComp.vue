@@ -3,7 +3,7 @@
     <h2>Новости</h2>
     <div id="News_info">
       <div class="News_infoItem" v-for="item of news" :key="item.id">
-        <p>{{ item.description }}</p>
+        <a :href="item.link">{{ item.description }}</a>
         <p>{{ item.appearanceTime }}</p>
       </div>
     </div>
@@ -20,16 +20,19 @@
         news: [
           {
             id: 0,
+            link: '',
             description: 'Яндекс выложил код счётчика Метрики в opensource',
             appearanceTime: '3 часа назад'
           },
           {
             id: 1,
+            link: '',
             description: 'Яндекс выложил код счётчика Метрики в opensource',
             appearanceTime: '2 часа назад'
           },
           {
             id: 2,
+            link: '',
             description: 'Яндекс выложил код счётчика Метрики в opensource',
             appearanceTime: '4 часа назад'
           },
@@ -75,10 +78,16 @@
         width: 100%;
         height: 45px; 
         cursor: pointer;
-        p:first-child {
+        a {
           color: #a5a5a5;
           font-size: 14px;
           font-family: 'Inter', sans-serif;
+          text-decoration: none;
+          transition: 500ms ease;
+          outline: none;
+        }
+        a:hover {
+          color: #ffffff;
         }
         p:last-child {
           color: #747474;

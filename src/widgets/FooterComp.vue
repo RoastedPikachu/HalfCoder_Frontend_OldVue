@@ -36,6 +36,11 @@
       color: #747474;
       line-height: 25px;
       text-decoration: none;
+      transition: 500ms ease;
+      outline: none;
+    }
+    a:hover {
+      color: #3d5aff;
     }
     p {
       display: flex;

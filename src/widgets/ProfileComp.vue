@@ -184,7 +184,12 @@
         font-family: 'Space Grotesk', sans-serif;
         background-color: #141414;
         border: 0;
+        transition: 500ms ease;
+        outline: none;
         cursor: pointer;
+      }
+      button:hover {
+        color: #ffffff;
       }
     }
   }

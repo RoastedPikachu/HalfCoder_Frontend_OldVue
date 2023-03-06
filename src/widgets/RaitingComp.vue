@@ -14,7 +14,7 @@
         </span>
       </div>
     </div>
-    <p id="Rating_moreUsers">Ещё {{ countOfUsersResults }} результата</p>
+    <router-link to="/users" id="Rating_moreUsers">Ещё {{ countOfUsersResults }} результатов</router-link>
   </section>
 </template>
 
@@ -142,12 +142,18 @@
         }
       }
     }
-    // вьебать из p кнопку
     #Rating_moreUsers {
       height: 30px;
+      color: #747474;
       font-size: 12px;
       font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      transition: 500ms ease;
+      outline: none;
       cursor: pointer;
+    }
+    #Rating_moreUsers:hover {
+      color: #3d5aff;
     }
   }
 </style>

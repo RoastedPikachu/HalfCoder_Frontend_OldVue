@@ -47,9 +47,6 @@ export default defineComponent({
   #MainBlock {
     display: flex;
     font-weight: 700;
-    a {
-      outline: none;
-    }
     #MainBlock_info {
       display: flex;
       flex-wrap: wrap;
