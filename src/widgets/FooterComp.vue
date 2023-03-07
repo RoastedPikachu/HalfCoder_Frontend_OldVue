@@ -1,14 +1,27 @@
 <template>
   <footer>
-    <a href="/">About</a>
-    <a href="/">Settings</a>
-    <a href="/">Support</a>
-    <a href="/">Docs</a>
-    <p>
+    <span>
+      <a href="/">About</a>
+      <a href="/">Settings</a>
+      <a href="/">Support</a>
+      <a href="/">Docs</a>
+    </span>
+    <span>
       <a href="/">Help</a>
       <a href="/">Privacy & terms</a>
-    </p>
-    <p>©2023 &lt; HalfCoder /></p>
+    </span>
+    <span>©2023 &lt; HalfCoder /></span>
+    <span id="SocialNetworkLinks">
+      <a href="/" id="SocialNetworkLinks_Vk">
+        <img src="@/assets/grey_vk_icon.svg" alt="Vk">
+      </a>
+      <a href="/" id="SocialNetworkLinks_Tg">
+        <img src="@/assets/grey_telegramm_icon.svg" alt="Telegram">
+      </a>
+      <a href="/" id="SocialNetworkLinks_Dzen">
+        <img src="@/assets/grey_dzen_icon.svg" alt="Дзен">
+      </a>
+    </span>
   </footer>
 </template>
 
@@ -42,12 +55,38 @@
     a:hover {
       color: #3d5aff;
     }
-    p {
+    span {
       display: flex;
       justify-content: space-around;
       width: 60%;
       text-align: center;
       line-height: 25px;
+    }
+    span:first-child {
+      width: 100%;
+    }
+    span:last-child {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 5px;
+      width: 50%;
+      a {
+        width: 26px;
+        height: 26px;
+        transition: 500ms ease;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      a:last-child {
+        width: 22px;
+        height: 22px;
+      }
+      a:hover {
+        transform: translateY(2px);
+      }
     }
   }
 </style>

@@ -83,7 +83,6 @@ export default defineComponent({
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 15px;
     margin-left: 20px;
     width: 100%;
     height: 30px;

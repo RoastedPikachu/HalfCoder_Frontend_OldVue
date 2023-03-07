@@ -9,6 +9,7 @@
       </router-link>
       <button>
         <img src="@/assets/grey_notifications_icon.svg" alt="Уведомления">
+        <div id="HasNotificationsStatus" v-if="hasNotificationsStatus"></div>
       </button>
       <button>
         <img src="@/assets/profile_icon.svg" alt="Профиль">
@@ -21,7 +22,12 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'HeaderComp'
+  name: 'HeaderComp',
+  data() {
+    return {
+      hasNotificationsStatus: true
+    }
+  }
 })
 </script>
 
@@ -73,6 +79,7 @@ export default defineComponent({
         color: #3d5aff;
       }
       button {
+        position: relative;
         width: 34px;
         height: 34px;
         background-color: #1e1e1e;
@@ -80,6 +87,15 @@ export default defineComponent({
         border-radius: 10px;
         outline: none;
         cursor: pointer;
+        div {
+          position: absolute;
+          top: -2px;
+          right: -2px;
+          width: 10px;
+          height: 10px;
+          background-color: #df0a0a;
+          border-radius: 50px;
+        }
       }
     }
   }

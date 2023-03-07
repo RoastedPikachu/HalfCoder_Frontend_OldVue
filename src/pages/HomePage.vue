@@ -46,12 +46,13 @@ export default defineComponent({
 <style lang="scss" scoped>
   #MainBlock {
     display: flex;
+    margin-top: 15px;
+    width: 85%;
+    padding: 0 7.5%;
     font-weight: 700;
     #MainBlock_info {
       display: flex;
       flex-wrap: wrap;
-      margin-left: 7.5%;
-      margin-top: 15px;
       width: 280px;
       height: 890px;
     }
@@ -65,7 +66,7 @@ export default defineComponent({
       flex-wrap: wrap;
       margin-top: 17px;
       margin-left: 20px;
-      width: 308px;
+      width: 307px;
       height: 627px;
     }
   }

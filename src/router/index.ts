@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue';
+import SettingsPage from '@/pages/SettingsPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -7,7 +8,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: HomePage
   },
-    
+  {
+    path: '/settings',
+    name: 'settings',
+    component: SettingsPage
+  }
     //component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
 ]
 

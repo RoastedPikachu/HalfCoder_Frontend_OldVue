@@ -13,44 +13,13 @@
       <div><p>{{ following }}</p>  Following</div>
     </span>
     <div id="Profile_centerLine"></div>
-    <div id="Profile_menuIcons">
-      <span>
-        <img src="@/assets/home_icon.svg" alt="Feed">
-        <p>Feed</p>
-      </span>
-      <span>
-        <img src="@/assets/connections_icon.svg" alt="Связи">
-        <p>Connections</p>
-      </span>
-      <span>
-        <img src="@/assets/news_icon.svg" alt="Последние новости">
-        <p>Latest News</p>
-      </span>
-      <span>
-        <img src="@/assets/events_icon.svg" alt="События">
-        <p>Events</p>
-      </span>
-      <span>
-        <img src="@/assets/groups_icon.svg" alt="Группы">
-        <p>Groups</p>
-      </span>
-      <span>
-        <img src="@/assets/notifications_icon.svg" alt="Уведомления">
-        <p>Notifications</p>
-      </span>
-      <span>
-        <img src="@/assets/settings_icon.svg" alt="Настройки">
-        <p>Settings</p>
-      </span>
-    </div>
-    <div id="Profile_checkProfile">
-      <button>Просмотр профиля</button>
-    </div>
+    <ProfileMenuComp/>
   </section>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import ProfileMenuComp from '@/widgets/features/ProfileMenuComp.vue';
 
   export default defineComponent({
     name: 'ProfileComp',
@@ -60,6 +29,9 @@
         followers: 2.5,
         following: 365
       }
+    },
+    components: {
+      ProfileMenuComp
     }
   })
 </script>
@@ -141,56 +113,6 @@
       border: 2px solid #747474;
       border-width: 2px 0 0;
       border-radius: 5px;
-    }
-    #Profile_menuIcons {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 20px;
-      width: 87.5%;
-      height: 220px;
-      color: #ffffff;
-      span {
-        display: flex;
-        align-items: flex-end;
-        width: 100%;
-        height: 18px;
-        cursor: pointer;
-        img {
-          width: 20px;
-          height: 20px;
-        }
-        p {
-          margin-left: 10px;
-          height: 22px;
-          font-size: 20px;
-          font-family: 'Space Grotesk', sans-serif;
-        }
-      }
-    }
-    #Profile_checkProfile {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 50px;
-      border: 1px solid #747474;
-      border-width: 2px 0 0;
-      border-radius: 0px 0px 5px 5px;
-      button {
-        color: #3d5aff;
-        font-size: 16px;
-        font-weight: 700;
-        font-family: 'Space Grotesk', sans-serif;
-        background-color: #141414;
-        border: 0;
-        transition: 500ms ease;
-        outline: none;
-        cursor: pointer;
-      }
-      button:hover {
-        color: #ffffff;
-      }
     }
   }
 </style>
