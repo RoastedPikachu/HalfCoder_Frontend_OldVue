@@ -23,7 +23,7 @@
         </div>
         <div>
           <p>Дата рождения</p>
-          <input type="date">
+          <input type="datetime-local">
         </div>
       </div>
       <div class="mainBlock_Settings_InputsContainers">
@@ -48,9 +48,13 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import flatpickr from "flatpickr";
 
   export default defineComponent({
-    name: 'SettingsComp'
+    name: 'SettingsComp',
+    mounted() {
+      setTimeout(() => flatpickr("input[type=datetime-local]", {}), 500);
+    }
   })
 </script>
 

@@ -11,10 +11,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import HeaderComp from '@/widgets/HeaderComp.vue';
-  import FooterComp from '@/widgets/FooterComp.vue';
+  import HeaderComp from '@/widgets/shared/HeaderComp.vue';
+  import FooterComp from '@/widgets/shared/FooterComp.vue';
   import ProfileMenuComp from '@/widgets/features/ProfileMenuComp.vue';
-  import SettingsComp from '@/widgets/SettingsComp.vue';
+  import SettingsComp from '@/widgets/SettingsPage/SettingsComp.vue';
 
   export default defineComponent({
     name: 'SettingsPage',
@@ -31,8 +31,9 @@
   #MainBlock {
     display: flex;
     margin-top: 15px;
-    width: 85%;
-    padding: 0 7.5%;
+    width: 75%;
+    padding: 0 12.5%;
+    font-weight: 700;
   }
   #MainBlock_LeftOtherInfo {
     display: flex;

@@ -19,14 +19,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HeaderComp from '@/widgets/HeaderComp.vue';
-import ProfileComp from '@/widgets/ProfileComp.vue';
-import CompaniesComp from '@/widgets/CompaniesComp.vue';
-import RecommendedCategoriesComp from '@/widgets/RecommendedCategoriesComp.vue';
-import PostsComp from '@/widgets/PostsComp.vue';
-import RaitingComp from '@/widgets/RaitingComp.vue';
-import NewsComp from '@/widgets/NewsComp.vue';
-import FooterComp from '@/widgets/FooterComp.vue';
+import HeaderComp from '@/widgets/shared/HeaderComp.vue';
+import ProfileComp from '@/widgets/HomePage/ProfileComp.vue';
+import CompaniesComp from '@/widgets/HomePage/CompaniesComp.vue';
+import RecommendedCategoriesComp from '@/widgets/HomePage/RecommendedCategoriesComp.vue';
+import PostsComp from '@/widgets/HomePage/PostsComp.vue';
+import RaitingComp from '@/widgets/HomePage/RaitingComp.vue';
+import NewsComp from '@/widgets/HomePage/NewsComp.vue';
+import FooterComp from '@/widgets/shared/FooterComp.vue';
 
 export default defineComponent({
   name: 'HomePage',

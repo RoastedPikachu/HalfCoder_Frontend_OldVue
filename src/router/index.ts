@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/settings',
     name: 'settings',
     component: SettingsPage
-  }
+  },
     //component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
 ]
 
