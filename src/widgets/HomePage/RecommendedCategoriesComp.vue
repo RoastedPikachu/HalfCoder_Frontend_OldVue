@@ -10,72 +10,72 @@
 </template>
 
 <script lang="ts">  
-import { defineComponent } from 'vue';
+  import { defineComponent } from 'vue';
 
-export default defineComponent({
-  name: 'RecommendedCategoriesComp',
-  data() {
-    return {
-      recomends: [
-        {
-          id: 0, 
-          categoryName: 'Python',
-          link: '/python',
-        }, 
-        {
-          id: 1,
-          categoryName: 'JS',
-          link: '/js',
-        },
-        {
-          id: 2,
-          categoryName: 'ML',
-          link: '/machLearn',
-        },
-        {
-          id: 3,
-          categoryName: 'News',
-          link: '/news',
-        },
-        {
-          id: 4,
-          categoryName: 'Java',
-          link: '/java',
-        },
-        {
-          id: 5,
-          categoryName: 'Programming',
-          link: '/programming',
-        },
-        {
-          id: 6,
-          categoryName: 'UI',
-          link: '/userinterf',
-        }, 
-        {
-          id: 7,
-          categoryName: 'Business',
-          link: '/business',
-        },
-        {
-          id: 8,
-          categoryName: 'UX',
-          link: '/userexper',
-        },
-        {
-          id: 9,
-          categoryName: 'IoT',
-          link: '/iot',
-        },
-        {
-          id: 10,
-          categoryName: 'Android',
-          link: '/android',
-        }
-      ],
+  export default defineComponent({
+    name: 'RecommendedCategoriesComp',
+    data() {
+      return {
+        recomends: [
+          {
+            id: 0, 
+            categoryName: 'Python',
+            link: '/python',
+          }, 
+          {
+            id: 1,
+            categoryName: 'JS',
+            link: '/js',
+          },
+          {
+            id: 2,
+            categoryName: 'ML',
+            link: '/machLearn',
+          },
+          {
+            id: 3,
+            categoryName: 'News',
+            link: '/news',
+          },
+          {
+            id: 4,
+            categoryName: 'Java',
+            link: '/java',
+          },
+          {
+            id: 5,
+            categoryName: 'Programming',
+            link: '/programming',
+          },
+          {
+            id: 6,
+            categoryName: 'UI',
+            link: '/userinterf',
+          }, 
+          {
+            id: 7,
+            categoryName: 'Business',
+            link: '/business',
+          },
+          {
+            id: 8,
+            categoryName: 'UX',
+            link: '/userexper',
+          },
+          {
+            id: 9,
+            categoryName: 'IoT',
+            link: '/iot',
+          },
+          {
+            id: 10,
+            categoryName: 'Android',
+            link: '/android',
+          }
+        ],
+      }
     }
-  }
-})
+  })
 </script>
 
 <style lang="scss" scoped>

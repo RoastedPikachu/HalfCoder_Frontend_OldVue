@@ -24,10 +24,7 @@
       <img src="@/assets/notifications_icon.svg" alt="Уведомления">
       <p>Notifications</p>
     </span>
-    <span>
-      <img src="@/assets/settings_icon.svg" alt="Настройки">
-      <router-link to="/settings" class="profile_menuIcons_route">Settings</router-link>
-    </span>
+    <SettingsLinkComp/>
   </div>
   <div id="Profile_checkProfile">
     <button>Просмотр профиля</button>
@@ -36,9 +33,13 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
 
   export default defineComponent({
-    name: 'ProfileMenuComp'
+    name: 'ProfileMenuComp',
+    components: {
+      SettingsLinkComp
+    }
   })
 </script>
 

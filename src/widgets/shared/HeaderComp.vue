@@ -7,28 +7,40 @@
       <router-link to="/settings" class="route">
         <img src="@/assets/grey_settings_icon.svg" alt="Настройки">
       </router-link>
-      <button>
-        <img src="@/assets/grey_notifications_icon.svg" alt="Уведомления">
-        <div id="HasNotificationsStatus" v-if="hasNotificationsStatus"></div>
-      </button>
-      <button>
-        <img src="@/assets/profile_icon.svg" alt="Профиль">
-      </button>
+      <div class="modalContainer">
+        <button>
+          <img src="@/assets/grey_notifications_icon.svg" alt="Уведомления">
+          <div id="HasNotificationsStatus" v-if="hasNotificationsStatus"></div>
+        </button>
+        <ModalNotifComp/>
+      </div>
+      <div class="modalContainer">
+        <button>
+          <img src="@/assets/profile_icon.svg" alt="Профиль">
+        </button>
+        <ModalProfileComp/>
+      </div>
     </nav>
   </header>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+  import { defineComponent } from 'vue';
+  import ModalProfileComp from '@/widgets/features/ModalProfileComp.vue';
+  import ModalNotifComp from '@/widgets/features/ModalNotifComp.vue';
 
-export default defineComponent({
-  name: 'HeaderComp',
-  data() {
-    return {
-      hasNotificationsStatus: true
+  export default defineComponent({
+    name: 'HeaderComp',
+    data() {
+      return {
+        hasNotificationsStatus: true
+      }
+    },
+    components: {
+      ModalProfileComp,
+      ModalNotifComp
     }
-  }
-})
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -78,23 +90,27 @@ export default defineComponent({
       .route:hover {
         color: #3d5aff;
       }
-      button {
+      .modalContainer {
         position: relative;
         width: 34px;
         height: 34px;
-        background-color: #1e1e1e;
-        border: 0px;
-        border-radius: 10px;
-        outline: none;
-        cursor: pointer;
-        div {
-          position: absolute;
-          top: -2px;
-          right: -2px;
-          width: 10px;
-          height: 10px;
-          background-color: #df0a0a;
-          border-radius: 50px;
+        button {
+          width: 34px;
+          height: 34px;
+          background-color: #1e1e1e;
+          border: 0px;
+          border-radius: 10px;
+          outline: none;
+          cursor: pointer;
+          div {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 10px;
+            height: 10px;
+            background-color: #df0a0a;
+            border-radius: 50px;
+          }
         }
       }
     }

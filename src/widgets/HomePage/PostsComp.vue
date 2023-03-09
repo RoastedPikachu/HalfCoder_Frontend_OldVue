@@ -29,50 +29,50 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+  import { defineComponent } from 'vue';
 
-export default defineComponent({
-  name: 'PostsComp',
-  data() {
-    return {
-      posts: [
-        {
-          id: 0,
-          userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-          userName: 'Lorem Ipsum',
-          userSpeciality: 'Frontend developer',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum accumsan mauris, et pharetra nibh rhoncus in. Morbi',
-          postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
-          likes: 15,
-          reposts: 25, 
-          views: 54
-        },
-        {
-          id: 1,
-          userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-          userName: 'Lorem Ipsum',
-          userSpeciality: 'Frontend developer',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum accumsan mauris, et pharetra nibh rhoncus in. Morbi et sodales.',
-          postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
-          likes: 15,
-          reposts: 25, 
-          views: 54
-        },
-        {
-          id: 2,
-          userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-          userName: 'Lorem Ipsum',
-          userSpeciality: 'Frontend developer',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum accumsan mauris, et pharetra nibh rhoncus in. Morbi et sodales.',
-          postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
-          likes: 15,
-          reposts: 25, 
-          views: 54
-        }
-      ]
+  export default defineComponent({
+    name: 'PostsComp',
+    data() {
+      return {
+        posts: [
+          {
+            id: 0,
+            userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
+            userName: 'Lorem Ipsum',
+            userSpeciality: 'Frontend developer',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum accumsan mauris, et pharetra nibh rhoncus in. Morbi',
+            postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
+            likes: 15,
+            reposts: 25, 
+            views: 54
+          },
+          {
+            id: 1,
+            userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
+            userName: 'Lorem Ipsum',
+            userSpeciality: 'Frontend developer',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum accumsan mauris, et pharetra nibh rhoncus in. Morbi et sodales.',
+            postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
+            likes: 15,
+            reposts: 25, 
+            views: 54
+          },
+          {
+            id: 2,
+            userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
+            userName: 'Lorem Ipsum',
+            userSpeciality: 'Frontend developer',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum accumsan mauris, et pharetra nibh rhoncus in. Morbi et sodales.',
+            postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
+            likes: 15,
+            reposts: 25, 
+            views: 54
+          }
+        ]
+      }
     }
-  }
-})
+  })
 </script>
 
 <style lang="scss" scoped>
