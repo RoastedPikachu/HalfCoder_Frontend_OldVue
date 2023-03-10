@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue';
 import SettingsPage from '@/pages/SettingsPage.vue';
+import RegistrationPage from '@/pages/RegistrationPage.vue';
+import SignInPage from '@/pages/SignInPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,6 +15,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'settings',
     component: SettingsPage
   },
+  {
+    path: '/registration',
+    name: 'registration',
+    component: RegistrationPage
+  },
+  {
+    path: '/signIn',
+    name: 'signIn',
+    component: SignInPage
+  }
     //component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
 ]
 

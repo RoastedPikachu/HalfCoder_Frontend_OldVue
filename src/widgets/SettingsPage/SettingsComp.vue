@@ -32,7 +32,7 @@
           <input type="text">
         </div>
         <div>
-          <p>Email</p>
+          <p>E-mail</p>
           <input type="email">
         </div>
       </div>
@@ -65,7 +65,7 @@
     width: 720px;
     height: 490px;
     background-color: #141414;
-    border: 2px solid #747474;
+    border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     font-weight: 700;
     font-family: 'Space Grotesk', sans-serif;

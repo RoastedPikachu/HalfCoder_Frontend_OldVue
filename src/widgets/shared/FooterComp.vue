@@ -19,7 +19,7 @@
         <img src="@/assets/grey_telegramm_icon.svg" alt="Telegram">
       </a>
       <a href="/" id="SocialNetworkLinks_Dzen">
-        <img src="@/assets/grey_dzen_icon.svg" alt="Дзен">
+        <img src="@/assets/dzen_icon.svg" alt="Дзен">
       </a>
     </span>
   </footer>

@@ -4,7 +4,7 @@
     <nav>
       <router-link to="/" class="route">Главная</router-link>
       <router-link to="/events" class="route">События</router-link>
-      <router-link to="/settings" class="route">
+      <router-link to="/settings" class="routeImg">
         <img src="@/assets/grey_settings_icon.svg" alt="Настройки">
       </router-link>
       <div class="modalContainer">
@@ -14,12 +14,15 @@
         </button>
         <ModalNotifComp :active="modalNotifActive"/>
       </div>
-      <div class="modalContainer">
+      <div class="modalContainer" v-if="isSignIn">
         <button @click="changeProfileActive()">
           <img src="@/assets/profile_icon.svg" alt="Профиль">
         </button>
         <ModalProfileComp :active="modalProfileActive"/>
       </div>
+      <router-link to="/signIn" class="routeImg">
+        <img src="@/assets/profile_icon.svg" alt="Профиль">
+      </router-link>
     </nav>
   </header>
 </template>
@@ -33,18 +36,18 @@
     name: 'HeaderComp',
     data() {
       return {
+        isSignIn: false,
         hasNotificationsStatus: true,
         modalNotifActive: false,
         modalProfileActive: false,
       }
     },
     methods: {
-      changeNotifeActive() {
+      changeNotifeActive():void {
         this.modalNotifActive = !this.modalNotifActive;
       },
-      changeProfileActive() {
+      changeProfileActive():void {
         this.modalProfileActive = !this.modalProfileActive;
-        console.log(this.modalProfileActive)
       }
     },
     components: {
@@ -88,7 +91,10 @@
         transition: 500ms ease;
         outline: none;
       }
-      .route:nth-child(3) {
+      .route:hover {
+        color: #3d5aff;
+      }
+      .routeImg {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -97,9 +103,6 @@
         background-color: #1e1e1e;
         border: 0px;
         border-radius: 10px;
-      }
-      .route:hover {
-        color: #3d5aff;
       }
       .modalContainer {
         position: relative;

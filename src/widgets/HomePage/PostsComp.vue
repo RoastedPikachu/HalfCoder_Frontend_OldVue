@@ -89,7 +89,7 @@
       min-height: 440px;
       height: auto;
       background-color: #141414;
-      border: 2px solid #747474;
+      border: 2px solid rgba(116, 116, 116, 0.5);
       border-radius: 5px;
       color: #747474;
       font-family: 'Space Grotesk', sans-serif;

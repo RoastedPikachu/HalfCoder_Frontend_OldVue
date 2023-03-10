@@ -89,7 +89,7 @@
     align-items: center;
     width: 100%;
     height: 50px;
-    border: 1px solid #747474;
+    border: 1px solid rgba(116, 116, 116, 0.5);
     border-width: 2px 0 0;
     border-radius: 0px 0px 5px 5px;
     button {

@@ -45,15 +45,14 @@
     width: 100%;
     height: 600px;
     background-color: #141414;
-    border: 2px solid #747474;
+    border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     #Profile_topLine {
       position: absolute;
       width: 100%;
       height: 50px;
-      border: 1px solid #747474;
-      border-width: 0 0 2px;
-      border-radius: 5px 5px 0 0;
+      background-image: url('@/assets/test_bgImage.png');
+      background-size: cover;
     }
     #Profile_mainInfo {
       display: flex;
