@@ -1,18 +1,17 @@
 <template>
-  <div id="ModalProfileWindow" v-if="modalProfileActive">
+  <div id="ModalProfileWindow" v-if="active">
     <ItemBrieflyInfoComp
       :name="name"
       :image="image"
       :employment="employment"
       :starStatus="starStatus"
     />
-    <button>Профиль</button>
-    <SettingsLinkComp/>
-    <div id="ModalProfileWindow_support">
-      <img src="@/assets/support_icon.svg" alt="Тех поддержка">
-      <p>Support</p>
+    <button id="ModalProfileWindow_profileButton">Профиль</button>
+    <div id="ModalProfileWindow_buttons">
+      <SettingsLinkComp/>
+      <SupportLinkComp/>
     </div>
-    <hr>
+    <SignOutButtonComp/>
     <div id="ModalProfileWindow_changeTheme">
       <img src="@/assets/changeTheme_sun_icon.svg" alt="Сменить тему">
     </div>
@@ -23,12 +22,13 @@
   import { defineComponent } from 'vue';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
+  import SupportLinkComp from '@/widgets/shared/SupportLinkComp.vue';
+  import SignOutButtonComp from '@/widgets/shared/SignOutButtonComp.vue';
 
   export default defineComponent({
     name: "ModalProfileComp",
     data() {
         return {
-          modalProfileActive: true,
           image: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
           starStatus: false,
           name: 'Leha Ovchinnikov',
@@ -37,26 +37,32 @@
     },
     components: { 
       ItemBrieflyInfoComp,
-      SettingsLinkComp
+      SettingsLinkComp,
+      SupportLinkComp,
+      SignOutButtonComp
+    },
+    props: {
+      active: Boolean,
     }
   })
 </script>
 
 <style lang="scss" scoped>
   #ModalProfileWindow {
-    display: flex;
-    flex-wrap: wrap;
     position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     top: 35px;
     right: 0px;
     padding: 15px 15px;
     width: 195px;
-    height: 235px;
+    height: 255px;
     background-color: #141414;
     border: 2px solid #747474;
     border-radius: 5px;
     z-index: 10;
-    button {
+    #ModalProfileWindow_profileButton {
       width: 100%;
       height: 30px;
       background-color: #3d5aff;
@@ -66,25 +72,17 @@
       font-size: 14px;
       cursor: pointer;
     }
-    #ModalProfileWindow_support {
+    #ModalProfileWindow_buttons {
       display: flex;
-      align-items: flex-end;
-      height: 25px;
-      cursor: pointer;
-      img {
-        width: 25px;
-        height: 100%;
-      }
-      p {
-        margin-left: 5px;
-        color: #ffffff;
-        font-size: 20px;
-        font-weight: 600;
-        transition: 500ms ease;
-      }
-      p:hover {
-        color: #3d5aff;
-      }
+      align-items: center;
+      flex-wrap: wrap;
+      height: 55px;
+    }
+    .ModalProfileWindow_buttonContainer {
+      display: flex;
+      height: 40px;
+      border: 0px solid #747474;
+      border-width: 1px 0px;
     }
     #ModalProfileWindow_changeTheme {
       display: flex;

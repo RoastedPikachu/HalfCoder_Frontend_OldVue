@@ -151,6 +151,7 @@
         color: #ffffff;
         font-size: 12px;
         font-weight: 700;
+        outline: none;
         cursor: pointer;
       }
     }

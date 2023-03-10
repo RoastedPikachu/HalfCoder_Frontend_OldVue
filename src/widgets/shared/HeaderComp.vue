@@ -8,17 +8,17 @@
         <img src="@/assets/grey_settings_icon.svg" alt="Настройки">
       </router-link>
       <div class="modalContainer">
-        <button>
+        <button @click="changeNotifeActive()">
           <img src="@/assets/grey_notifications_icon.svg" alt="Уведомления">
           <div id="HasNotificationsStatus" v-if="hasNotificationsStatus"></div>
         </button>
-        <ModalNotifComp/>
+        <ModalNotifComp :active="modalNotifActive"/>
       </div>
       <div class="modalContainer">
-        <button>
+        <button @click="changeProfileActive()">
           <img src="@/assets/profile_icon.svg" alt="Профиль">
         </button>
-        <ModalProfileComp/>
+        <ModalProfileComp :active="modalProfileActive"/>
       </div>
     </nav>
   </header>
@@ -33,13 +33,24 @@
     name: 'HeaderComp',
     data() {
       return {
-        hasNotificationsStatus: true
+        hasNotificationsStatus: true,
+        modalNotifActive: false,
+        modalProfileActive: false,
+      }
+    },
+    methods: {
+      changeNotifeActive() {
+        this.modalNotifActive = !this.modalNotifActive;
+      },
+      changeProfileActive() {
+        this.modalProfileActive = !this.modalProfileActive;
+        console.log(this.modalProfileActive)
       }
     },
     components: {
       ModalProfileComp,
       ModalNotifComp
-    }
+    },
   })
 </script>
 

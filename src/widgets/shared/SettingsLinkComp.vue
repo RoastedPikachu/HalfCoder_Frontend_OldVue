@@ -32,6 +32,7 @@
       font-family: 'Space Grotesk', sans-serif;
       transition: 500ms ease;
       text-decoration: none;
+      outline: none;
     }
     .profile_menuIcons_route:hover {
       color: #3d5aff;
