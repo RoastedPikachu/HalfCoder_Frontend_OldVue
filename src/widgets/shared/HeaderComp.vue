@@ -20,7 +20,7 @@
         </button>
         <ModalProfileComp :active="modalProfileActive"/>
       </div>
-      <router-link to="/signIn" class="routeImg">
+      <router-link to="/registration" class="routeImg">
         <img src="@/assets/profile_icon.svg" alt="Профиль">
       </router-link>
     </nav>

@@ -91,6 +91,7 @@
           color: #ffffff;
           font-size: 16px;
           font-weight: 700;
+          cursor: pointer;
         }
       }
     }
