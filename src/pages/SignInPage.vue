@@ -78,9 +78,6 @@
             color: #ffffff;
             outline: none;
           }
-          input::placeholder {
-            color: #ffffff;
-          }
         }
         button {
           width: 150px;

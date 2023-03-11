@@ -5,21 +5,21 @@
       <form>
         <div class="registration_inputs">
           <p>Имя</p>
-          <input type="text">
+          <input type="text" placeholder="Введите имя" v-model="name">
         </div>
         <div class="registration_inputs">
           <p>Фамилия</p>
-          <input type="text">
+          <input type="text" placeholder="Введите фамилию" v-model="secondName">
         </div>
         <div class="registration_inputs">
           <p>Имя пользователя</p>
-          <input type="text">
+          <input type="text" placeholder="Введите имя пользователя" v-model="userName">
         </div>
         <div class="registration_inputs">
           <p>E-mail</p>
-          <input type="text">
+          <input type="text" placeholder="Введите e-mail" v-model="email">
         </div>
-        <button>Зарегистрироваться</button>
+        <button type="button" @click="setValues()">Зарегистрироваться</button>
       </form>
     </div>
   </section>
@@ -27,9 +27,54 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import axios from 'axios';
 
   export default defineComponent({
     name: 'RegistrationPage',
+    data() {
+      return {
+        name: '',
+        secondName: '',
+        userName: '',
+        email: ''
+      }
+    },
+    methods: {
+      async setValues() {
+        let url = new URL('http://62.109.10.224:500/api/v1/auth/register/');
+        let isRegisterSucces = false;
+        let error = '';
+
+        let status = await axios.post(url.toString(), {
+          name: this.name,
+          secondname: this.secondName,
+          username: this.userName,
+          email: this.email,
+        }, {
+          headers: {'Content-Type': 'application/json;charset=utf-8'}
+        })
+
+        console.log(status);
+
+        /*switch(status) {
+          case 100: isRegisterSucces = true;
+            break;
+          case 101: error = 'Неккоректные данные';
+            break;
+          case 102: error = 'Такой пользователь уже существует'
+            break;
+          case 103: error = 'Пользователь с такой почтой уже существует'
+            break;
+        }*/
+
+        this.name = '';
+        this.secondName = '';
+        this.userName = '';
+        this.email = '';
+
+        alert(error);
+      }
+    }
   })
 </script>
 
