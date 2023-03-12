@@ -19,7 +19,15 @@
           <p>E-mail</p>
           <input type="text" placeholder="Введите e-mail" v-model="email">
         </div>
-        <button type="button" @click="setValues()">Зарегистрироваться</button>
+        <div class="registration_inputs">
+          <p>Пароль</p>
+          <input type="text" placeholder="Введите пароль" v-model="password">
+        </div>
+        <div class="registration_inputs">
+          <p>Повторите пароль</p>
+          <input type="text" placeholder="Введите пароль ещё раз" v-model="repeatedPassword">
+        </div>
+        <button type="button" @click="setValuesRegistration()">Зарегистрироваться</button>
       </form>
     </div>
   </section>
@@ -36,43 +44,51 @@
         name: '',
         secondName: '',
         userName: '',
-        email: ''
+        email: '',
+        password: '',
+        repeatedPassword: ''
       }
     },
     methods: {
-      async setValues() {
+      async setValuesRegistration() {
         let url = new URL('http://62.109.10.224:500/api/v1/auth/register/');
-        let isRegisterSucces = false;
+        let isRegisterSuccess = false;
         let error = '';
 
-        let status = await axios.post(url.toString(), {
-          name: this.name,
-          secondname: this.secondName,
+        let result = await axios.post(url.toString(), {
+          first_name: this.name,
+          last_name: this.secondName,
           username: this.userName,
-          email: this.email,
+          email: this.email,  
+          password: this.password,
+          repeatedPassword: this.repeatedPassword
         }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
-        })
+        });
 
-        console.log(status);
+        let status:number = result.data.status;
 
-        /*switch(status) {
-          case 100: isRegisterSucces = true;
+        switch(status) {
+          case 100: isRegisterSuccess = true;
             break;
           case 101: error = 'Неккоректные данные';
             break;
-          case 102: error = 'Такой пользователь уже существует'
+          case 102: error = 'Такой пользователь уже существует';
             break;
-          case 103: error = 'Пользователь с такой почтой уже существует'
+          case 103: error = 'Пользователь с такой почтой уже существует';
             break;
-        }*/
+        }
+
+        if(isRegisterSuccess) {
+          alert('Регистрация прошла успешно');
+        } else {
+          alert(error);
+        }
 
         this.name = '';
         this.secondName = '';
         this.userName = '';
         this.email = '';
-
-        alert(error);
       }
     }
   })
@@ -92,7 +108,7 @@
     flex-wrap: wrap;
     padding: 15px 15px;
     width: 520px;
-    height: 320px;
+    height: 380px;
     background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
@@ -111,7 +127,7 @@
       flex-wrap: wrap;
       align-items: center;
       width: 100%;
-      height: 240px;
+      height: 300px;
       .registration_inputs {
         width: 47.5%;
         p {

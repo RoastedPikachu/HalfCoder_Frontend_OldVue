@@ -1,15 +1,27 @@
 <template>
-  <button>
+  <button @click="logOut()">
     <img src="@/assets/exitProfile_icon.svg" alt="Выйти из профиля">
     <p>Sign out</p>
   </button>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'; 
+  import axios from 'axios';
+import { defineComponent } from 'vue'; 
 
   export default defineComponent({
-    name: 'SignOutButtonComp'
+    name: 'SignOutButtonComp',
+    methods: {
+      async logOut() {
+        let url = new URL('http://62.109.10.224:500/api/v1/auth/logout/');
+        let isLogOutSuccess = false;
+        let error = '';
+        let token = '';
+
+        let result = await axios.post(url.toString(), token, {headers: {'Content-Type': 'application/json;charset=utf-8'}});
+
+      }
+    }
   })
 </script>
 

@@ -33,7 +33,7 @@
           starStatus: false,
           name: 'Leha Ovchinnikov',
           employment: 'backend-разработчик'
-        };
+        }
     },
     components: { 
       ItemBrieflyInfoComp,

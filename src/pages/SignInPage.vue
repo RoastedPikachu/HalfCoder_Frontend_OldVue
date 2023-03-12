@@ -5,13 +5,13 @@
       <form>
         <div class="signIn_inputs">
           <p>Имя пользователя</p>
-          <input type="text" placeholder="Введите имя">
+          <input type="text" placeholder="Введите имя" v-model="name">
         </div>
         <div class="signIn_inputs">
           <p>E-mail</p>
-          <input type="email" placeholder="Введите e-mail">
+          <input type="email" placeholder="Введите e-mail" v-model="email">
         </div>
-        <button>Войти</button>
+        <button type="button" @click="setValuesLogin()">Войти</button>
       </form>
     </div>
   </section>
@@ -19,9 +19,50 @@
 
 <script lang=ts>
   import { defineComponent } from 'vue';
+  import axios from 'axios';
 
   export default defineComponent({
     name: 'SignInPage',
+    data() {
+      return {
+        name: '',
+        email: ''
+      }
+    },
+    methods: {
+      async setValuesLogin() {
+        let url = new URL('http://62.109.10.224:500/api/v1/auth/login/');
+        let isLoginSucces = false;
+        let error = '';
+
+        let result = await axios.post(url.toString(), {
+          name: this.name,
+          email: this.email,
+        }, {
+          headers: {'Content-Type': 'application/json;charset=utf-8'}
+        });
+
+        console.log(result);
+
+        /*switch(status) {
+          case 110: isLoginSucces = true;
+            break;
+          case 111: isLoginSucces = false;
+            break;
+          case 112: error = 'Некорректные данные';
+            alert(error);
+            break;
+          case 113: error = 'Пользователь не найден';
+            alert(error);
+            break;
+          case 114: error = 'Неверный пароль';
+            alert(error);
+        } */
+
+        this.name = '';
+        this.email = '';
+      }
+    }
   })
 </script>
 
