@@ -1,5 +1,5 @@
 <template>
-  <HeaderComp/>
+  <HeaderComp :token="token"/>
   <section id="MainBlock">
     <aside id="MainBlock_info">
       <ProfileComp/>
@@ -30,6 +30,14 @@
 
   export default defineComponent({
     name: 'HomePage',
+    data() {
+      return {
+        token: ''
+      }
+    },
+    mounted() {
+      this.token = document.cookie.slice(67);
+    },
     components: {
       HeaderComp,
       ProfileComp,

@@ -15,12 +15,12 @@
         <ModalNotifComp :active="modalNotifActive"/>
       </div>
       <div class="modalContainer" v-if="isSignIn">
-        <button @click="changeProfileActive()">
-          <img src="@/assets/profile_icon.svg" alt="Профиль">
+        <button id="ModalContainer_profile" @click="changeProfileActive()">
+          <img src="" alt="">
         </button>
-        <ModalProfileComp :active="modalProfileActive"/>
+        <ModalProfileComp :active="modalProfileActive" :token="token"/>
       </div>
-      <router-link to="/registration" class="routeImg">
+      <router-link to="/registration" class="routeImg" v-if="!isSignIn">
         <img src="@/assets/profile_icon.svg" alt="Профиль">
       </router-link>
     </nav>
@@ -29,6 +29,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import store from '@/store/index';
   import ModalProfileComp from '@/widgets/features/ModalProfileComp.vue';
   import ModalNotifComp from '@/widgets/features/ModalNotifComp.vue';
 
@@ -36,7 +37,7 @@
     name: 'HeaderComp',
     data() {
       return {
-        isSignIn: false,
+        isSignIn: store.state.isSignIn,
         hasNotificationsStatus: true,
         modalNotifActive: false,
         modalProfileActive: false,
@@ -47,12 +48,17 @@
         this.modalNotifActive = !this.modalNotifActive;
       },
       changeProfileActive():void {
-        this.modalProfileActive = !this.modalProfileActive;
+        if(this.isSignIn) {
+          this.modalProfileActive = !this.modalProfileActive;
+        }
       }
     },
     components: {
       ModalProfileComp,
       ModalNotifComp
+    },
+    props: {
+      token: String
     },
   })
 </script>
@@ -108,6 +114,9 @@
         position: relative;
         width: 34px;
         height: 34px;
+        #ModalContainer_profile {
+          background-color: #ffffff;
+        }
         button {
           width: 34px;
           height: 34px;

@@ -6,8 +6,9 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue'; 
   import axios from 'axios';
-import { defineComponent } from 'vue'; 
+  import store from '@/store/index';
 
   export default defineComponent({
     name: 'SignOutButtonComp',
@@ -16,11 +17,23 @@ import { defineComponent } from 'vue';
         let url = new URL('http://62.109.10.224:500/api/v1/auth/logout/');
         let isLogOutSuccess = false;
         let error = '';
-        let token = '';
 
-        let result = await axios.post(url.toString(), token, {headers: {'Content-Type': 'application/json;charset=utf-8'}});
+        let result = await axios.post(url.toString(), this.token, {headers: {'Content-Type': 'application/json;charset=utf-8'}});
 
+        isLogOutSuccess = true;
+        store.commit('CHANGE_SIGN_IN_STATUS'); 
+        document.cookie = `token; path=/; max-age=-1`;
+
+        if(isLogOutSuccess) {
+          alert('Выход из аккаунта прошёл успешно');
+          location.reload();
+        } else {
+          alert('error');
+        }
       }
+    },
+    props: {
+      token: String
     }
   })
 </script>
@@ -35,6 +48,7 @@ import { defineComponent } from 'vue';
     background-color: #141414;
     border: 0px solid rgba(116, 116, 116, 0.5);
     border-width: 1px 0px;
+    cursor: pointer;
     img {
       width: 24px;
       height: 24px;

@@ -21,11 +21,11 @@
         </div>
         <div class="registration_inputs">
           <p>Пароль</p>
-          <input type="text" placeholder="Введите пароль" v-model="password">
+          <input type="password" placeholder="Введите пароль" v-model="password">
         </div>
         <div class="registration_inputs">
           <p>Повторите пароль</p>
-          <input type="text" placeholder="Введите пароль ещё раз" v-model="repeatedPassword">
+          <input type="password" placeholder="Введите пароль ещё раз" v-model="repeatedPassword">
         </div>
         <button type="button" @click="setValuesRegistration()">Зарегистрироваться</button>
       </form>
@@ -81,6 +81,7 @@
 
         if(isRegisterSuccess) {
           alert('Регистрация прошла успешно');
+          this.$router.push('/signIn');
         } else {
           alert(error);
         }
@@ -89,6 +90,8 @@
         this.secondName = '';
         this.userName = '';
         this.email = '';
+        this.password = '';
+        this.repeatedPassword = '';
       }
     }
   })

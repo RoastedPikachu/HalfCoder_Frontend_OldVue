@@ -18,6 +18,14 @@
 
   export default defineComponent({
     name: 'SettingsPage',
+    data() {
+      return {
+        token: ''
+      }
+    },
+    mounted() {
+      this.token = document.cookie.slice(67);
+    },
     components: {
       HeaderComp,
       ProfileMenuComp,

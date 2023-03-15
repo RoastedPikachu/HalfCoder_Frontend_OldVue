@@ -11,7 +11,7 @@
       <SettingsLinkComp/>
       <SupportLinkComp/>
     </div>
-    <SignOutButtonComp/>
+    <SignOutButtonComp :token="token"/>
     <div id="ModalProfileWindow_changeTheme">
       <img src="@/assets/changeTheme_sun_icon.svg" alt="Сменить тему">
     </div>
@@ -43,6 +43,7 @@
     },
     props: {
       active: Boolean,
+      token: String
     }
   })
 </script>

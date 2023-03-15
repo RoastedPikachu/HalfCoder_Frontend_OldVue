@@ -4,12 +4,12 @@
       <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
       <form>
         <div class="signIn_inputs">
-          <p>Имя пользователя</p>
-          <input type="text" placeholder="Введите имя" v-model="name">
+          <p>Имя пользователя/email</p>
+          <input type="text" placeholder="Введите логин" v-model="login">
         </div>
         <div class="signIn_inputs">
-          <p>E-mail</p>
-          <input type="email" placeholder="Введите e-mail" v-model="email">
+          <p>Пароль</p>
+          <input type="password" placeholder="Введите пароль" v-model="password">
         </div>
         <button type="button" @click="setValuesLogin()">Войти</button>
       </form>
@@ -20,47 +20,54 @@
 <script lang=ts>
   import { defineComponent } from 'vue';
   import axios from 'axios';
+  import store from '@/store/index';
 
   export default defineComponent({
     name: 'SignInPage',
     data() {
       return {
-        name: '',
-        email: ''
+        login: '',
+        password: ''
       }
     },
     methods: {
       async setValuesLogin() {
         let url = new URL('http://62.109.10.224:500/api/v1/auth/login/');
-        let isLoginSucces = false;
+        let isLoginSuccess = false;
         let error = '';
 
         let result = await axios.post(url.toString(), {
-          name: this.name,
-          email: this.email,
+          username: this.login,
+          password: this.password,
         }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         });
 
-        console.log(result);
+        let token = result.data.token;
 
-        /*switch(status) {
-          case 110: isLoginSucces = true;
+        switch(result.data.status) {
+          case 110: isLoginSuccess = true;
             break;
-          case 111: isLoginSucces = false;
+          case 111: isLoginSuccess = false;
             break;
           case 112: error = 'Некорректные данные';
-            alert(error);
             break;
           case 113: error = 'Пользователь не найден';
-            alert(error);
             break;
           case 114: error = 'Неверный пароль';
-            alert(error);
-        } */
+        } 
 
-        this.name = '';
-        this.email = '';
+        if(isLoginSuccess && token) {
+          store.commit('CHANGE_SIGN_IN_STATUS');  
+          document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
+          alert('Вход в аккаунт прошёл успешно');
+          this.$router.push('/');
+        } else {
+          alert(error);
+        }
+
+        this.login = '';
+        this.password = '';
       }
     }
   })
@@ -129,6 +136,7 @@
           color: #ffffff;
           font-size: 16px;
           font-weight: 700;
+          outline: none;
           cursor: pointer;
         }
       }
