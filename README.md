@@ -12,3 +12,8 @@
 3. Добавить адаптив
 
 Если у вас возникают какие-либо баги, то пишите на эту почту: **boriskarabytwork@gmail.com**
+
+### Создатели проекта: 
+
+Frontend: https://github.com/RoastedPikachu
+Backend: https://github.com/allelleo
