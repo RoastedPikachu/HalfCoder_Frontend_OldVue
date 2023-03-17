@@ -24,6 +24,7 @@
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
   import SupportLinkComp from '@/widgets/shared/SupportLinkComp.vue';
   import SignOutButtonComp from '@/widgets/shared/SignOutButtonComp.vue';
+  import store from '@/store';
 
   export default defineComponent({
     name: "ModalProfileComp",
@@ -31,8 +32,8 @@
         return {
           image: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
           starStatus: false,
-          name: 'Leha Ovchinnikov',
-          employment: 'backend-разработчик'
+          name: store.state.userName,
+          employment: store.state.employment
         }
     },
     components: { 

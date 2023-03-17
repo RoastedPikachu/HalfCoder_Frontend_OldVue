@@ -36,6 +36,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import axios from 'axios';
+  import store from '@/store';
 
   export default defineComponent({
     name: 'RegistrationPage',
@@ -51,11 +52,11 @@
     },
     methods: {
       async setValuesRegistration() {
-        let url = new URL('http://62.109.10.224:500/api/v1/auth/register/');
+        const url = new URL('http://62.109.10.224:500/api/v1/auth/register/');
         let isRegisterSuccess = false;
         let error = '';
 
-        let result = await axios.post(url.toString(), {
+        const result = await axios.post(url.toString(), {
           first_name: this.name,
           last_name: this.secondName,
           username: this.userName,
@@ -66,7 +67,7 @@
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         });
 
-        let status:number = result.data.status;
+        const status:number = result.data.status;
 
         switch(status) {
           case 100: isRegisterSuccess = true;
@@ -80,6 +81,7 @@
         }
 
         if(isRegisterSuccess) {
+          store.commit('SET_USER_NAME', `${this.name} ${this.secondName}`);
           alert('Регистрация прошла успешно');
           this.$router.push('/signIn');
         } else {

@@ -85,7 +85,7 @@
         height: 22px;
       }
       a:hover {
-        transform: translateY(2px);
+        transform: translateY(5px);
       }
     }
   }

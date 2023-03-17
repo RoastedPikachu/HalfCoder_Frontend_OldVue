@@ -3,8 +3,8 @@
     <div id="Profile_topLine"></div>
     <div id="Profile_mainInfo">
       <img src="" alt="Фото профиля">
-      <h2>Leha Ovchinnikov</h2>
-      <p>frontend-разработчик</p>
+      <h2>{{ userName }}</h2>
+      <p>{{ employment }}</p>
       <p>I'd love to change the world, but they won't give me the source code</p>
     </div>
     <span id="Profile_secondaryInfo">
@@ -19,12 +19,15 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import store from '@/store/index';
   import ProfileMenuComp from '@/widgets/features/ProfileMenuComp.vue';
 
   export default defineComponent({
     name: 'ProfileComp',
     data() {
       return {
+        userName: store.state.userName,
+        employment: store.state.employment,
         posts: 256,
         followers: 2.5,
         following: 365
@@ -69,10 +72,12 @@
         z-index: 9;
       }
       h2 {
+        width: 100%;
         margin-top: 7px;
         color: #ffffff;
         font-size: 18px;
         font-family: 'Inter', sans-serif;
+        text-align: center;
       }
       p {
         color: #747474;

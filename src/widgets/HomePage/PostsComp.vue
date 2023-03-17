@@ -1,21 +1,24 @@
 <template>
   <section id="MainBlock_childPosts">
-    <div class="MainBlock_childPosts_info" v-for="post of posts" :key="post.id">
-      <div class="MainBlock_childPosts_topInfo">
-        <div>
+    <div class="mainBlock_childPosts_info" v-for="post of posts" :key="post.id">
+      <div class="mainBlock_childPosts_topInfo">
+        <div class="mainBlock_childPosts_userInfo">
           <img :src="post.userImage" :alt="post.userName">
           <span>
             <p>{{ post.userName }}</p>
             <p>{{ post.userSpeciality }}</p>
           </span>
         </div>
-        <button>
-          <i class="fa-solid fa-ellipsis"></i>
-        </button>
+        <div class="mainBlock_childPosts_button">
+          <button @click="changeModalActionsActive()">
+            <i class="fa-solid fa-ellipsis"></i>
+          </button>
+          <ModalPostActions :modalActionsActive="modalActionsActive"/>
+        </div>
       </div>
       <p>{{ post.text }}</p>
       <img :src="post.postImage" :alt="post.text">
-      <div class="MainBlock_childPosts_activityInfo">
+      <div class="mainBlock_childPosts_activityInfo">
         <span>
           <img src="@/assets/grey_like_icon.svg" alt="Лайк"><p> {{ post.likes }}</p>
           <img src="@/assets/grey_repost_icon.svg" alt="Репост"><p> {{ post.reposts }}</p>
@@ -30,11 +33,13 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import ModalPostActions from '@/widgets/features/ModalPostActions.vue';
 
   export default defineComponent({
     name: 'PostsComp',
     data() {
       return {
+        modalActionsActive: true,
         posts: [
           {
             id: 0,
@@ -71,6 +76,14 @@
           }
         ]
       }
+    },
+    methods: {
+      changeModalActionsActive() {
+        this.modalActionsActive = !this.modalActionsActive;
+      }
+    },
+    components: {
+      ModalPostActions
     }
   })
 </script>
@@ -79,7 +92,7 @@
   #MainBlock_childPosts {
     width: auto;
     height: auto;
-    .MainBlock_childPosts_info {
+    .mainBlock_childPosts_info {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -94,12 +107,12 @@
       color: #747474;
       font-family: 'Space Grotesk', sans-serif;
       overflow: hidden;
-      .MainBlock_childPosts_topInfo {
+      .mainBlock_childPosts_topInfo {
         display: flex;
         margin-top: 28px;
         width: 90%;
         height: 40px;
-        div {
+        .mainBlock_childPosts_userInfo {
           display: flex;
           align-items: center;
           width: 100%;
@@ -125,13 +138,19 @@
             }
           }
         }
-        button {
-          align-self: flex-start;
-          background: none;
-          border: 0;
-          color: #747474;
-          font-size: 24px;
-          cursor: pointer;
+        .mainBlock_childPosts_button {
+          position: relative;
+          width: 20px;
+          height: 20px;
+          button {
+            align-self: flex-start;
+            background: none;
+            border: 0;
+            color: #747474;
+            font-size: 24px;
+            outline: none;
+            cursor: pointer;
+          }
         }
       }
       p {
@@ -142,7 +161,7 @@
         height: 250px;
         border-radius: 5px;
       }
-      .MainBlock_childPosts_activityInfo {
+      .mainBlock_childPosts_activityInfo {
         display: flex;
         justify-content: space-between;
         align-items: center;

@@ -11,7 +11,12 @@
           <p>Пароль</p>
           <input type="password" placeholder="Введите пароль" v-model="password">
         </div>
-        <button type="button" @click="setValuesLogin()">Войти</button>
+        <div id="signIn_ExternalButtons">
+          <button></button>
+          <button></button>
+          <button></button>
+        </div>
+        <button id="signIn_FormButton" type="button" @click="setValuesLogin()">Войти</button>
       </form>
     </div>
   </section>
@@ -32,23 +37,21 @@
     },
     methods: {
       async setValuesLogin() {
-        let url = new URL('http://62.109.10.224:500/api/v1/auth/login/');
-        let isLoginSuccess = false;
+        const url = new URL('http://62.109.10.224:500/api/v1/auth/login/');
         let error = '';
 
-        let result = await axios.post(url.toString(), {
+        const result = await axios.post(url.toString(), {
           username: this.login,
           password: this.password,
         }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         });
 
-        let token = result.data.token;
+        const token = result.data.token;
+        const status:number = result.data.status;
 
-        switch(result.data.status) {
-          case 110: isLoginSuccess = true;
-            break;
-          case 111: isLoginSuccess = false;
+        switch(status) {
+          case 111: error= 'Ошибка входа';
             break;
           case 112: error = 'Некорректные данные';
             break;
@@ -57,7 +60,7 @@
           case 114: error = 'Неверный пароль';
         } 
 
-        if(isLoginSuccess && token) {
+        if(token) {
           store.commit('CHANGE_SIGN_IN_STATUS');  
           document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
           alert('Вход в аккаунт прошёл успешно');
@@ -105,7 +108,7 @@
         flex-wrap: wrap;
         align-items: center;
         width: 100%;
-        height: 220px;
+        height: 240px;
         .signIn_inputs {
           width: 240px;
           height: 52.5px;
@@ -127,7 +130,36 @@
             outline: none;
           }
         }
-        button {
+        #signIn_ExternalButtons {
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          width: 80%;
+          height: 60px;
+          button {
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            background-color: #141414;
+            border: none;
+            border-radius: 50px;
+            transition: 500ms ease;
+            cursor: pointer;
+          }
+          button:hover {
+            transform: translateY(5px);
+          }
+          button:nth-child(1) {
+            background-image: url('@/assets/vk_login_icon.svg');
+          }
+          button:nth-child(2) {
+            background-image: url('@/assets/google_login_icon.svg');
+          }
+          button:nth-child(3) {
+            background-image: url('@/assets/github_login_icon.svg');
+          }
+        }
+        #signIn_FormButton {
           width: 150px;
           height: 30px;
           background-color: #3d5aff;
