@@ -27,7 +27,12 @@
           <p>Повторите пароль</p>
           <input type="password" placeholder="Введите пароль ещё раз" v-model="repeatedPassword">
         </div>
-        <button type="button" @click="setValuesRegistration()">Зарегистрироваться</button>
+        <div id="Registation_termsOfUse">
+          <input type="checkbox" name="termsOfUse" v-model="agreeToTermsOfUse" > 
+          <label for="termsOfUse">Я принимаю условия <a href="/">Пользовательского соглашения</a></label>
+        </div>
+        <button type="button" @click="setValuesRegistration()" v-if="agreeToTermsOfUse">Зарегистрироваться</button>
+        <button id="Registration_notActiveButton" type="button" v-if="!agreeToTermsOfUse">Зарегистрироваться</button>
       </form>
     </div>
   </section>
@@ -47,7 +52,8 @@
         userName: '',
         email: '',
         password: '',
-        repeatedPassword: ''
+        repeatedPassword: '',
+        agreeToTermsOfUse: false
       }
     },
     methods: {
@@ -94,7 +100,7 @@
         this.email = '';
         this.password = '';
         this.repeatedPassword = '';
-      }
+      },
     }
   })
 </script>
@@ -132,7 +138,7 @@
       flex-wrap: wrap;
       align-items: center;
       width: 100%;
-      height: 300px;
+      height: 320px;
       .registration_inputs {
         width: 47.5%;
         p {
@@ -153,6 +159,28 @@
             outline: none;
         }
       }
+      #Registation_termsOfUse {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        input {
+          width: 20px;
+          height: 75%;
+        }
+        label {
+          margin-left: 2.5%;
+          color: #ffffff;
+          font-size: 14px;
+          font-family: 'Space Grotesk', sans-serif;
+          a {
+            color: #3d5aff;
+            text-decoration: none;
+            outline: none;
+          }
+        }
+      }
       button {
         margin-left: calc(50% - 90px);
         width: 180px;
@@ -164,6 +192,9 @@
         font-size: 14px;
         font-weight: 700;
         cursor: pointer;
+      }
+      #Registration_notActiveButton {
+        background-color: #747474;
       }
     }
   }

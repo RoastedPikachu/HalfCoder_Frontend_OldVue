@@ -15,6 +15,7 @@
       </aside>
     </section>
   </section>
+  <CookieComp/>
 </template>
 
 <script lang="ts">
@@ -27,6 +28,7 @@
   import RaitingComp from '@/widgets/HomePage/RaitingComp.vue';
   import NewsComp from '@/widgets/HomePage/NewsComp.vue';
   import FooterComp from '@/widgets/shared/FooterComp.vue';
+  import CookieComp from '@/widgets/shared/CookieComp.vue';
 
   export default defineComponent({
     name: 'HomePage',
@@ -46,7 +48,8 @@
       PostsComp,
       RaitingComp,
       NewsComp,
-      FooterComp
+      FooterComp,
+      CookieComp
     }
   })
 </script>

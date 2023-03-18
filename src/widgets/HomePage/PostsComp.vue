@@ -10,10 +10,10 @@
           </span>
         </div>
         <div class="mainBlock_childPosts_button">
-          <button @click="changeModalActionsActive()">
+          <button @click="changeModalActionsActive(post)">
             <i class="fa-solid fa-ellipsis"></i>
           </button>
-          <ModalPostActions :modalActionsActive="modalActionsActive"/>
+          <ModalPostActions :modalActionsActive="post.modalActionsActive"/>
         </div>
       </div>
       <p>{{ post.text }}</p>
@@ -35,11 +35,23 @@
   import { defineComponent } from 'vue';
   import ModalPostActions from '@/widgets/features/ModalPostActions.vue';
 
+  interface Post {
+    id: number,
+    userImage: string,
+    userName: string,
+    userSpeciality: string,
+    text: string,
+    postImage: string,
+    likes: number,
+    reposts: number,
+    views: number,
+    modalActionsActive: boolean
+  }
+
   export default defineComponent({
     name: 'PostsComp',
     data() {
       return {
-        modalActionsActive: true,
         posts: [
           {
             id: 0,
@@ -50,7 +62,8 @@
             postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
             likes: 15,
             reposts: 25, 
-            views: 54
+            views: 54,
+            modalActionsActive: false,
           },
           {
             id: 1,
@@ -61,7 +74,8 @@
             postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
             likes: 15,
             reposts: 25, 
-            views: 54
+            views: 54,
+            modalActionsActive: false,
           },
           {
             id: 2,
@@ -72,14 +86,15 @@
             postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
             likes: 15,
             reposts: 25, 
-            views: 54
+            views: 54,
+            modalActionsActive: false,
           }
         ]
       }
     },
     methods: {
-      changeModalActionsActive() {
-        this.modalActionsActive = !this.modalActionsActive;
+      changeModalActionsActive(post:Post) {
+        post.modalActionsActive = !post.modalActionsActive;
       }
     },
     components: {

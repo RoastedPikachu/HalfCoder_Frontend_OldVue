@@ -3,6 +3,10 @@
     <div id="SignIn">
       <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
       <form>
+        <button id="SignIn_errorBlock" v-if="error.length">
+          <img src="@/assets/error_icon.svg" alt="Крестик">
+          <p>{{ error }}</p>
+        </button>
         <div class="signIn_inputs">
           <p>Имя пользователя/email</p>
           <input type="text" placeholder="Введите логин" v-model="login">
@@ -32,13 +36,13 @@
     data() {
       return {
         login: '',
-        password: ''
+        password: '',
+        error: ''
       }
     },
     methods: {
       async setValuesLogin() {
         const url = new URL('http://62.109.10.224:500/api/v1/auth/login/');
-        let error = '';
 
         const result = await axios.post(url.toString(), {
           username: this.login,
@@ -47,17 +51,17 @@
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         });
 
-        const token = result.data.token;
+        const token:string = result.data.token;
         const status:number = result.data.status;
 
         switch(status) {
-          case 111: error= 'Ошибка входа';
+          case 111: this.error= 'Ошибка входа';
             break;
-          case 112: error = 'Некорректные данные';
+          case 112: this.error = 'Некорректные данные';
             break;
-          case 113: error = 'Пользователь не найден';
+          case 113: this.error = 'Пользователь не найден';
             break;
-          case 114: error = 'Неверный пароль';
+          case 114: this.error = 'Неверный пароль';
         } 
 
         if(token) {
@@ -65,8 +69,6 @@
           document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
           alert('Вход в аккаунт прошёл успешно');
           this.$router.push('/');
-        } else {
-          alert(error);
         }
 
         this.login = '';
@@ -89,7 +91,7 @@
       flex-wrap: wrap;
       padding: 15px 15px;
       width: 290px;
-      height: 320px;
+      height: 360px;
       background-color: #141414;
       border: 2px solid rgba(116, 116, 116, 0.5);
       border-radius: 5px;
@@ -108,9 +110,28 @@
         flex-wrap: wrap;
         align-items: center;
         width: 100%;
-        height: 240px;
+        height: 280px;
+        #SignIn_errorBlock {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 2.5%;
+          width: 80%;
+          height: 35px;
+          background-color: #101010;
+          border: 1.5px solid #dc283a;
+          border-radius: 5px;
+          p {
+            width: 85%;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 400;
+            font-family: 'Space Grotesk', sans-serif;
+            text-align: left;
+          }
+        }
         .signIn_inputs {
-          width: 240px;
+          width: 80%;
           height: 52.5px;
           p {
             height: 22.5px;
@@ -135,7 +156,7 @@
           justify-content: space-evenly;
           align-items: center;
           width: 80%;
-          height: 60px;
+          height: 40px;
           button {
             width: 40px;
             height: 40px;
