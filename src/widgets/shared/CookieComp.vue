@@ -1,14 +1,9 @@
 <template>
   <section id="CookieBlock">
-    <p>Наш сайт использует файлы cookie</p>
-    <button>
-      <img src="@/assets/more_info_icon.svg" alt="Подробнее">
-      <p>Подробнее</p>
-    </button>
-    <button>
-      <img src="@/assets/ok_icon.svg" alt="Хорошо">
-      <p>Хорошо</p>
-    </button>
+    <i class="fa-solid fa-xmark"></i>
+    <img src="@/assets/cookie_icon.svg" alt="Куки">
+    <p>Мы используем файлы куки, при помощи них мы подбираем вам контент и анализируем наш трафик</p>
+    <button>Принять</button>
   </section>
 </template>
 
@@ -22,51 +17,61 @@
 
 <style lang="scss" scoped>
   #CookieBlock {
+    position: relative;
     position: fixed;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     left: 10%;
-    bottom: 0;
-    width: 80%;
-    height: 12.5%;
-    background-color: #0c0b0b;
-    border-radius: 5px;
+    bottom: 5%;
+    padding: 0 2.5%;
+    width: 10%;
+    height: 40%;
+    background-color: #1b1b1b;
+    border: 2px solid #a8b3cf;
+    border-radius: 15px;
+    i {
+      position: absolute;
+      top: 7.5%;
+      right: 10%;
+      color: #a8b3cf;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    img {
+      width: 55%;
+      height: 20%;
+    }
     p {
+      margin-top: -10%;
       width: 100%;
-      height: 10%;
-      color: #747474;
-      font-size: 20px;
-      font-weight: 700;
+      height: 35%;
+      color: #cfd6e6;
+      font-size: 14px;
+      font-weight: 400;
       font-family: 'Space Grotesk', sans-serif;
-      text-align: center;
+      text-align: center; 
     }
     button {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding: 5px 10px;
-      width: 15%;
-      height: 30%;
+      width: 100%;
+      height: 10%;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
       background-color: #ffffff;
+      color: #0e1217;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
       transition: 500ms ease;
       cursor: pointer;
-      img {
-        width: 25px;
-        height: 25px;
-      }
-      p {
-        width: 80%;
-        height: auto;
-        font-size: 16px;
-        text-align: left;
-      }
     }
     button:hover {
-      transform: scale(1.05);
+      background-color: #0e1217;
+      border: 1.5px solid #a8b3cf;
+      color: #cfd6e6;
     }
   }
 </style>
