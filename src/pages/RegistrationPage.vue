@@ -41,7 +41,6 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import axios from 'axios';
-  import store from '@/store';
 
   export default defineComponent({
     name: 'RegistrationPage',
@@ -59,7 +58,6 @@
     methods: {
       async setValuesRegistration() {
         const url = new URL('http://62.109.10.224:500/api/v1/auth/register/');
-        let isRegisterSuccess = false;
         let error = '';
 
         const result = await axios.post(url.toString(), {
@@ -76,22 +74,15 @@
         const status:number = result.data.status;
 
         switch(status) {
-          case 100: isRegisterSuccess = true;
+          case 100: alert('Регистрация прошла успешно');
+            this.$router.push('/signIn');
             break;
-          case 101: error = 'Неккоректные данные';
+          case 101: alert(error = 'Неккоректные данные');
             break;
-          case 102: error = 'Такой пользователь уже существует';
+          case 102: alert(error = 'Такой пользователь уже существует');
             break;
-          case 103: error = 'Пользователь с такой почтой уже существует';
+          case 103: alert(error = 'Пользователь с такой почтой уже существует');
             break;
-        }
-
-        if(isRegisterSuccess) {
-          store.commit('SET_USER_NAME', `${this.name} ${this.secondName}`);
-          alert('Регистрация прошла успешно');
-          this.$router.push('/signIn');
-        } else {
-          alert(error);
         }
 
         this.name = '';

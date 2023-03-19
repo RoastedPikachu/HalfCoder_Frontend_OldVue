@@ -22,6 +22,7 @@
         document.cookie = `token; path=/; max-age=-1`;
 
         if(result) {
+          store.commit('CLEAR_USER_DATA');
           alert('Выход из аккаунта прошёл успешно');
           location.reload();
         } else {

@@ -26,12 +26,18 @@
     name: 'ProfileComp',
     data() {
       return {
-        userName: store.state.userName,
-        employment: store.state.employment,
+        userName: '',
+        employment: '',
         posts: 256,
         followers: 2.5,
         following: 365
       }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.userName = `${store.state.firstName} ${store.state.secondName}`;
+        this.employment = store.state.employment;
+      }, 50)
     },
     components: {
       ProfileMenuComp

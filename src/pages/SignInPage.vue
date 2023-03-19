@@ -41,6 +41,29 @@
       }
     },
     methods: {
+      async getInfoAboutUser(token:string) {
+        const url = new URL('http://62.109.10.224:500/api/v1/account/data/');
+        let payload = {
+          firstName: '',
+          secondName: '',
+          userName: '',
+          email: ''
+        };
+        let error = '';
+
+        const result = await axios.post(url.toString(), {
+          token: token
+        }, {
+          headers: {'Content-Type': 'application/json;charset=utf-8'}
+        });
+
+        payload.firstName = result.data.user.first_name;
+        payload.secondName = result.data.user.last_name;
+        payload.userName = result.data.user.username;
+        payload.email = result.data.user.email;
+
+        store.commit('SET_USER_DATA', payload);
+      },
       async setValuesLogin() {
         const url = new URL('http://62.109.10.224:500/api/v1/auth/login/');
 
@@ -55,6 +78,12 @@
         const status:number = result.data.status;
 
         switch(status) {
+          case 110: store.commit('CHANGE_SIGN_IN_STATUS');  
+            this.getInfoAboutUser(token);
+            document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
+            alert('Вход в аккаунт прошёл успешно');
+            this.$router.push('/');
+            break;
           case 111: this.error= 'Ошибка входа';
             break;
           case 112: this.error = 'Некорректные данные';
@@ -63,13 +92,6 @@
             break;
           case 114: this.error = 'Неверный пароль';
         } 
-
-        if(token) {
-          store.commit('CHANGE_SIGN_IN_STATUS');  
-          document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
-          alert('Вход в аккаунт прошёл успешно');
-          this.$router.push('/');
-        }
 
         this.login = '';
         this.password = '';

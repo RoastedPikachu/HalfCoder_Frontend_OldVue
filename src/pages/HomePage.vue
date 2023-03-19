@@ -50,7 +50,7 @@
       NewsComp,
       FooterComp,
       CookieComp
-    }
+    },
   })
 </script>
 

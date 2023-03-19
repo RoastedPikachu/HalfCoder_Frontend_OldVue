@@ -5,11 +5,11 @@
       <div class="mainBlock_Settings_InputsContainers">
         <div class="">
           <p>Имя</p>
-          <input type="text">
+          <input type="text" v-model="firstName">
         </div>
         <div>
           <p>Фамилия</p>
-          <input type="text">
+          <input type="text" v-model="secondName">
         </div>
         <div>
           <p>Доп. имя</p>
@@ -19,7 +19,7 @@
       <div class="mainBlock_Settings_InputsContainers">
         <div>
           <p>Имя пользователя</p>
-          <input type="text">
+          <input type="text" v-model="userName">
         </div>
         <div>
           <p>Дата рождения</p>
@@ -33,7 +33,7 @@
         </div>
         <div>
           <p>E-mail</p>
-          <input type="email">
+          <input type="email" v-model="email">
         </div>
       </div>
       <div id="MainBlock_Settings_textareaContainer">
@@ -48,11 +48,24 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import store from '@/store/index';
   import flatpickr from "flatpickr";
 
   export default defineComponent({
     name: 'SettingsComp',
+    data() {
+      return {
+        firstName: '',
+        secondName: '',
+        userName: '',
+        email: ''
+      }
+    },
     mounted() {
+      this.firstName = store.state.firstName;
+      this.secondName = store.state.secondName;
+      this.userName = store.state.userName;
+      this.email = store.state.email;
       setTimeout(() => flatpickr("input[type=datetime-local]", {}), 500);
     }
   })

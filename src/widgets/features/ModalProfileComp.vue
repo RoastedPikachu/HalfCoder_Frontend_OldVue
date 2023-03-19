@@ -32,9 +32,15 @@
         return {
           image: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
           starStatus: false,
-          name: store.state.userName,
-          employment: store.state.employment
+          name: '',
+          employment: ''
         }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.name = store.state.userName;
+        this.employment = store.state.employment;
+      }, 100);
     },
     components: { 
       ItemBrieflyInfoComp,

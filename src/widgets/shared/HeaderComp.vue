@@ -45,14 +45,16 @@
     },
     methods: {
       changeNotifeActive():void {
-        this.modalNotifActive = !this.modalNotifActive;
+        if(!this.modalProfileActive) {
+          this.modalNotifActive = !this.modalNotifActive;
+        }
       },
       changeProfileActive():void {
-        if(this.isSignIn) {
+        if(!this.modalNotifActive) {
           this.modalProfileActive = !this.modalProfileActive;
         }
       }
-    },
+    },  
     components: {
       ModalProfileComp,
       ModalNotifComp
