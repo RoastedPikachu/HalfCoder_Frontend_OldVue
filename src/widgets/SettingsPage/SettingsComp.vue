@@ -13,7 +13,7 @@
         </div>
         <div>
           <p>Доп. имя</p>
-          <input type="text">
+          <input type="text" v-model="additionalName">
         </div>
       </div>
       <div class="mainBlock_Settings_InputsContainers">
@@ -23,13 +23,13 @@
         </div>
         <div>
           <p>Дата рождения</p>
-          <input type="datetime-local">
+          <input type="datetime-local" v-model="dateOfBirth">
         </div>
       </div>
       <div class="mainBlock_Settings_InputsContainers">
         <div>
           <p>Номер телефона</p>
-          <input type="text">
+          <input type="text" v-model="phoneNumber">
         </div>
         <div>
           <p>E-mail</p>
@@ -38,10 +38,10 @@
       </div>
       <div id="MainBlock_Settings_textareaContainer">
         <p>О себе</p>
-        <textarea maxlength="300"></textarea>
+        <textarea maxlength="300" v-model="aboutUser"></textarea>
         <p>Лимит символов: 300</p>
       </div>
-      <button>Сохранить изменения</button>
+      <button type="button" @click="setChanges()">Сохранить изменения</button>
     </form>
   </section>
 </template>
@@ -57,15 +57,38 @@
       return {
         firstName: '',
         secondName: '',
+        additionalName: '',
         userName: '',
-        email: ''
+        dateOfBirth: '',
+        phoneNumber: '',
+        email: '',
+        aboutUser: ''
+      }
+    },
+    methods: {
+      setChanges():void {
+        let payload = {
+          firstName: this.firstName,
+          secondName: this.secondName,
+          additionalName: this.additionalName,
+          userName: this.userName,
+          dateOfBirth: this.dateOfBirth,
+          phoneNumber: this.phoneNumber,
+          email: this.email,
+          aboutUser: this.aboutUser
+        }
+        
+        store.commit('SET_FULL_USER_DATA', payload);
       }
     },
     mounted() {
       this.firstName = store.state.firstName;
       this.secondName = store.state.secondName;
+      this.additionalName = store.state.additionalName;
       this.userName = store.state.userName;
+      this.phoneNumber = store.state.phoneNumber;
       this.email = store.state.email;
+      this.aboutUser = store.state.aboutUser;
       setTimeout(() => flatpickr("input[type=datetime-local]", {}), 500);
     }
   })

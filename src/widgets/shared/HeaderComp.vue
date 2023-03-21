@@ -4,7 +4,7 @@
     <nav>
       <router-link to="/" class="route">Главная</router-link>
       <router-link to="/events" class="route">События</router-link>
-      <router-link to="/settings" class="routeImg">
+      <router-link to="/settings" class="routeImg" v-if="isSignIn">
         <img src="@/assets/grey_settings_icon.svg" alt="Настройки">
       </router-link>
       <div class="modalContainer">

@@ -2,13 +2,12 @@
   <section id="Rating">
     <h2>Рейтинг</h2>
     <div id="Rating_info">
-      <div id="Rating_infoUser" v-for="elem of elements" :key="elem.id">
-        <p>{{ elem.score }} points</p>
+      <div id="Rating_infoUser" v-for="elem of elements.slice(0, 4)" :key="elem.id">
+        <p>{{ elem.rating }} points</p>
         <ItemBrieflyInfoComp  
-          :name="elem.name"
-          :image="elem.image"
-          :employment="elem.employment"
-          :starStatus="elem.starStatus"
+          :name="elem.username"
+          :image="elem.photo"
+          :employment="elem.profile.work"
         />
       </div>
     </div>
@@ -18,48 +17,69 @@
 
 <script lang="ts"> 
   import { defineComponent } from 'vue';
+  import axios from 'axios';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
+
+  interface Profile {
+    sex: null,
+    work: null,
+    birthday: null,
+    phone: null,
+    country: null,
+    hobby: null,
+    education: null,
+    website: null,
+    quote: null
+  }
+
+  interface Advertisement {
+    count: number,
+    all: object
+  }
+
+  interface User {
+    id: number,
+    username: string,
+    email: string,
+    last_login: null,
+    first_name: string,
+    last_name: string,
+    date_joined: string,
+    trustFactor: number,
+    is_authenticity: boolean,
+    profile_id: number,
+    photo: string,
+    is_staff: boolean,
+    profile: Profile,
+    advertisement: Advertisement,
+    subs_to_user: number,
+    post_from_user: number,
+    views_to_user: number,
+    user_rating_per_month: number,
+    user_rating_per_week: number,
+    rating: number
+  }
 
   export default defineComponent({
     name: 'RaitingComp',
     data() {
-      return {
-        elements: [
-          {
-            id: 0, 
-            score: 15563,
-            image: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-            starStatus: true,
-            name: 'Leha Ovchinnikov',
-            employment: 'backend-разработчик'
-          },
-          {
-            id: 1, 
-            score: 27963,
-            image: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-            starStatus: true,
-            name: 'Vitalii Ogurtsov',
-            employment: 'frontend-разработчик'
-          },
-          {
-            id: 2, 
-            score: 9558,
-            image: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-            starStatus: true,
-            name: 'Karl Gustav',
-            employment: 'ML-разработчик'
-          },
-          {
-            id: 3, 
-            score: 13286,
-            image: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-            starStatus: false,
-            name: 'Mr Holtstein',
-            employment: 'android-разработчик'
-          }
-        ],
-        countOfUsersResults: 8673,
+      return {  
+        elements: [] as User[],
+        countOfUsersResults: 0,
       }
+    },
+    methods: {
+      async getElems() {
+        const url = new URL('http://62.109.10.224:500/api/v1/rating/popular/');
+
+        const result = await axios.get(url.toString());
+
+        this.elements = Object.values(result.data);
+        this.countOfUsersResults = this.elements.length;
+      }
+    },
+    mounted() {
+      this.getElems();
     },
     components: {
       ItemBrieflyInfoComp

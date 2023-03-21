@@ -1,17 +1,32 @@
 <template>
-  <section id="CookieBlock">
-    <i class="fa-solid fa-xmark"></i>
+  <section id="CookieBlock" v-if="isCookieOpen">
+    <i class="fa-solid fa-xmark" @click="closeCookie()"></i>
     <img src="@/assets/cookie_icon.svg" alt="Куки">
     <p>Мы используем файлы куки, при помощи них мы подбираем вам контент и анализируем наш трафик</p>
-    <button>Принять</button>
+    <button @click="closeCookie()">Принять</button>
   </section>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import store from '@/store/index';
 
   export default defineComponent({
-    name: 'CookieComp'
+    name: 'CookieComp',
+    data() {
+      return {
+        isCookieOpen: false,
+      }
+    },
+    methods: {
+      closeCookie():void {
+        store.commit('CLOSE_COOKIE');
+        this.isCookieOpen = store.state.isCookieOpen
+      }
+    },
+    mounted() {
+      setTimeout(() => this.isCookieOpen = store.state.isCookieOpen, 100);
+    }
   })
 </script>
 

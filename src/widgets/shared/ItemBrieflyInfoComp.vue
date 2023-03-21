@@ -2,11 +2,10 @@
   <div class="ElemBrieflyInfo">
     <div class="ElemBrieflyInfo_Rating_infoUser_image">
       <img :src="image" :alt="name">
-      <div class="ElemBrieflyInfo_Rating_infoUser_image_starStatus" v-if="starStatus"></div>
     </div>
     <span>
       <p>{{ name }}</p>
-      <p>{{ employment }}</p>
+      <p>{{ emlpoyment }}</p>
     </span>
   </div>
 </template>
@@ -19,8 +18,7 @@
     props: {
       image: String,
       name: String,
-      starStatus: Boolean,
-      employment: String
+      emlpoyment: String
     }
   })
 </script>
@@ -40,15 +38,6 @@
         width: 100%;
         height: 100%;
         color: #ffffff;
-      }
-      .ElemBrieflyInfo_Rating_infoUser_image_starStatus {
-        position: absolute;
-        right: 2px;
-        bottom: 2px;
-        width: 10px;
-        height: 10px;
-        background-color: #ffdd00;
-        border-radius: 50px;
       }
     }
     span {

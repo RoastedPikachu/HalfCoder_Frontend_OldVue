@@ -1,7 +1,7 @@
 <template>
   <section id="RecommendedCategories">
-    <router-link :to="recomend.link" class="recomendation" v-for="recomend of recomends" :key="recomend.id">
-      {{ recomend.categoryName }}
+    <router-link :to="category.link" class="recomendation" v-for="category in categories.slice(0, 11)" :key="category.id">
+      {{ category.title }}
     </router-link>
     <button>
       <img src="@/assets/grey_arrow_icon.svg" alt="Стрелка">
@@ -11,69 +11,32 @@
 
 <script lang="ts">  
   import { defineComponent } from 'vue';
+  import axios from 'axios';
+
+  interface Category {
+    id: number,
+    title: string,
+    link: string,
+  }
 
   export default defineComponent({
     name: 'RecommendedCategoriesComp',
     data() {
       return {
-        recomends: [
-          {
-            id: 0, 
-            categoryName: 'Python',
-            link: '/python',
-          }, 
-          {
-            id: 1,
-            categoryName: 'JS',
-            link: '/js',
-          },
-          {
-            id: 2,
-            categoryName: 'ML',
-            link: '/machLearn',
-          },
-          {
-            id: 3,
-            categoryName: 'News',
-            link: '/news',
-          },
-          {
-            id: 4,
-            categoryName: 'Java',
-            link: '/java',
-          },
-          {
-            id: 5,
-            categoryName: 'Programming',
-            link: '/programming',
-          },
-          {
-            id: 6,
-            categoryName: 'UI',
-            link: '/userinterf',
-          }, 
-          {
-            id: 7,
-            categoryName: 'Business',
-            link: '/business',
-          },
-          {
-            id: 8,
-            categoryName: 'UX',
-            link: '/userexper',
-          },
-          {
-            id: 9,
-            categoryName: 'IoT',
-            link: '/iot',
-          },
-          {
-            id: 10,
-            categoryName: 'Android',
-            link: '/android',
-          }
-        ],
+        categories: [] as Category[],
       }
+    },
+    methods: {
+      async getCategories() {
+        const url = new URL('http://62.109.10.224:500/api/v1/article/category/popular/');
+
+        const result = await axios.get(url.toString());
+
+        this.categories = Object.values(result.data.categories);
+      }
+    },
+    mounted() {
+      this.getCategories();
     }
   })
 </script>

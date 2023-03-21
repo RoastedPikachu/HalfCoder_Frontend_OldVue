@@ -57,6 +57,7 @@
 <style lang="scss" scoped>
   #MainBlock {
     display: flex;
+    justify-content: center;
     margin-top: 15px;
     width: 85%;
     padding: 0 7.5%;

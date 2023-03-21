@@ -37,7 +37,7 @@
       setTimeout(() => {
         this.userName = `${store.state.firstName} ${store.state.secondName}`;
         this.employment = store.state.employment;
-      }, 50)
+      }, 100)
     },
     components: {
       ProfileMenuComp

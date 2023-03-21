@@ -3,10 +3,7 @@
     <div id="SignIn">
       <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
       <form>
-        <button id="SignIn_errorBlock" v-if="error.length">
-          <img src="@/assets/error_icon.svg" alt="Крестик">
-          <p>{{ error }}</p>
-        </button>
+        <ErrorComp :error="error" :errLength="error.length"/>
         <div class="signIn_inputs">
           <p>Имя пользователя/email</p>
           <input type="text" placeholder="Введите логин" v-model="login">
@@ -30,6 +27,7 @@
   import { defineComponent } from 'vue';
   import axios from 'axios';
   import store from '@/store/index';
+  import ErrorComp from '@/widgets/shared/ErrorComp.vue';
 
   export default defineComponent({
     name: 'SignInPage',
@@ -37,7 +35,7 @@
       return {
         login: '',
         password: '',
-        error: ''
+        error: '',
       }
     },
     methods: {
@@ -62,7 +60,7 @@
         payload.userName = result.data.user.username;
         payload.email = result.data.user.email;
 
-        store.commit('SET_USER_DATA', payload);
+        store.commit('SET_FIRST_USER_DATA', payload);
       },
       async setValuesLogin() {
         const url = new URL('http://62.109.10.224:500/api/v1/auth/login/');
@@ -81,7 +79,6 @@
           case 110: store.commit('CHANGE_SIGN_IN_STATUS');  
             this.getInfoAboutUser(token);
             document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
-            alert('Вход в аккаунт прошёл успешно');
             this.$router.push('/');
             break;
           case 111: this.error= 'Ошибка входа';
@@ -96,6 +93,9 @@
         this.login = '';
         this.password = '';
       }
+    },
+    components: {
+      ErrorComp,
     }
   })
 </script>
@@ -133,27 +133,8 @@
         align-items: center;
         width: 100%;
         height: 280px;
-        #SignIn_errorBlock {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0 2.5%;
-          width: 80%;
-          height: 35px;
-          background-color: #101010;
-          border: 1.5px solid #dc283a;
-          border-radius: 5px;
-          p {
-            width: 85%;
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 400;
-            font-family: 'Space Grotesk', sans-serif;
-            text-align: left;
-          }
-        }
         .signIn_inputs {
-          width: 80%;
+          width: 87.5%;
           height: 52.5px;
           p {
             height: 22.5px;

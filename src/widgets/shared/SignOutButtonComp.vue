@@ -23,6 +23,7 @@
 
         if(result) {
           store.commit('CLEAR_USER_DATA');
+          store.commit('CLOSE_COOKIE');
           alert('Выход из аккаунта прошёл успешно');
           location.reload();
         } else {

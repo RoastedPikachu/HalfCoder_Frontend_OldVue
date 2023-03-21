@@ -3,10 +3,10 @@
     <h2>Популярные компании</h2>
     <div id="Companies_info">
       <div class="Companies_infoCompany" v-for="company of companies" :key="company.id">
-        <img :src="company.companyImage" :alt="company.companyName">
+        <img :src="company.photo" :alt="company.name">
         <span>
-          <p>{{ company.companyName }}</p>
-          <p>{{ company.companyEmployment }}</p>
+          <p>{{ company.name }}</p>
+          <p>{{ company.description }}</p>
         </span>
         <button>
           <img src="@/assets/eye_icon.svg" alt="Иконка глаза">
@@ -18,38 +18,51 @@
 
 <script lang=ts>
   import { defineComponent } from 'vue';
+  import axios from 'axios';
+
+  interface Ambassador {
+    username: string,
+    first_name: string,
+    last_name: string
+  }
+
+  interface Track {
+    title: string
+  }
+
+  interface Company {
+    id: number,
+    name: string,
+    photo: string,
+    ambassador: Ambassador,
+    description: string,
+    views: number,
+    tracks: Track,
+    reg_date: string,
+    created_date: null,
+    country: string,
+    authenticity: true,
+    website: null,
+  }
 
   export default defineComponent({
     name: 'CompaniesComp',
     data() {
       return {
-        companies: [
-          {
-            id: 0,
-            companyImage: 'https://ucarecdn.com/0eddfa5e-15cc-493e-8fbf-e0b90440a362/',
-            companyName: 'Selectel',
-            companyEmployment: 'IT-инфраструктура'
-          },
-          {
-            id: 1,
-            companyImage: 'https://assets.stickpng.com/images/623b00a027d4946aceae2fdb.png',
-            companyName: 'Yandex',
-            companyEmployment: 'IT-продукты'
-          },
-          {
-            id: 2,
-            companyImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/VK_Compact_Logo_%282021-present%29.svg/1024px-VK_Compact_Logo_%282021-present%29.svg.png',
-            companyName: 'VK',
-            companyEmployment: 'Messenger'
-          },
-          {
-            id: 3,
-            companyImage: 'https://www.sostav.ru/images/news/2019/05/08/wwh5l7ed.png',
-            companyName: 'Alpha-bank',
-            companyEmployment: 'FinTech'
-          }
-        ]
+        companies: [] as Company[]
       }
+    },
+    methods: {
+      async getCompanies() {
+        const url = new URL('http://62.109.10.224:500/api/v1/company/popular/');
+
+        const result = await axios.get(url.toString());
+
+        this.companies = Object.values(result.data);
+      }
+    },
+    mounted() {
+      this.getCompanies();
     }
   })
 </script>

@@ -3,36 +3,43 @@
     <div id="Registration">
       <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
       <form>
-        <div class="registration_inputs">
-          <p>Имя</p>
-          <input type="text" placeholder="Введите имя" v-model="name">
+        <ErrorComp :error="error" :errLength="error.length"/>
+        <div class="registration_inputs_container">
+          <div class="registration_inputs">
+            <p>Имя</p>
+            <input type="text" placeholder="Введите имя" v-model="name">
+          </div>
+          <div class="registration_inputs">
+            <p>Фамилия</p>
+            <input type="text" placeholder="Введите фамилию" v-model="secondName">
+          </div>
         </div>
-        <div class="registration_inputs">
-          <p>Фамилия</p>
-          <input type="text" placeholder="Введите фамилию" v-model="secondName">
+        <div class="registration_inputs_container">
+          <div class="registration_inputs">
+            <p>Имя пользователя</p>
+            <input type="text" placeholder="Введите имя пользователя" v-model="userName">
+          </div>
+          <div class="registration_inputs">
+            <p>E-mail</p>
+            <input type="text" placeholder="Введите e-mail" v-model="email">
+          </div>
         </div>
-        <div class="registration_inputs">
-          <p>Имя пользователя</p>
-          <input type="text" placeholder="Введите имя пользователя" v-model="userName">
-        </div>
-        <div class="registration_inputs">
-          <p>E-mail</p>
-          <input type="text" placeholder="Введите e-mail" v-model="email">
-        </div>
-        <div class="registration_inputs">
-          <p>Пароль</p>
-          <input type="password" placeholder="Введите пароль" v-model="password">
-        </div>
-        <div class="registration_inputs">
-          <p>Повторите пароль</p>
-          <input type="password" placeholder="Введите пароль ещё раз" v-model="repeatedPassword">
+        <div class="registration_inputs_container">
+          <div class="registration_inputs">
+            <p>Пароль</p>
+            <input type="password" placeholder="Введите пароль" v-model="password">
+          </div>
+          <div class="registration_inputs">
+            <p>Повторите пароль</p>
+            <input type="password" placeholder="Введите пароль ещё раз" v-model="repeatedPassword">
+          </div>
         </div>
         <div id="Registation_termsOfUse">
           <input type="checkbox" name="termsOfUse" v-model="agreeToTermsOfUse" > 
-          <label for="termsOfUse">Я принимаю условия <a href="/">Пользовательского соглашения</a></label>
+          <label for="termsOfUse">Я принимаю условия <router-link to="/termsOfUse" id="Registation_termsOfUse_route">Пользовательского соглашения</router-link></label>
         </div>
-        <button type="button" @click="setValuesRegistration()" v-if="agreeToTermsOfUse">Зарегистрироваться</button>
-        <button id="Registration_notActiveButton" type="button" v-if="!agreeToTermsOfUse">Зарегистрироваться</button>
+        <button class="registration_button" type="button" @click="setValuesRegistration()" v-if="agreeToTermsOfUse">Зарегистрироваться</button>
+        <button class="registration_button registration_notActiveButton" type="button" v-if="!agreeToTermsOfUse">Зарегистрироваться</button>
       </form>
     </div>
   </section>
@@ -41,6 +48,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import axios from 'axios';
+  import ErrorComp from '@/widgets/shared/ErrorComp.vue';
 
   export default defineComponent({
     name: 'RegistrationPage',
@@ -52,13 +60,13 @@
         email: '',
         password: '',
         repeatedPassword: '',
-        agreeToTermsOfUse: false
+        agreeToTermsOfUse: false,
+        error: '',
       }
     },
     methods: {
       async setValuesRegistration() {
         const url = new URL('http://62.109.10.224:500/api/v1/auth/register/');
-        let error = '';
 
         const result = await axios.post(url.toString(), {
           first_name: this.name,
@@ -74,14 +82,13 @@
         const status:number = result.data.status;
 
         switch(status) {
-          case 100: alert('Регистрация прошла успешно');
-            this.$router.push('/signIn');
+          case 100: this.$router.push('/signIn');
             break;
-          case 101: alert(error = 'Неккоректные данные');
+          case 101: this.error = 'Неккоректные данные';
             break;
-          case 102: alert(error = 'Такой пользователь уже существует');
+          case 102: this.error = 'Такой пользователь уже существует';
             break;
-          case 103: alert(error = 'Пользователь с такой почтой уже существует');
+          case 103: this.error = 'Пользователь с такой почтой уже существует';
             break;
         }
 
@@ -92,6 +99,9 @@
         this.password = '';
         this.repeatedPassword = '';
       },
+    },
+    components: {
+      ErrorComp,
     }
   })
 </script>
@@ -110,7 +120,7 @@
     flex-wrap: wrap;
     padding: 15px 15px;
     width: 520px;
-    height: 380px;
+    height: 400px;
     background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
@@ -125,11 +135,17 @@
     }
     form {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       flex-wrap: wrap;
       align-items: center;
       width: 100%;
-      height: 320px;
+      height: 340px;
+      .registration_inputs_container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+      }
       .registration_inputs {
         width: 47.5%;
         p {
@@ -165,15 +181,14 @@
           color: #ffffff;
           font-size: 14px;
           font-family: 'Space Grotesk', sans-serif;
-          a {
+          #Registation_termsOfUse_route {
             color: #3d5aff;
             text-decoration: none;
             outline: none;
           }
         }
       }
-      button {
-        margin-left: calc(50% - 90px);
+      .registration_button {
         width: 180px;
         height: 35px;
         background-color: #3d5aff;
@@ -184,7 +199,7 @@
         font-weight: 700;
         cursor: pointer;
       }
-      #Registration_notActiveButton {
+      .registration_notActiveButton {
         background-color: #747474;
       }
     }
