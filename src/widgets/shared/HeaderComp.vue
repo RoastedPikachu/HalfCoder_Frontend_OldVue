@@ -45,14 +45,12 @@
     },
     methods: {
       changeNotifeActive():void {
-        if(!this.modalProfileActive) {
-          this.modalNotifActive = !this.modalNotifActive;
-        }
+        this.modalNotifActive = !this.modalNotifActive;
+        this.modalProfileActive = false;
       },
       changeProfileActive():void {
-        if(!this.modalNotifActive) {
-          this.modalProfileActive = !this.modalProfileActive;
-        }
+        this.modalProfileActive = !this.modalProfileActive;
+        this.modalNotifActive = false;
       }
     },  
     components: {

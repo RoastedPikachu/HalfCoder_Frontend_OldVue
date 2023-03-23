@@ -5,7 +5,7 @@
     </div>
     <span>
       <p>{{ name }}</p>
-      <p>{{ emlpoyment }}</p>
+      <p>{{ employment }}</p>
     </span>
   </div>
 </template>
@@ -18,7 +18,7 @@
     props: {
       image: String,
       name: String,
-      emlpoyment: String
+      employment: String
     }
   })
 </script>

@@ -29,6 +29,16 @@
   import store from '@/store/index';
   import ErrorComp from '@/widgets/shared/ErrorComp.vue';
 
+  interface Payload {
+    posts: number,
+    followers: number,
+    views: number,
+    firstName: string,
+    secondName: string,
+    userName: string,
+    email: string
+  }
+
   export default defineComponent({
     name: 'SignInPage',
     data() {
@@ -41,7 +51,10 @@
     methods: {
       async getInfoAboutUser(token:string) {
         const url = new URL('http://62.109.10.224:500/api/v1/account/data/');
-        let payload = {
+        let payload:Payload = {
+          posts: 0,
+          followers: 0,
+          views: 0,
           firstName: '',
           secondName: '',
           userName: '',
@@ -55,6 +68,9 @@
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         });
 
+        payload.posts = result.data.user.post_from_user;
+        payload.followers = result.data.user.subs_to_user;
+        payload.views = result.data.user.views_to_user;
         payload.firstName = result.data.user.first_name;
         payload.secondName = result.data.user.last_name;
         payload.userName = result.data.user.username;
@@ -82,7 +98,7 @@
             this.$router.push('/');
             break;
           case 111: this.error= 'Ошибка входа';
-            break;
+            break;   
           case 112: this.error = 'Некорректные данные';
             break;
           case 113: this.error = 'Пользователь не найден';

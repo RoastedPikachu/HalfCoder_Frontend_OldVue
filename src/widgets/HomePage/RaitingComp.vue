@@ -11,7 +11,7 @@
         />
       </div>
     </div>
-    <router-link to="/users" id="Rating_moreUsers">Ещё {{ countOfUsersResults }} результатов</router-link>
+    <router-link to="/users" id="Rating_moreUsers">Ещё {{ countOfUsersResults }} {{countOfResultsText}}</router-link>
   </section>
 </template>
 
@@ -66,6 +66,7 @@
       return {  
         elements: [] as User[],
         countOfUsersResults: 0,
+        countOfResultsText: ''
       }
     },
     methods: {
@@ -76,6 +77,20 @@
 
         this.elements = Object.values(result.data);
         this.countOfUsersResults = this.elements.length;
+        this.setCountText(this.countOfUsersResults, ['результат', 'результата', 'результатов']);
+      },
+      setCountText(num:number, arr:string[]) {
+        const n:number = num % 100;
+        
+        if(n >= 5 && n <= 20) {
+          this.countOfResultsText = arr[2];
+        } else if(n === 1) {
+          this.countOfResultsText = arr[0];
+        } else if(n >= 2 && n <= 4) {
+          this.countOfResultsText = arr[1];
+        } else {
+          this.countOfResultsText = arr[2];
+        }
       }
     },
     mounted() {

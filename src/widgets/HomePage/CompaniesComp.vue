@@ -127,6 +127,7 @@
           background-color: #1e1e1e;
           border: 0;
           border-radius: 50px;
+          outline: none;
           cursor: pointer;
           img {
             width: 20px;

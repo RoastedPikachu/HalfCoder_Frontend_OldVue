@@ -8,9 +8,15 @@
       <p>I'd love to change the world, but they won't give me the source code</p>
     </div>
     <span id="Profile_secondaryInfo">
-      <div><p>{{ posts }}</p> Posts</div>
-      <div><p>{{ followers }}K</p> Followers</div>
-      <div><p>{{ following }}</p>  Following</div>
+      <div>
+        <p>{{ followers }}</p> 
+        <p>{{ followersCountText }}</p></div>
+      <div>
+        <p>{{ posts }}</p>
+        <p>{{ postsCountText }}</p></div>
+      <div>
+        <p>{{ views }}</p>
+        <p>{{ viewsCountText }}</p></div>
     </span>
     <div id="Profile_centerLine"></div>
     <ProfileMenuComp/>
@@ -23,21 +29,51 @@
   import ProfileMenuComp from '@/widgets/features/ProfileMenuComp.vue';
 
   export default defineComponent({
-    name: 'ProfileComp',
+    name: 'ProfileSignInComp',
     data() {
       return {
         userName: '',
         employment: '',
-        posts: 256,
-        followers: 2.5,
-        following: 365
+        posts: 0,
+        followers: 0,
+        views: 0,
+        postsCountText: '',
+        followersCountText: '',
+        viewsCountText: '',
+      }
+    },
+    methods: {
+      setCountText(numArr:number[], targetArr:string[], textArr:string[][]) {
+        for(let i = 0; i < numArr.length; i++) {
+          let n:number = numArr[i] % 100;
+
+          if(n >= 5 && n <= 20) {
+            targetArr[i] = textArr[i][2];
+          } else if(n === 1) {
+            targetArr[i] = textArr[i][0]
+          } else if(n >= 2 && n <= 4) {
+            targetArr[i] = textArr[i][1]
+          } else {
+            targetArr[i] = textArr[i][2];
+          }
+        } 
+        this.postsCountText = targetArr[0];
+        this.followersCountText = targetArr[1];
+        this.viewsCountText = targetArr[2]; 
       }
     },
     mounted() {
+      this.setCountText([this.posts, this.followers, this.views], [this.postsCountText, 
+        this.followersCountText, this.viewsCountText] ,[['Пост', 'Поста', 'Постов'], 
+        ['Подписчик', 'Подписчика', 'Подписчиков'], ['Просмотр', 'Просмотра', 'Просмотров']]);
+
       setTimeout(() => {
         this.userName = `${store.state.firstName} ${store.state.secondName}`;
         this.employment = store.state.employment;
-      }, 100)
+        this.posts = store.state.posts;
+        this.followers = store.state.followers;
+        this.views = store.state.views;
+      }, 200)
     },
     components: {
       ProfileMenuComp
@@ -81,11 +117,12 @@
         width: 100%;
         margin-top: 7px;
         color: #ffffff;
-        font-size: 18px;
+        font-size: 16px;
         font-family: 'Inter', sans-serif;
         text-align: center;
       }
       p {
+        margin-top: 7px;
         color: #747474;
         font-size: 14px;
         font-family: 'Space Grotesk', sans-serif;
@@ -98,20 +135,24 @@
     #Profile_secondaryInfo {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-top: 10px;
       width: 235px;
       height: 45px;
       div {
-        color: #747474;
         font-family: 'Space Grotesk', sans-serif;
         text-align: center;
         p {
           color: #ffffff;
           font-size: 16px;
         }
+        p:last-child {
+          color: #747474;
+          font-size: 12px;
+        } 
       }
       div:nth-child(2) {
-        width: 90px;
+        width: 25%;
         border: 1px solid #747474;
         border-width: 0 2px 0;
       }

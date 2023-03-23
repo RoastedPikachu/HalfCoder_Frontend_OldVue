@@ -33,6 +33,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
 
   export default defineComponent({
@@ -46,6 +47,7 @@
 <style lang="scss" scoped>
   #Profile_menuIcons {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     margin-top: 20px;
     width: 87.5%;

@@ -4,7 +4,6 @@
       :name="name"
       :image="image"
       :employment="employment"
-      :starStatus="starStatus"
     />
     <button id="ModalProfileWindow_profileButton">Профиль</button>
     <div id="ModalProfileWindow_buttons">
@@ -20,11 +19,11 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import store from '@/store';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
   import SupportLinkComp from '@/widgets/shared/SupportLinkComp.vue';
   import SignOutButtonComp from '@/widgets/shared/SignOutButtonComp.vue';
-  import store from '@/store';
 
   export default defineComponent({
     name: "ModalProfileComp",
@@ -40,7 +39,7 @@
       setTimeout(() => {
         this.name = store.state.userName;
         this.employment = store.state.employment;
-      }, 100);
+      }, 200);
     },
     components: { 
       ItemBrieflyInfoComp,

@@ -2,7 +2,8 @@
   <HeaderComp :token="token"/>
   <section id="MainBlock">
     <aside id="MainBlock_info">
-      <ProfileComp/>
+      <ProfileSignInComp v-if="isSignIn"/>
+      <ProfileNotSignInComp v-if="!isSignIn"/>
       <CompaniesComp/>
     </aside>
     <section id="MainBlock_child">
@@ -20,8 +21,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import store from '@/store';
   import HeaderComp from '@/widgets/shared/HeaderComp.vue';
-  import ProfileComp from '@/widgets/HomePage/ProfileComp.vue';
+  import ProfileSignInComp from '@/widgets/HomePage/ProfileSignInComp.vue';
+  import ProfileNotSignInComp from '@/widgets/HomePage/ProfileNotSignInComp.vue';
   import CompaniesComp from '@/widgets/HomePage/CompaniesComp.vue';
   import RecommendedCategoriesComp from '@/widgets/HomePage/RecommendedCategoriesComp.vue';
   import PostsComp from '@/widgets/HomePage/PostsComp.vue';
@@ -34,15 +37,18 @@
     name: 'HomePage',
     data() {
       return {
-        token: ''
+        token: '',
+        isSignIn: false
       }
     },
     mounted() {
       this.token = document.cookie.slice(67);
+      this.isSignIn = store.state.isSignIn;
     },
     components: {
       HeaderComp,
-      ProfileComp,
+      ProfileSignInComp,
+      ProfileNotSignInComp,
       CompaniesComp,
       RecommendedCategoriesComp,
       PostsComp,
@@ -64,7 +70,7 @@
     font-weight: 700;
     #MainBlock_info {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       width: 280px;
       height: 890px;
     }

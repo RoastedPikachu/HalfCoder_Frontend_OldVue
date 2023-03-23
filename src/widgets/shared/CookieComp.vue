@@ -25,7 +25,7 @@
       }
     },
     mounted() {
-      setTimeout(() => this.isCookieOpen = store.state.isCookieOpen, 100);
+      setTimeout(() => this.isCookieOpen = store.state.isCookieOpen, 250);
     }
   })
 </script>

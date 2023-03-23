@@ -2,7 +2,7 @@
   <footer>
     <span>
       <a href="/">About</a>
-      <a href="/">Settings</a>
+      <router-link class="route" to="/settings">Settings</router-link>
       <a href="/">Support</a>
       <a href="/">Docs</a>
     </span>
@@ -51,6 +51,16 @@
       text-decoration: none;
       transition: 500ms ease;
       outline: none;
+    }
+    .route {
+      color: #747474;
+      line-height: 25px;
+      text-decoration: none;
+      transition: 500ms ease;
+      outline: none;
+    }
+    .route:hover {
+      color: #3d5aff;
     }
     a:hover {
       color: #3d5aff;

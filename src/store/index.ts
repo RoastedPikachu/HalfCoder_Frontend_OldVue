@@ -13,6 +13,9 @@ export interface State {
   email: string,
   aboutUser: string,
   employment: string,
+  posts: number,
+  followers: number,
+  views: number,
 }
 
 export default createStore<State>({
@@ -28,6 +31,9 @@ export default createStore<State>({
     email: '',
     aboutUser: '',
     employment: 'Занят IT уточками', 
+    posts: 0,
+    followers: 0,
+    views: 0
   },
   mutations: {
     CHANGE_SIGN_IN_STATUS(state) {
@@ -41,6 +47,9 @@ export default createStore<State>({
       state.secondName = payload.secondName;
       state.userName = payload.userName;
       state.email = payload.email;
+      state.posts = payload.posts;
+      state.followers = payload.followers;
+      state.views = payload.views;
       state.isCookieOpen = true;
     },
     SET_FULL_USER_DATA(state, payload) {
