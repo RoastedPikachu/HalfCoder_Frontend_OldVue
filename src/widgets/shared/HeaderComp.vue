@@ -53,9 +53,24 @@
         this.modalNotifActive = false;
       }
     },  
+    mounted() {
+      window.addEventListener('click', event => {
+        if(event.target !== null) {
+          const target = event.target as HTMLElement;
+
+          if(!target.closest('.modalContainer')) {
+            if(this.modalNotifActive) {
+              this.modalNotifActive = false;
+            } else if(this.modalProfileActive) {
+              this.modalProfileActive = false;
+            }
+          }
+        }
+      })
+    },
     components: {
       ModalProfileComp,
-      ModalNotifComp
+      ModalNotifComp,
     },
     props: {
       token: String
