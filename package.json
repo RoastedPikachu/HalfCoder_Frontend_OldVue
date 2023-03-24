@@ -9,10 +9,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.26.5",
     "core-js": "^3.8.3",
     "flatpickr": "^4.6.13",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-0",
+    "vue-pseudo-window": "^1.0.0",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.1.0"
