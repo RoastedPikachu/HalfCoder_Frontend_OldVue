@@ -5,11 +5,17 @@
       <router-link to="/" class="route">Главная</router-link>
       <router-link to="/events" class="route">События</router-link>
       <router-link to="/settings" class="routeImg" v-if="isSignIn">
-        <img src="@/assets/grey_settings_icon.svg" alt="Настройки">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.9999 14C12.6568 14 13.9999 12.6569 13.9999 11C13.9999 9.3431 12.6568 8 10.9999 8C9.34304 8 7.99994 9.3431 7.99994 11C7.99994 12.6569 9.34304 14 10.9999 14Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18.6224 9.3954L17.5247 6.7448L19 5L17 3L15.2647 4.48295L12.5578 3.36974L11.9353 1H9.981L9.3491 3.40113L6.70441 4.51596L5 3L3 5L4.45337 6.78885L3.3725 9.4463L1 10V12L3.40111 12.6555L4.51575 15.2997L3 17L5 19L6.79116 17.5403L9.397 18.6123L10 21H12L12.6045 18.6132L15.2551 17.5155C15.6969 17.8313 17 19 17 19L19 17L17.5159 15.2494L18.6139 12.598L20.9999 11.9772L21 10L18.6224 9.3954Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </router-link>
       <div class="modalContainer">
         <button @click="changeNotifeActive()">
-          <img src="@/assets/grey_notifications_icon.svg" alt="Уведомления">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.6667 7.40112C17.6667 5.70343 16.9643 4.07529 15.714 2.87485C14.4638 1.6744 12.7681 1 11 1C9.23189 1 7.5362 1.6744 6.28596 2.87485C5.03571 4.07529 4.33333 5.70343 4.33333 7.40112C4.33333 14.8691 1 17.0028 1 17.0028H21C21 17.0028 17.6667 14.8691 17.6667 7.40112Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12.9222 20.0033C12.7269 20.3064 12.4465 20.5581 12.1091 20.7329C11.7718 20.9079 11.3893 21 11 21C10.6106 21 10.2282 20.9079 9.89087 20.7329C9.55354 20.5581 9.27309 20.3064 9.07776 20.0033" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
           <div id="HasNotificationsStatus" v-if="hasNotificationsStatus"></div>
         </button>
         <ModalNotifComp :active="modalNotifActive"/>
@@ -66,7 +72,7 @@
             }
           }
         }
-      })
+      });
     },
     components: {
       ModalProfileComp,
@@ -124,6 +130,17 @@
         background-color: #1e1e1e;
         border: 0px;
         border-radius: 10px;
+        outline: none;
+        svg {
+          path {
+            transition: 500ms ease;
+          }
+        }
+        svg:hover {
+          path {
+            stroke: #3d5aff;
+          }
+        }
       }
       .modalContainer {
         position: relative;
@@ -140,6 +157,16 @@
           border-radius: 10px;
           outline: none;
           cursor: pointer;
+          svg {
+            path {
+              transition: 500ms ease;
+            }
+          }
+          svg:hover {
+            path {
+              stroke: #3d5aff;
+            }
+          }
           div {
             position: absolute;
             top: -2px;

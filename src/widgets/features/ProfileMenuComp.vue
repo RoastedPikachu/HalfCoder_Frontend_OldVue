@@ -6,7 +6,7 @@
     </span>
     <span>
       <img src="@/assets/connections_icon.svg" alt="Связи">
-      <p>Connections</p>
+      <router-link to="/createPost" class="route">Connections</router-link>
     </span>
     <span>
       <img src="@/assets/news_icon.svg" alt="Последние новости">
@@ -26,18 +26,26 @@
     </span>
     <SettingsLinkComp/>
   </div>
-  <div id="Profile_checkProfile">
+  <div id="Profile_checkProfile" v-if="isSignIn">
     <button>Просмотр профиля</button>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-
+  import store from '@/store/index';
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
 
   export default defineComponent({
     name: 'ProfileMenuComp',
+    data() {
+      return {
+        isSignIn: false
+      }
+    },
+    mounted() {
+      this.isSignIn = store.state.isSignIn;
+    },
     components: {
       SettingsLinkComp
     }
@@ -69,6 +77,18 @@
         height: 22px;
         font-size: 20px;
         font-family: 'Space Grotesk', sans-serif;
+      }
+      .route {
+        margin-left: 10px;
+        height: 22px;
+        color: #ffffff;
+        font-size: 20px;
+        font-family: 'Space Grotesk', sans-serif;
+        transition: 500ms ease;
+        text-decoration: none;
+      }
+      .route:hover {
+        color: #3d5aff;
       }
       .profile_menuIcons_route {
         margin-left: 10px;

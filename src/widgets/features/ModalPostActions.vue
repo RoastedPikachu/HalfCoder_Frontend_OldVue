@@ -5,7 +5,7 @@
       <p>В закладки</p>
     </button>
     <button>
-      <img src="@/assets/report_icon.svg" alt="Репорт">
+      <i class="fa-solid fa-flag"></i>
       <p>Репорт</p> 
     </button>
   </div>
@@ -51,6 +51,12 @@
       img {
         width: 20px;
         height: 20px;
+      }
+      i {
+        width: 20px;
+        height: 15px;
+        color: #747474;
+        font-size: 16px;
       }
       p {
         margin-left: 5px;

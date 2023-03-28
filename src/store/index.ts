@@ -6,7 +6,6 @@ export interface State {
   isCookieOpen: boolean,
   firstName: string,
   secondName: string,
-  additionalName: string,
   userName: string,
   dateOfBirth: string,
   phoneNumber: string,
@@ -24,13 +23,12 @@ export default createStore<State>({
     isCookieOpen: true,
     firstName: '',
     secondName: '',
-    additionalName: '',
     userName: '',
     dateOfBirth: '',
     phoneNumber: '',
     email: '',
     aboutUser: '',
-    employment: 'Занят IT уточками', 
+    employment: 'Кормит IT уточек', 
     posts: 0,
     followers: 0,
     views: 0
@@ -55,7 +53,6 @@ export default createStore<State>({
     SET_FULL_USER_DATA(state, payload) {
       state.firstName = payload.firstName;
       state.secondName = payload.secondName;
-      state.additionalName = payload.additionalName;
       state.userName = payload.userName;
       state.dateOfBirth = payload.dateOfBirth;
       state.phoneNumber = payload.phoneNumber;
@@ -65,7 +62,6 @@ export default createStore<State>({
     CLEAR_USER_DATA(state) {
       state.firstName = '';
       state.secondName = '';
-      state.additionalName = '';
       state.userName = '';
       state.dateOfBirth = '';
       state.phoneNumber = '';

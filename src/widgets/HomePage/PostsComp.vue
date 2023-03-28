@@ -20,11 +20,14 @@
       <img :src="post.postImage" :alt="post.text">
       <div class="mainBlock_childPosts_activityInfo">
         <span>
-          <img src="@/assets/grey_like_icon.svg" alt="Лайк"><p> {{ post.likes }}</p>
-          <img src="@/assets/grey_repost_icon.svg" alt="Репост"><p> {{ post.reposts }}</p>
+          <i class="fa-solid fa-heart"></i>
+          <p>{{ post.likes }}</p>
+          <i class="fa-solid fa-share"></i>
+          <p>{{ post.reposts }}</p>
         </span>
         <span>
-          <img src="@/assets/grey_eye_icon.svg" alt="Просмотры"><p> {{ post.views }}</p>
+          <i class="fa-solid fa-eye"></i>
+          <p>{{ post.views }}</p>
         </span>
       </div>
     </div>
@@ -52,6 +55,7 @@
     name: 'PostsComp',
     data() {
       return {
+        activeId: 0,
         posts: [
           {
             id: 0,
@@ -95,7 +99,28 @@
     methods: {
       changeModalActionsActive(post:Post) {
         post.modalActionsActive = !post.modalActionsActive;
+        this.activeId = post.id;
+
+        this.posts.forEach((item) => {
+          if(item.id !== this.activeId) {
+            item.modalActionsActive = false;
+          }
+        })
       }
+    },
+    mounted() {
+      window.addEventListener('click', event => {
+        if(event.target !== null) {
+          const target = event.target as HTMLElement;
+
+          if(!target.closest('.mainBlock_childPosts_button')) {
+            let currentPost = this.posts.find(item => item.id === this.activeId);
+            if(currentPost !== undefined) {
+              currentPost.modalActionsActive = false;
+            }
+          }
+        }
+      });
     },
     components: {
       ModalPostActions
@@ -164,7 +189,11 @@
             color: #747474;
             font-size: 24px;
             outline: none;
+            transition: 500ms ease;
             cursor: pointer;
+          }
+          button:hover {
+            color: #3d5aff;
           }
         }
       }
@@ -187,10 +216,14 @@
           justify-content: flex-start;
           align-items: center;
           width: 25%;
-          img {
-            width: 25px;
-            height: 25px;
+          i {
+            color: #747474;
+            font-size: 24px;
+            transition: 500ms ease;
             cursor: pointer;
+          }
+          i:hover {
+            color: #3d5aff;
           }
           p {
             margin-left: 7.5px;

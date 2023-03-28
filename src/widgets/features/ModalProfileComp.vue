@@ -12,7 +12,7 @@
     </div>
     <SignOutButtonComp :token="token"/>
     <div id="ModalProfileWindow_changeTheme">
-      <img src="@/assets/changeTheme_sun_icon.svg" alt="Сменить тему">
+      <i class="fa-solid fa-circle-half-stroke"></i>
     </div>
   </div>
 </template>
@@ -100,10 +100,13 @@
       background-color: #1e1e1e;
       border-radius: 5px;
       cursor: pointer;
-      img {
-        margin-left: 2%;
-        width: 75%;
-        height: 75%;
+      i {
+        color: #747474;
+        font-size: 30px;
+        transition: 500ms ease;
+      }
+      i:hover {
+        color: #3d5aff;
       }
     }
   }

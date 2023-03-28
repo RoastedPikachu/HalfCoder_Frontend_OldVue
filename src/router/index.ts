@@ -3,6 +3,7 @@ import HomePage from '@/pages/HomePage.vue';
 import SettingsPage from '@/pages/SettingsPage.vue';
 import RegistrationPage from '@/pages/RegistrationPage.vue';
 import SignInPage from '@/pages/SignInPage.vue';
+import CreatePostPage from '@/pages/CreatePostPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/signIn',
     name: 'signIn',
     component: SignInPage
+  },
+  {
+    path: '/createPost',
+    name: 'createPost',
+    component: CreatePostPage
   }
     //component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
 ]

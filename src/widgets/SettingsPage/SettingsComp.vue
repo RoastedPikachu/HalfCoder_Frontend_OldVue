@@ -3,17 +3,13 @@
     <h2>Настройки аккаунта</h2>
     <form>
       <div class="mainBlock_Settings_InputsContainers">
-        <div class="">
+        <div>
           <p>Имя</p>
           <input type="text" v-model="firstName">
         </div>
         <div>
           <p>Фамилия</p>
           <input type="text" v-model="secondName">
-        </div>
-        <div>
-          <p>Доп. имя</p>
-          <input type="text" v-model="additionalName">
         </div>
       </div>
       <div class="mainBlock_Settings_InputsContainers">
@@ -57,7 +53,6 @@
       return {
         firstName: '',
         secondName: '',
-        additionalName: '',
         userName: '',
         dateOfBirth: '',
         phoneNumber: '',
@@ -70,7 +65,6 @@
         let payload = {
           firstName: this.firstName,
           secondName: this.secondName,
-          additionalName: this.additionalName,
           userName: this.userName,
           dateOfBirth: this.dateOfBirth,
           phoneNumber: this.phoneNumber,
@@ -84,7 +78,6 @@
     mounted() {
       this.firstName = store.state.firstName;
       this.secondName = store.state.secondName;
-      this.additionalName = store.state.additionalName;
       this.userName = store.state.userName;
       this.phoneNumber = store.state.phoneNumber;
       this.email = store.state.email;
@@ -148,11 +141,6 @@
           input:last-child {
             width: 100%;
           }
-        }
-      }
-      .mainBlock_Settings_InputsContainers:first-child {
-        div {
-          width: 32%;
         }
       }
       #MainBlock_Settings_textareaContainer {

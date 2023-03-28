@@ -2,14 +2,14 @@
   <section id="Companies">
     <h2>Популярные компании</h2>
     <div id="Companies_info">
-      <div class="Companies_infoCompany" v-for="company of companies" :key="company.id">
+      <div class="Companies_infoCompany" v-for="company of companies.slice(0, 4)" :key="company.id">
         <img :src="company.photo" :alt="company.name">
         <span>
           <p>{{ company.name }}</p>
           <p>{{ company.description }}</p>
         </span>
         <button>
-          <img src="@/assets/eye_icon.svg" alt="Иконка глаза">
+          <i class="fa-solid fa-eye"></i>
         </button>
       </div>
     </div>
@@ -122,17 +122,20 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 37.5px;
-          height: 30px;
+          width: 42.5px;
+          height: 32.5px;
           background-color: #1e1e1e;
           border: 0;
           border-radius: 50px;
           outline: none;
           cursor: pointer;
-          img {
-            width: 20px;
-            height: 20px;
-            background-color: #1e1e1e;
+          i {
+            color: #747474;
+            font-size: 18px;
+            transition: 500ms ease;
+          }
+          i:hover {
+            color: #3d5aff
           }
         }
       }

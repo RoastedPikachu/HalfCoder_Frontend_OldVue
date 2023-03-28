@@ -1,5 +1,6 @@
 <template>
   <section>
+    <div id="vk_api_transport"></div>
     <div id="SignIn">
       <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
       <form>
@@ -12,10 +13,10 @@
           <p>Пароль</p>
           <input type="password" placeholder="Введите пароль" v-model="password">
         </div>
-        <div id="signIn_ExternalButtons">
+        <div id="signIn_ExternalButtons" v-if="whenPohui">
           <button></button>
           <button></button>
-          <button></button>
+          <button @click="githubAuth()"></button>
         </div>
         <button id="signIn_FormButton" type="button" @click="setValuesLogin()">Войти</button>
       </form>
@@ -46,6 +47,7 @@
         login: '',
         password: '',
         error: '',
+        whenPohui: false
       }
     },
     methods: {
@@ -108,6 +110,13 @@
 
         this.login = '';
         this.password = '';
+      },
+      async githubAuth() {
+        const url = new URL('https://github.com/login/oauth/authorize&client_id=cb49d0c9c363a6d035ce');
+
+        const result = 0;
+
+        console.log(result);
       }
     },
     components: {

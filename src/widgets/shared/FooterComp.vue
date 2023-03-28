@@ -13,7 +13,7 @@
     <span>©2023 &lt; HalfCoder /></span>
     <span id="SocialNetworkLinks">
       <a href="/" id="SocialNetworkLinks_Vk">
-        <img src="@/assets/grey_vk_icon.svg" alt="Vk">
+        <img src="@/assets/grey_vk_icon.svg" alt="Вконтакте">
       </a>
       <a href="/" id="SocialNetworkLinks_Tg">
         <img src="@/assets/grey_telegramm_icon.svg" alt="Telegram">
