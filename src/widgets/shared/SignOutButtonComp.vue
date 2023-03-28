@@ -14,21 +14,13 @@
     name: 'SignOutButtonComp',
     methods: {
       async logOut() {
-        const url = new URL('http://62.109.10.224:500/api/v1/auth/logout/');
-
-        const result = await axios.post(url.toString(), this.token, {headers: {'Content-Type': 'application/json;charset=utf-8'}});
-
         store.commit('CHANGE_SIGN_IN_STATUS'); 
         document.cookie = `token; path=/; max-age=-1`;
 
-        if(result) {
-          store.commit('CLEAR_USER_DATA');
-          store.commit('CLOSE_COOKIE');
-          alert('Выход из аккаунта прошёл успешно');
-          location.reload();
-        } else {
-          alert('error');
-        }
+        store.commit('CLEAR_USER_DATA');
+        store.commit('CLOSE_COOKIE');
+        alert('Выход из аккаунта прошёл успешно');
+        location.reload();
       }
     },
     props: {

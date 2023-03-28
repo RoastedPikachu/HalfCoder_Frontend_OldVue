@@ -36,6 +36,7 @@
     views: number,
     firstName: string,
     secondName: string,
+    userImage: string,
     userName: string,
     email: string
   }
@@ -59,6 +60,7 @@
           views: 0,
           firstName: '',
           secondName: '',
+          userImage: '',
           userName: '',
           email: ''
         };
@@ -75,6 +77,7 @@
         payload.views = result.data.user.views_to_user;
         payload.firstName = result.data.user.first_name;
         payload.secondName = result.data.user.last_name;
+        payload.userImage = result.data.user.photo;
         payload.userName = result.data.user.username;
         payload.email = result.data.user.email;
 

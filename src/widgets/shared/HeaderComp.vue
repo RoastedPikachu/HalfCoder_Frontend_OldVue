@@ -22,7 +22,7 @@
       </div>
       <div class="modalContainer" v-if="isSignIn">
         <button id="ModalContainer_profile" @click="changeProfileActive()">
-          <img src="" alt="">
+          <img :src="image" alt="Мой аватар">
         </button>
         <ModalProfileComp :active="modalProfileActive" :token="token"/>
       </div>
@@ -47,6 +47,7 @@
         hasNotificationsStatus: true,
         modalNotifActive: false,
         modalProfileActive: false,
+        image: ''
       }
     },
     methods: {
@@ -73,6 +74,10 @@
           }
         }
       });
+      
+      setInterval(() => {
+        this.image = store.state.userImage;
+      }, 250)
     },
     components: {
       ModalProfileComp,
@@ -148,6 +153,11 @@
         height: 34px;
         #ModalContainer_profile {
           background-color: #ffffff;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+          }
         }
         button {
           width: 34px;

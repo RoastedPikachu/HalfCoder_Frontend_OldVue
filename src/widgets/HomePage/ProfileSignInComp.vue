@@ -2,7 +2,7 @@
   <section id="Profile">
     <div id="Profile_topLine"></div>
     <div id="Profile_mainInfo">
-      <img src="" alt="Фото профиля">
+      <img :src="userImage" alt="Фото профиля">
       <h2>{{ userName }}</h2>
       <p>{{ employment }}</p>
       <p>I'd love to change the world, but they won't give me the source code</p>
@@ -32,6 +32,7 @@
     name: 'ProfileSignInComp',
     data() {
       return {
+        userImage: '',
         userName: '',
         employment: '',
         posts: 0,
@@ -67,13 +68,14 @@
         this.followersCountText, this.viewsCountText] ,[['Пост', 'Поста', 'Постов'], 
         ['Подписчик', 'Подписчика', 'Подписчиков'], ['Просмотр', 'Просмотра', 'Просмотров']]);
 
-      setTimeout(() => {
+      setInterval(() => {
+        this.userImage = store.state.userImage;
         this.userName = `${store.state.firstName} ${store.state.secondName}`;
         this.employment = store.state.employment;
         this.posts = store.state.posts;
         this.followers = store.state.followers;
         this.views = store.state.views;
-      }, 200)
+      }, 250);
     },
     components: {
       ProfileMenuComp

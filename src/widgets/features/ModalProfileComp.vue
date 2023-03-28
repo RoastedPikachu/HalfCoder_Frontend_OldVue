@@ -36,10 +36,11 @@
         }
     },
     mounted() {
-      setTimeout(() => {
+      setInterval(() => {
         this.name = store.state.userName;
+        this.image = store.state.userImage;
         this.employment = store.state.employment;
-      }, 200);
+      }, 250);
     },
     components: { 
       ItemBrieflyInfoComp,

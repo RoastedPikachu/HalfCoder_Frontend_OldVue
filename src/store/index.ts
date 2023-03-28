@@ -6,6 +6,7 @@ export interface State {
   isCookieOpen: boolean,
   firstName: string,
   secondName: string,
+  userImage: string,
   userName: string,
   dateOfBirth: string,
   phoneNumber: string,
@@ -23,6 +24,7 @@ export default createStore<State>({
     isCookieOpen: true,
     firstName: '',
     secondName: '',
+    userImage: '',
     userName: '',
     dateOfBirth: '',
     phoneNumber: '',
@@ -43,6 +45,7 @@ export default createStore<State>({
     SET_FIRST_USER_DATA(state, payload) {
       state.firstName = payload.firstName;
       state.secondName = payload.secondName;
+      state.userImage = payload.userImage;
       state.userName = payload.userName;
       state.email = payload.email;
       state.posts = payload.posts;
