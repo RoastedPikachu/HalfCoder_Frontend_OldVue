@@ -4,6 +4,7 @@ import SettingsPage from '@/pages/SettingsPage.vue';
 import RegistrationPage from '@/pages/RegistrationPage.vue';
 import SignInPage from '@/pages/SignInPage.vue';
 import CreatePostPage from '@/pages/CreatePostPage.vue';
+import EventsPage from '@/pages/EventsPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/createPost',
     name: 'createPost',
     component: CreatePostPage
+  },
+  {
+    path: '/events',
+    name: 'events',
+    component: EventsPage
   }
     //component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
 ]

@@ -65,12 +65,13 @@
     right: 0px;
     padding: 15px 15px;
     width: 195px;
-    height: 255px;
+    height: 280px;
     background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     z-index: 10;
     #ModalProfileWindow_profileButton {
+      margin-top: 10px;
       width: 100%;
       height: 30px;
       background-color: #3d5aff;
@@ -84,11 +85,11 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      height: 55px;
+      height: 75px;
     }
     .ModalProfileWindow_buttonContainer {
       display: flex;
-      height: 40px;
+      height: 65px;
       border: 0px solid #747474;
       border-width: 1px 0px;
     }

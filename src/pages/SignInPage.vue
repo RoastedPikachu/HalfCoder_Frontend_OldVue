@@ -141,7 +141,7 @@
       flex-wrap: wrap;
       padding: 15px 15px;
       width: 290px;
-      height: 360px;
+      height: 280px;
       background-color: #141414;
       border: 2px solid rgba(116, 116, 116, 0.5);
       border-radius: 5px;
@@ -160,7 +160,7 @@
         flex-wrap: wrap;
         align-items: center;
         width: 100%;
-        height: 280px;
+        height: 220px;
         .signIn_inputs {
           width: 87.5%;
           height: 52.5px;

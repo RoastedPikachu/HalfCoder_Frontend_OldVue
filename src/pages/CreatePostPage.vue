@@ -21,6 +21,7 @@
   import AttachesTool from '@editorjs/attaches';
   import Marker from '@editorjs/marker';
   import InlineCode from '@editorjs/inline-code';
+  import ImageTool from '@editorjs/image';
 
   export default defineComponent({
     name: 'CreatePostPage',
@@ -41,6 +42,7 @@
             raw: RawTool,
             code: CodeTool,
             linkTool: LinkTool,
+            image: ImageTool,
             list: {
               class: NestedList,
               inlineToolbar: true,
@@ -79,6 +81,7 @@
                 'Raw HTML': 'HTML фрагмент',
                 'Code': 'Код',
                 'Link': 'Ссылка',
+                'Image': 'Изображение',
                 'List': 'Список',
                 'Checklist': 'Чеклист',
                 'Delimiter': 'Разделитель',

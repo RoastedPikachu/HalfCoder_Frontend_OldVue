@@ -26,9 +26,15 @@
         </button>
         <ModalProfileComp :active="modalProfileActive" :token="token"/>
       </div>
-      <router-link to="/registration" class="routeImg" v-if="!isSignIn">
-        <img src="@/assets/profile_icon.svg" alt="Профиль">
-      </router-link>
+      <div class="modalContainer" v-if="!isSignIn">
+        <button @click="changeSignInActive()">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 11C14.2147 11 16.8208 8.76142 16.8208 6C16.8208 3.23858 14.2147 1 11 1C7.78535 1 5.17932 3.23858 5.17932 6C5.17932 8.76142 7.78535 11 11 11Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 21C21 17.13 16.518 14 11 14C5.48196 14 1 17.13 1 21" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <ModalSignInComp :active="modalSignInActive"/>
+      </div>
     </nav>
   </header>
 </template>
@@ -38,6 +44,7 @@
   import store from '@/store/index';
   import ModalProfileComp from '@/widgets/features/ModalProfileComp.vue';
   import ModalNotifComp from '@/widgets/features/ModalNotifComp.vue';
+  import ModalSignInComp from '@/widgets/features/ModalSignInComp.vue';
 
   export default defineComponent({
     name: 'HeaderComp',
@@ -47,6 +54,7 @@
         hasNotificationsStatus: true,
         modalNotifActive: false,
         modalProfileActive: false,
+        modalSignInActive: false,
         image: ''
       }
     },
@@ -54,9 +62,14 @@
       changeNotifeActive():void {
         this.modalNotifActive = !this.modalNotifActive;
         this.modalProfileActive = false;
+        this.modalSignInActive = false;
       },
       changeProfileActive():void {
         this.modalProfileActive = !this.modalProfileActive;
+        this.modalNotifActive = false;
+      },
+      changeSignInActive():void {
+        this.modalSignInActive = !this.modalSignInActive;
         this.modalNotifActive = false;
       }
     },  
@@ -70,6 +83,8 @@
               this.modalNotifActive = false;
             } else if(this.modalProfileActive) {
               this.modalProfileActive = false;
+            } else if(this.modalSignInActive) {
+              this.modalSignInActive = false;
             }
           }
         }
@@ -82,6 +97,7 @@
     components: {
       ModalProfileComp,
       ModalNotifComp,
+      ModalSignInComp
     },
     props: {
       token: String
