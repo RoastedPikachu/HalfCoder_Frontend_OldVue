@@ -2,11 +2,21 @@
   <section id="Companies">
     <h2>Популярные компании</h2>
     <div id="Companies_info">
-      <div class="Companies_infoCompany" v-for="company of companies.slice(0, 4)" :key="company.id">
+      <div class="companies_infoCompany" v-for="company of companies.slice(0, 4)" :key="company.id" v-show="isLoaded">
         <img :src="company.photo" :alt="company.name">
         <span>
           <p>{{ company.name }}</p>
           <p>{{ company.description }}</p>
+        </span>
+        <button>
+          <i class="fa-solid fa-eye"></i>
+        </button>
+      </div>
+      <div class="companies_infoLoadingCompany" v-for="loadingCompany of loadingCompanies" :key="loadingCompany.id" v-show="!isLoaded">
+        <div></div>
+        <span>
+          <p></p>
+          <p></p>
         </span>
         <button>
           <i class="fa-solid fa-eye"></i>
@@ -49,7 +59,22 @@
     name: 'CompaniesComp',
     data() {
       return {
-        companies: [] as Company[]
+        isLoaded: false,
+        companies: [] as Company[],
+        loadingCompanies: [
+          {
+            id: 0
+          },
+          {
+            id: 1
+          },
+          {
+            id: 2
+          },
+          {
+            id: 3
+          }
+        ]
       }
     },
     methods: {
@@ -59,6 +84,10 @@
         const result = await axios.get(url.toString());
 
         this.companies = Object.values(result.data);
+
+        if(this.companies.length) {
+          this.isLoaded = true;
+        }
       }
     },
     mounted() {
@@ -91,8 +120,9 @@
       margin-top: 17px;
       width: 80%;
       min-height: 240px;
-      .Companies_infoCompany {
+      div {
         display: flex;
+        align-items: center;
         width: 100%;
         height: 40px;
         cursor: pointer;
@@ -100,7 +130,6 @@
           width: 40px;
           height: 40px;
           border-radius: 10px;
-          background-color: #ffffff;
         }
         span {
           display: flex;
@@ -109,13 +138,7 @@
           width: 85%;
           p {
             width: 85%;
-            color: #ffffff;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-          }
-          p:last-child {
-            color: #747474;
-            font-size: 12px;
+            height: 12.5px;
           }
         }
         button {
@@ -136,6 +159,43 @@
           }
           i:hover {
             color: #3d5aff
+          }
+        }
+      }
+      .companies_infoCompany {
+        img {
+          background-color: #ffffff;
+        }
+        span {
+          p {
+            color: #ffffff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+          }
+          p:last-child {
+            margin-top: 7.5px;
+            color: #747474;
+            font-size: 12px;
+          }
+        }
+      }
+      .companies_infoLoadingCompany {
+        div {
+          width: 57.5px;
+          height: 40px;
+          background-color: rgba(116, 116, 116, 0.5);
+          border-radius: 5px;
+        }
+        span {
+          p {
+            width: 60%;
+            height: 12.5px;
+            background-color: rgba(116, 116, 116, 0.5);
+            border-radius: 2.5px;
+          }
+          p:last-child {
+            margin-top: 7.5px;
+            width: 80%;
           }
         }
       }

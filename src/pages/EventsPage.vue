@@ -235,6 +235,7 @@
             color: #ffffff;
             font-size: 12px;
             font-family: 'Space Grotesk', sans-serif;
+            cursor: pointer;
           }
           .mainInfoAboutEvents_eventBlock_text {
             display: flex;

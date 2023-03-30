@@ -2,13 +2,24 @@
   <section id="Rating">
     <h2>Рейтинг</h2>
     <div id="Rating_info">
-      <div id="Rating_infoUser" v-for="elem of elements.slice(0, 4)" :key="elem.id">
+      <div class="rating_infoUser" v-for="elem of elements.slice(0, 4)" :key="elem.id" v-show="isLoaded">
         <p>{{ elem.rating }} points</p>
         <ItemBrieflyInfoComp  
           :name="elem.username"
           :image="elem.photo"
           :employment="elem.profile.work"
         />
+      </div>
+      <div class="rating_loadingInfoUser" v-for="loadingElem of loadingElements" :key="loadingElem.id" v-show="!isLoaded">
+        <div class="rating_loadingInfoUser_score">
+          <p></p>
+          <p></p>
+        </div>
+        <div class="rating_loadingInfoUser_image"></div>
+        <div class="rating_loadingInfoUser_info">
+          <p></p>
+          <p></p>
+        </div>
       </div>
     </div>
     <router-link to="/users" id="Rating_moreUsers">Ещё {{ countOfUsersResults }} {{countOfResultsText}}</router-link>
@@ -64,7 +75,22 @@
     name: 'RaitingComp',
     data() {
       return {  
+        isLoaded: false,
         elements: [] as User[],
+        loadingElements: [
+          {
+            id: 0,
+          },
+          {
+            id: 1,
+          },
+          {
+            id: 2,
+          },
+          {
+            id: 3,
+          }
+        ],
         countOfUsersResults: 0,
         countOfResultsText: ''
       }
@@ -78,6 +104,10 @@
         this.elements = Object.values(result.data);
         this.countOfUsersResults = this.elements.length;
         this.setCountText(this.countOfUsersResults, ['результат', 'результата', 'результатов']);
+
+        if(this.elements.length) {
+          this.isLoaded = true;
+        }
       },
       setCountText(num:number, arr:string[]) {
         const n:number = num % 100;
@@ -128,12 +158,14 @@
       margin-top: 10px;
       width: 80%;
       min-height: 250px;
-      #Rating_infoUser {
+      div {
         display: flex;
         align-items: center;
         width: 100%;
         height: 40px;
         cursor: pointer;
+      }
+      .rating_infoUser {
         p {
           padding-right: 5px;
           width: 45px;
@@ -141,8 +173,53 @@
           text-align: center;
         }
       }
+      .rating_loadingInfoUser {
+        justify-content: space-between;
+        .rating_loadingInfoUser_score {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+          width: 20%;
+          height: 100%;
+          p {
+            height: 12.5px;
+            background-color: rgba(116, 116, 116, 0.5);
+            border-radius: 2.5px;
+          }
+          p:first-child {
+            width: 70%;
+          }
+          p:last-child {
+            width: 100%;
+          }
+        }
+        .rating_loadingInfoUser_image {
+          width: 40px;
+          height: 100%;
+          background-color: rgba(116, 116, 116, 0.5);
+          border-radius: 5px;
+        }
+        .rating_loadingInfoUser_info {
+          display: flex;
+          flex-wrap: wrap;
+          width: 52.5%;
+          p {
+            height: 12.5px;
+            background-color: rgba(116, 116, 116, 0.5);
+            border-radius: 2.5px;
+          }
+          p:first-child {
+            width: 70%;
+          }
+          p:last-child {
+            width: 90%;
+          }
+        }
+      }
     }
     #Rating_moreUsers {
+      width: 100%;
       height: 30px;
       color: #747474;
       font-size: 12px;
@@ -150,6 +227,7 @@
       text-decoration: none;
       transition: 500ms ease;
       outline: none;
+      text-align: center;
       cursor: pointer;
     }
     #Rating_moreUsers:hover {

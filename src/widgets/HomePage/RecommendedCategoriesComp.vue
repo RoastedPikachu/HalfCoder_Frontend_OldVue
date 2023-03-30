@@ -1,8 +1,9 @@
 <template>
   <section id="RecommendedCategories">
-    <router-link :to="category.link" class="recomendation" v-for="category of categories.slice(0, 11)" :key="category.id">
-      {{ category.title }}
-    </router-link>
+      <p class="recomendation_loading" v-for="loadingCategory of loadingCategories" :key="loadingCategory.id" v-show="!isLoaded"></p>
+      <router-link :to="category.link" class="recomendation" v-for="category of categories.slice(0, 11)" :key="category.id" v-show="isLoaded">
+        {{ category.title }}
+      </router-link>
     <button>
       <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <rect x="19" width="18" height="19" transform="rotate(90 19 0)" fill="url(#pattern0)"/>
@@ -31,7 +32,31 @@
     name: 'RecommendedCategoriesComp',
     data() {
       return {
+        isLoaded: false,
         categories: [] as Category[],
+        loadingCategories: [
+          {
+            id: 0
+          },
+          {
+            id: 1
+          },
+          {
+            id: 2
+          },
+          {
+            id: 3
+          },
+          {
+            id: 4
+          },
+          {
+            id: 5
+          },
+          {
+            id: 6
+          },
+        ]
       }
     },
     methods: {
@@ -41,6 +66,10 @@
         const result = await axios.get(url.toString()); 
 
         this.categories = Object.values(result.data);
+
+        if(this.categories.length) {
+          this.isLoaded = true;
+        }
       }
     },
     mounted() {
@@ -72,6 +101,12 @@
     .recomendation:hover {
       color: #3d5aff;
     }
+    .recomendation_loading {
+      width: 90px;
+      height: 10px;
+      background-color: rgba(116, 116, 116, 0.5);
+      border-radius: 2.5px;
+    }
     button {
       margin-left: -12px;
       width: 16px;
@@ -80,14 +115,6 @@
       border: 0;
       outline: none;
       cursor: pointer;
-      svg {
-        
-      }
-    }
-    button:hover {
-      svg {
-
-      }
     }
   }
 </style>

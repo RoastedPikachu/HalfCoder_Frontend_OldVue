@@ -76,6 +76,7 @@
         margin-left: 10px;
         height: 22px;
         font-size: 20px;
+        font-weight: 700;
         font-family: 'Space Grotesk', sans-serif;
       }
       .route {
@@ -83,23 +84,12 @@
         height: 22px;
         color: #ffffff;
         font-size: 20px;
+        font-weight: 700; 
         font-family: 'Space Grotesk', sans-serif;
         transition: 500ms ease;
         text-decoration: none;
       }
       .route:hover {
-        color: #3d5aff;
-      }
-      .profile_menuIcons_route {
-        margin-left: 10px;
-        height: 22px;
-        color: #ffffff;
-        font-size: 20px;
-        font-family: 'Space Grotesk', sans-serif;
-        transition: 500ms ease;
-        text-decoration: none;
-      }
-      .profile_menuIcons_route:hover {
         color: #3d5aff;
       }
     }

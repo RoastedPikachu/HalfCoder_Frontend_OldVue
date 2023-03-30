@@ -29,6 +29,7 @@
       height: 22px;
       color: #ffffff;
       font-size: 20px;
+      font-weight: 700;
       font-family: 'Space Grotesk', sans-serif;
       transition: 500ms ease;
       text-decoration: none;
