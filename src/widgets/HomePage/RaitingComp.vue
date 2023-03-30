@@ -188,14 +188,14 @@
             border-radius: 2.5px;
           }
           p:first-child {
-            width: 70%;
+            width: 50%;
           }
           p:last-child {
-            width: 100%;
+            width: 80%;
           }
         }
         .rating_loadingInfoUser_image {
-          width: 40px;
+          width: 42.5px;
           height: 100%;
           background-color: rgba(116, 116, 116, 0.5);
           border-radius: 5px;

@@ -5,6 +5,7 @@ import RegistrationPage from '@/pages/RegistrationPage.vue';
 import SignInPage from '@/pages/SignInPage.vue';
 import CreatePostPage from '@/pages/CreatePostPage.vue';
 import EventsPage from '@/pages/EventsPage.vue';
+import TermsOfUsePage from '@/pages/TermsOfUsePage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -36,6 +37,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/events',
     name: 'events',
     component: EventsPage
+  },
+  {
+    path: '/termsOfUse',
+    name: 'termsOfUse',
+    component: TermsOfUsePage
   }
     //component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
 ]

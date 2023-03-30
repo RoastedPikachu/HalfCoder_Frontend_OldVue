@@ -19,6 +19,7 @@
           <button @click="githubAuth()"></button>
         </div>
         <button id="signIn_FormButton" type="button" @click="setValuesLogin()">Войти</button>
+        <router-link to="/termsOfUse" class="route">Пользовательское соглашение</router-link>
       </form>
     </div>
   </section>
@@ -64,7 +65,6 @@
           userName: '',
           email: ''
         };
-        let error = '';
 
         const result = await axios.post(url.toString(), {
           token: token
@@ -115,7 +115,7 @@
         this.password = '';
       },
       async githubAuth() {
-        const url = new URL('https://github.com/login/oauth/authorize&client_id=cb49d0c9c363a6d035ce');
+        //const url = new URL('https://github.com/login/oauth/authorize&client_id=cb49d0c9c363a6d035ce');
 
         const result = 0;
 
@@ -141,7 +141,7 @@
       flex-wrap: wrap;
       padding: 15px 15px;
       width: 290px;
-      height: 280px;
+      height: 300px;
       background-color: #141414;
       border: 2px solid rgba(116, 116, 116, 0.5);
       border-radius: 5px;
@@ -160,7 +160,7 @@
         flex-wrap: wrap;
         align-items: center;
         width: 100%;
-        height: 220px;
+        height: 260px;
         .signIn_inputs {
           width: 87.5%;
           height: 52.5px;
@@ -222,6 +222,20 @@
           font-weight: 700;
           outline: none;
           cursor: pointer;
+        }
+        .route {
+          margin-top: -20px;
+          width: 80%;
+          color: #3d5aff;
+          font-size: 14px;
+          font-weight: 400;
+          font-family: 'Space Grotesk', sans-serif;
+          text-align: center;
+          transition: 500ms ease;
+          text-decoration: none;
+        }
+        .route:hover {
+          transform: translateY(2.5px);
         }
       }
     }
