@@ -39,7 +39,7 @@ const routes: Array<RouteRecordRaw> = [
     component: EventsPage
   },
   {
-    path: '/termsOfUse',
+    path: '/docs/termsOfUse',
     name: 'termsOfUse',
     component: TermsOfUsePage
   }

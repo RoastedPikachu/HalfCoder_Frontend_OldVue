@@ -36,7 +36,7 @@
         </div>
         <div id="Registation_termsOfUse">
           <input type="checkbox" name="termsOfUse" v-model="agreeToTermsOfUse" > 
-          <label for="termsOfUse">Я принимаю условия <router-link to="/termsOfUse" id="Registation_termsOfUse_route">Пользовательского соглашения</router-link></label>
+          <label for="termsOfUse">Я принимаю условия <router-link to="/docs/termsOfUse" target="_blank" id="Registation_termsOfUse_route">Пользовательского соглашения</router-link></label>
         </div>
         <button class="registration_button" type="button" @click="setValuesRegistration()" v-if="agreeToTermsOfUse">Зарегистрироваться</button>
         <button class="registration_button registration_notActiveButton" type="button" v-if="!agreeToTermsOfUse">Зарегистрироваться</button>

@@ -19,7 +19,7 @@
           <button @click="githubAuth()"></button>
         </div>
         <button id="signIn_FormButton" type="button" @click="setValuesLogin()">Войти</button>
-        <router-link to="/termsOfUse" class="route">Пользовательское соглашение</router-link>
+        <router-link to="/docs/termsOfUse" target="_blank" class="route">Пользовательское соглашение</router-link>
       </form>
     </div>
   </section>
