@@ -1,5 +1,5 @@
 <template>
-  <div id="ModalProfileWindow" v-if="active">
+  <div id="ModalProfileWindow" :class="{ whiteModalProfileTheme: !isDarkTheme }" v-if="active">
     <ItemBrieflyInfoComp
       :name="name"
       :image="image"
@@ -11,14 +11,15 @@
       <SupportLinkComp/>
     </div>
     <SignOutButtonComp :token="token"/>
-    <div id="ModalProfileWindow_changeTheme">
+    <button class="modalProfileWindow_changeTheme" @click="changeTheme()">
       <i class="fa-solid fa-circle-half-stroke"></i>
-    </div>
+    </button>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref } from 'vue';
   import store from '@/store';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
@@ -29,11 +30,29 @@
     name: "ModalProfileComp",
     data() {
         return {
-          image: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-          starStatus: false,
-          name: '',
-          employment: ''
+
         }
+    },
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const starStatus = ref(false);
+      const name = ref('');
+      const employment = ref('');
+      const image = ref('https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png');
+
+      const changeTheme = () => {
+        store.commit('CHANGE_THEME_COLOR_STATUS');
+        isDarkTheme.value = store.state.isDarkTheme;
+      }
+
+      return {
+        isDarkTheme,
+        starStatus,
+        name,
+        employment,
+        image,
+        changeTheme
+      }
     },
     mounted() {
       setInterval(() => {
@@ -56,6 +75,19 @@
 </script>
 
 <style lang="scss" scoped>
+  div {
+    background-color: #141414;
+    #ModalProfileWindow_buttons {
+      background-color: #141414;
+    }
+    .modalProfileWindow_changeTheme {
+      background-color: #1e1e1e;
+      i {
+        color: #747474;
+      }
+    }
+  }
+
   #ModalProfileWindow {
     position: absolute;
     display: flex;
@@ -66,9 +98,9 @@
     padding: 15px 15px;
     width: 195px;
     height: 280px;
-    background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
+    transition: 500ms ease;
     z-index: 10;
     #ModalProfileWindow_profileButton {
       margin-top: 10px;
@@ -86,29 +118,44 @@
       align-items: center;
       flex-wrap: wrap;
       height: 75px;
+      transition: 500ms ease;
     }
     .ModalProfileWindow_buttonContainer {
       display: flex;
       height: 65px;
       border: 0px solid #747474;
       border-width: 1px 0px;
+      transition: 500ms ease;
     }
-    #ModalProfileWindow_changeTheme {
+    .modalProfileWindow_changeTheme {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 45px;
-      height: 45px; 
-      background-color: #1e1e1e;
+      height: 45px;
+      border: none;
       border-radius: 5px;
+      transition: 500ms ease;
+      outline: none;
       cursor: pointer;
       i {
-        color: #747474;
         font-size: 30px;
         transition: 500ms ease;
       }
       i:hover {
         color: #3d5aff;
+      }
+    }
+  }
+  .whiteModalProfileTheme {
+    background-color: #ffffff;
+    #ModalProfileWindow_buttons {
+      background-color: #ffffff;
+    }
+    .modalProfileWindow_changeTheme {
+      background-color: #747474;
+      i {
+        color: #ffffff;
       }
     }
   }

@@ -127,6 +127,7 @@
         margin-top: 7px;
         color: #747474;
         font-size: 14px;
+        font-weight: 700;
         font-family: 'Space Grotesk', sans-serif;
         text-align: center;
       }

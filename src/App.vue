@@ -3,12 +3,40 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+  import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import store from '@/store/index';
 
-export default defineComponent({
-  name: 'App',
-  
-})
+  export default defineComponent({
+    name: 'App',
+    data() {
+      return {
+
+      }
+    },
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+
+      const changeBodyTheme = () => {
+        if(isDarkTheme.value === true) {
+          document.body.style.backgroundColor="#1e1e1e";
+        } else {
+          document.body.style.backgroundColor="#ffffff";
+        }
+      }
+
+      onMounted(() => {
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+          changeBodyTheme(); 
+        }, 150);
+      });
+
+      return {
+        isDarkTheme
+      }
+    }
+  })
 </script>
 
 <style lang="scss">
@@ -21,5 +49,7 @@ export default defineComponent({
 
   body {
     background-color: #1e1e1e;
+    transition: 500ms ease;
   }
+
 </style>

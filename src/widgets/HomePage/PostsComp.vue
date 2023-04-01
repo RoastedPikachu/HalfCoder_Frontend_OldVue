@@ -1,6 +1,6 @@
 <template>
   <section id="MainBlock_childPosts">
-    <div class="mainBlock_childPosts_info" v-for="post of posts" :key="post.id">
+    <div class="mainBlock_childPosts_info" :class="{ whitePostsTheme: !isDarkTheme}" v-for="post of posts" :key="post.id">
       <div class="mainBlock_childPosts_topInfo">
         <div class="mainBlock_childPosts_userInfo">
           <img :src="post.userImage" :alt="post.userName">
@@ -36,6 +36,8 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import store from '@/store/index';
   import ModalPostActions from '@/widgets/features/ModalPostActions.vue';
 
   interface Post {
@@ -55,8 +57,13 @@
     name: 'PostsComp',
     data() {
       return {
-        activeId: 0,
-        posts: [
+        
+      }
+    },
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const activeId = ref(0);
+      const posts = ref([
           {
             id: 0,
             userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
@@ -93,34 +100,44 @@
             views: 54,
             modalActionsActive: false,
           }
-        ]
-      }
-    },
-    methods: {
-      changeModalActionsActive(post:Post) {
-        post.modalActionsActive = !post.modalActionsActive;
-        this.activeId = post.id;
+        ]);
 
-        this.posts.forEach((item) => {
-          if(item.id !== this.activeId) {
+      const changeModalActionsActive = (post:Post):void => {
+        post.modalActionsActive = !post.modalActionsActive;
+        activeId.value = post.id;
+
+        posts.value.forEach((item) => {
+          if(item.id !== activeId.value) {
             item.modalActionsActive = false;
           }
         })
       }
-    },
-    mounted() {
-      window.addEventListener('click', event => {
-        if(event.target !== null) {
-          const target = event.target as HTMLElement;
 
-          if(!target.closest('.mainBlock_childPosts_button')) {
-            let currentPost = this.posts.find(item => item.id === this.activeId);
-            if(currentPost !== undefined) {
-              currentPost.modalActionsActive = false;
+      onMounted(() => {
+        window.addEventListener('click', event => {
+          if(event.target !== null) {
+            const target = event.target as HTMLElement;
+
+            if(!target.closest('.mainBlock_childPosts_button')) {
+              let currentPost = posts.value.find(item => item.id === activeId.value);
+              if(currentPost !== undefined) {
+                currentPost.modalActionsActive = false;
+              }
             }
           }
-        }
+        });
+
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
       });
+
+      return {
+        isDarkTheme,
+        activeId,
+        posts,
+        changeModalActionsActive
+      }
     },
     components: {
       ModalPostActions
@@ -129,6 +146,7 @@
 </script>
 
 <style lang="scss" scoped>
+
   #MainBlock_childPosts {
     width: auto;
     height: auto;
@@ -146,6 +164,7 @@
       border-radius: 5px;
       color: #747474;
       font-family: 'Space Grotesk', sans-serif;
+      transition: 500ms ease;
       overflow: hidden;
       .mainBlock_childPosts_topInfo {
         display: flex;
@@ -172,6 +191,7 @@
               color: #ffffff;
               font-size: 14px;
               font-family: 'Inter', sans-serif;
+              transition: 500ms ease;
             }
             p:last-child {
               font-size: 12px;
@@ -232,6 +252,21 @@
         }
         span:last-child {
           width: 10%;
+        }
+      }
+    }
+  }
+
+  #MainBlock_childPosts {
+    .whitePostsTheme {
+    background-color: #ffffff;
+      .mainBlock_childPosts_topInfo {
+        .mainBlock_childPosts_userInfo {
+          span {
+            p:first-child {
+              color: #1e1e1e;
+            }
+          }
         }
       }
     }

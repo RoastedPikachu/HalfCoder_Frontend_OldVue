@@ -9,23 +9,34 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
   import store from '@/store/index';
 
   export default defineComponent({
     name: 'CookieComp',
     data() {
       return {
-        isCookieOpen: false,
+        
       }
     },
-    methods: {
-      closeCookie():void {
+    setup() {
+      const isCookieOpen = ref(false);
+
+      const closeCookie = ():void => {
         store.commit('CLOSE_COOKIE');
-        this.isCookieOpen = store.state.isCookieOpen
+        isCookieOpen.value = store.state.isCookieOpen;
       }
-    },
-    mounted() {
-      setInterval(() => this.isCookieOpen = store.state.isCookieOpen, 250);
+
+      onMounted(() => {
+        setInterval(() => { 
+          isCookieOpen.value = store.state.isCookieOpen 
+        }, 250);
+      });
+
+      return {
+        isCookieOpen,
+        closeCookie
+      }
     }
   })
 </script>
@@ -46,6 +57,7 @@
     background-color: #1b1b1b;
     border: 2px solid #a8b3cf;
     border-radius: 15px;
+    transition: 500ms ease;
     i {
       position: absolute;
       top: 7.5%;

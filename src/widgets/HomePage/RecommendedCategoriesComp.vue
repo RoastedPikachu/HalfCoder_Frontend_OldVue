@@ -1,10 +1,10 @@
 <template>
-  <section id="RecommendedCategories">
-      <p class="recomendation_loading" v-for="loadingCategory of loadingCategories" :key="loadingCategory.id" v-show="!isLoaded"></p>
-      <router-link :to="category.link" class="recomendation" v-for="category of categories.slice(0, 11)" :key="category.id" v-show="isLoaded">
-        {{ category.title }}
-      </router-link>
-    <button>
+  <section id="RecommendedCategories" :class="{ whiteRecommendTheme: !isDarkTheme }">
+    <p class="recomendation_loading" v-for="loadingCategory of loadingCategories" :key="loadingCategory.id" v-show="!isLoaded"></p>
+    <router-link :to="category.link" class="recomendation" v-for="category of categories.slice(0, 10)" :key="category.id" v-show="isLoaded">
+      {{ category.title }}
+    </router-link>
+    <button>  
       <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <rect x="19" width="18" height="19" transform="rotate(90 19 0)" fill="url(#pattern0)"/>
         <defs>
@@ -20,6 +20,8 @@
 
 <script lang="ts">  
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import store from '@/store/index';
   import axios from 'axios';
 
   interface Category {
@@ -32,9 +34,14 @@
     name: 'RecommendedCategoriesComp',
     data() {
       return {
-        isLoaded: false,
-        categories: [] as Category[],
-        loadingCategories: [
+        
+      }
+    },
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const isLoaded = ref(false);
+      const categories = ref([] as Category[]);
+      const loadingCategories = ref([
           {
             id: 0
           },
@@ -56,11 +63,23 @@
           {
             id: 6
           },
-        ]
+        ]);
+
+      onMounted(() => {
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+      });
+
+      return {
+        isDarkTheme,
+        isLoaded,
+        categories,
+        loadingCategories
       }
     },
     methods: {
-      async getCategories() {
+      async getRecommendedCategories() {
         const url = new URL('http://62.109.10.224:500/api/v1/article/category/popular/');
 
         const result = await axios.get(url.toString()); 
@@ -73,12 +92,16 @@
       }
     },
     mounted() {
-      this.getCategories();
+      this.getRecommendedCategories();
     }
   })
 </script>
 
 <style lang="scss" scoped>
+  section {
+    background-color: #141414;
+  }
+
   #RecommendedCategories {
     display: flex;
     justify-content: space-around;
@@ -86,9 +109,9 @@
     margin-left: 20px;
     width: 100%;
     height: 30px;
-    background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
+    transition: 500ms ease;
     .recomendation {
       color: #747474;
       font-size: 16px;
@@ -111,10 +134,14 @@
       margin-left: -12px;
       width: 16px;
       height: 18px;
-      background-color: #141414;
+      background-color: transparent;
       border: 0;
       outline: none;
       cursor: pointer;
     }
+  }
+
+  .whiteRecommendTheme {
+    background-color: #ffffff;
   }
 </style>

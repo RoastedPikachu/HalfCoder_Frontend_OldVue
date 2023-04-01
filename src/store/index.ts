@@ -3,6 +3,7 @@ import createPersistedState from "vuex-persistedstate";
 
 export interface State {
   isSignIn: boolean,
+  isDarkTheme: boolean,
   isCookieOpen: boolean,
   firstName: string,
   secondName: string,
@@ -21,6 +22,7 @@ export interface State {
 export default createStore<State>({
   state: {
     isSignIn: false,
+    isDarkTheme: true,
     isCookieOpen: true,
     firstName: '',
     secondName: '',
@@ -38,6 +40,9 @@ export default createStore<State>({
   mutations: {
     CHANGE_SIGN_IN_STATUS(state) {
       state.isSignIn = !state.isSignIn;
+    },
+    CHANGE_THEME_COLOR_STATUS(state) {
+      state.isDarkTheme = !state.isDarkTheme;
     },
     SET_USER_EMPLOYMENT(state, employment:string) {
       state.employment = employment;

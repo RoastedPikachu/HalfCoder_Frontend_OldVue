@@ -1,5 +1,5 @@
 <template>
-  <div class="ElemBrieflyInfo">
+  <div id="ElemBrieflyInfo" :class="{ whiteBrieflyInfoTheme: !isDarkTheme }">
     <div class="ElemBrieflyInfo_Rating_infoUser_image">
       <img :src="image" :alt="name">
     </div>
@@ -12,9 +12,29 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import store from '@/store';
 
   export default defineComponent({
     name: 'ItemBrieflyInfoComp',
+    data() {
+      return {
+      
+      }
+    },
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+
+      onMounted(() => {
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+      });
+
+      return {
+        isDarkTheme
+      }
+    },
     props: {
       image: String,
       name: String,
@@ -24,16 +44,25 @@
 </script>
 
 <style lang="scss" scoped>
-  .ElemBrieflyInfo {
+  div {
+    span {
+      p {
+        color: #ffffff;
+      }
+    }
+  }
+
+  #ElemBrieflyInfo {
     display: flex;
     align-items: center;
     width: 100%;
+    background-color: transparent;
     .ElemBrieflyInfo_Rating_infoUser_image {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    background-color: #747474;
-    border-radius: 50px;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background-color: #747474;
+      border-radius: 50px;
       img {
         width: 100%;
         height: 100%;
@@ -48,14 +77,22 @@
       width: 70%;
       p {
         width: 100%;
-        color: #ffffff;
         font-size: 14px;
         font-family: 'Inter', sans-serif;
         text-align: left;
+        transition: 500ms ease;
       }
       p:last-child {
         color: #747474;
         font-size: 12px;
+      }
+    }
+  }
+
+  .whiteBrieflyInfoTheme {
+    span {
+      p {
+        color: #1e1e1e;
       }
     }
   }

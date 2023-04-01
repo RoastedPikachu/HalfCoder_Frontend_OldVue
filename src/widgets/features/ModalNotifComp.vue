@@ -1,5 +1,5 @@
 <template>
-  <div id="ModalNotifWindow" v-if="active">
+  <div id="ModalNotifWindow" :class="{ whiteNotifTheme: !isDarkTheme }" v-if="active">
     <span class="ModalNotifWindow_moderationStatus">
       <img src="@/assets/moderation_icon.svg" alt="Статус модерации">
       <p>Ваша статья отправлена на модерацию</p>
@@ -31,12 +31,19 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import store from '@/store/index';
 
   export default defineComponent({
     name: 'ModalNotifComp',
     data() {
       return {
+        isDarkTheme: store.state.isDarkTheme
       }
+    },
+    mounted() {
+      setInterval(() => {
+        this.isDarkTheme = store.state.isDarkTheme;
+      }, 100);
     },
     props: {
       active: Boolean
@@ -45,6 +52,10 @@
 </script>
 
 <style lang="scss" scoped>
+  div {
+    background-color: #141414;
+  }
+
   #ModalNotifWindow {
     position: absolute;
     display: flex;
@@ -56,7 +67,6 @@
     padding: 15px 15px;
     width: 190px;
     height: 250px;
-    background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     z-index: 10;
@@ -93,5 +103,9 @@
       font-weight: 500;
       cursor: pointer;
     }
+  }
+
+  .whiteNotifTheme {
+    background-color: #ffffff;
   }
 </style>

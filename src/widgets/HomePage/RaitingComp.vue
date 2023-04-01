@@ -1,5 +1,5 @@
 <template>
-  <section id="Rating">
+  <section id="Rating" :class="{ whiteRatingTheme: !isDarkTheme}">
     <h2>Рейтинг</h2>
     <div id="Rating_info">
       <div class="rating_infoUser" v-for="elem of elements.slice(0, 4)" :key="elem.id" v-show="isLoaded">
@@ -28,6 +28,8 @@
 
 <script lang="ts"> 
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import store from '@/store/index';
   import axios from 'axios';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
 
@@ -75,9 +77,16 @@
     name: 'RaitingComp',
     data() {
       return {  
-        isLoaded: false,
-        elements: [] as User[],
-        loadingElements: [
+        
+      }
+    },
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const isLoaded = ref(false);
+      const elements = ref([] as User[]);
+      const countOfUsersResults = ref(0);
+      const countOfResultsText = ref('');
+      const loadingElements = ref([
           {
             id: 0,
           },
@@ -90,9 +99,36 @@
           {
             id: 3,
           }
-        ],
-        countOfUsersResults: 0,
-        countOfResultsText: ''
+        ]);
+
+      const setCountText = (num:number, arr:string[]) => {
+        const n:number = num % 100;
+        
+        if(n >= 5 && n <= 20) {
+          countOfResultsText.value = arr[2];
+        } else if(n === 1) {
+          countOfResultsText.value = arr[0];
+        } else if(n >= 2 && n <= 4) {
+          countOfResultsText.value = arr[1];
+        } else {
+          countOfResultsText.value = arr[2];
+        }
+      }
+
+      onMounted(() => {
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+      });
+
+      return {
+        isDarkTheme,
+        isLoaded, 
+        elements,
+        countOfUsersResults,
+        countOfResultsText,
+        loadingElements,
+        setCountText
       }
     },
     methods: {
@@ -109,19 +145,6 @@
           this.isLoaded = true;
         }
       },
-      setCountText(num:number, arr:string[]) {
-        const n:number = num % 100;
-        
-        if(n >= 5 && n <= 20) {
-          this.countOfResultsText = arr[2];
-        } else if(n === 1) {
-          this.countOfResultsText = arr[0];
-        } else if(n >= 2 && n <= 4) {
-          this.countOfResultsText = arr[1];
-        } else {
-          this.countOfResultsText = arr[2];
-        }
-      }
     },
     mounted() {
       this.getElems();
@@ -133,21 +156,27 @@
 </script>
 
 <style lang="scss" scoped>
+  section {
+    background-color: #141414;
+    h2 {
+      color: #ffffff;
+    }
+  }
+
   #Rating {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
     height: 330px;
-    background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     color: #747474; 
     font-family: 'Space Grotesk', sans-serif;
+    transition: 500ms ease;
     h2 {
       margin-top: 12px; 
       width: 100%;
-      color: #ffffff;
       font-size: 18px;
       text-align: center;
     }
@@ -232,6 +261,13 @@
     }
     #Rating_moreUsers:hover {
       color: #3d5aff;
+    }
+  }
+
+  .whiteRatingTheme {
+    background-color: #ffffff;
+    h2 {
+      color: #1e1e1e;
     }
   }
 </style>

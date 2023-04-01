@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header :class="{ whiteHeaderTheme: !isDarkTheme }">
     <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
     <nav>
       <router-link to="/" class="route">Главная</router-link>
@@ -47,6 +47,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
   import store from '@/store/index';
   import ModalProfileComp from '@/widgets/features/ModalProfileComp.vue';
   import ModalNotifComp from '@/widgets/features/ModalNotifComp.vue';
@@ -56,50 +57,72 @@
     name: 'HeaderComp',
     data() {
       return {
-        isSignIn: store.state.isSignIn,
-        hasNotificationsStatus: true,
-        modalNotifActive: false,
-        modalProfileActive: false,
-        modalSignInActive: false,
-        image: ''
+        
       }
     },
-    methods: {
-      changeNotifeActive():void {
-        this.modalNotifActive = !this.modalNotifActive;
-        this.modalProfileActive = false;
-        this.modalSignInActive = false;
-      },
-      changeProfileActive():void {
-        this.modalProfileActive = !this.modalProfileActive;
-        this.modalNotifActive = false;
-      },
-      changeSignInActive():void {
-        this.modalSignInActive = !this.modalSignInActive;
-        this.modalNotifActive = false;
-      }
-    },  
-    mounted() {
-      window.addEventListener('click', event => {
-        if(event.target !== null) {
-          const target = event.target as HTMLElement;
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const isSignIn = ref(store.state.isSignIn);
+      const hasNotificationsStatus = ref(true);
+      const modalNotifActive = ref(false);
+      const modalProfileActive = ref(false);
+      const modalSignInActive = ref(false);
+      const image = ref('');
 
-          if(!target.closest('.modalContainer')) {
-            if(this.modalNotifActive) {
-              this.modalNotifActive = false;
-            } else if(this.modalProfileActive) {
-              this.modalProfileActive = false;
-            } else if(this.modalSignInActive) {
-              this.modalSignInActive = false;
+      const changeNotifeActive = ():void => {
+        modalNotifActive.value = !modalNotifActive.value;
+        modalProfileActive.value = false;
+        modalSignInActive.value = false;
+      }
+
+      const changeProfileActive = ():void => {
+        modalProfileActive.value = !modalProfileActive.value;
+        modalNotifActive.value = false;
+      }
+
+      const changeSignInActive = ():void => {
+        modalSignInActive.value = !modalSignInActive.value;
+        modalNotifActive.value = false;
+      }
+
+      onMounted(() => {
+        window.addEventListener('click', event => {
+          if(event.target !== null) {
+            const target = event.target as HTMLElement;
+
+            if(!target.closest('.modalContainer')) {
+              if(modalNotifActive.value) {
+                modalNotifActive.value = false;
+              } else if(modalProfileActive.value) {
+                modalProfileActive.value = false;
+              } else if(modalSignInActive.value) {
+                modalSignInActive.value = false;
+              }
             }
           }
-        }
+        });
+
+        setInterval(() => {
+          image.value = store.state.userImage;
+        }, 250);
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
       });
-      
-      setInterval(() => {
-        this.image = store.state.userImage;
-      }, 250)
-    },
+
+      return {
+        isDarkTheme,
+        isSignIn,
+        hasNotificationsStatus,
+        modalNotifActive,
+        modalProfileActive,
+        modalSignInActive,
+        image,
+        changeNotifeActive,
+        changeProfileActive,
+        changeSignInActive
+      }
+    },  
     components: {
       ModalProfileComp,
       ModalNotifComp,
@@ -121,12 +144,14 @@
     height: 60px;
     background-color: #111111;
     font-weight: 700;
+    transition: 500ms ease;
     outline: none;
     h1 {
       display: flex;
       color: #ffffff;
       font-size: 36px;
       font-family: 'Space Grotesk', sans-serif;
+      transition: 500ms ease;
       p {
         color: #3d5aff;
       }
@@ -168,6 +193,7 @@
         background-color: #1e1e1e;
         border: 0px;
         border-radius: 10px;
+        transition: 500ms ease;
         outline: none;
         svg {
           path {
@@ -198,6 +224,7 @@
           background-color: #1e1e1e;
           border: 0px;
           border-radius: 10px;
+          transition: 500ms ease;
           outline: none;
           cursor: pointer;
           svg {
@@ -218,6 +245,41 @@
             height: 10px;
             background-color: #df0a0a;
             border-radius: 50px;
+          }
+        }
+      }
+    }
+  }
+
+  .whiteHeaderTheme {
+    background-color: #3483f9;
+    h1 {
+      p {
+        color: #ffffff;
+      }
+    }
+    nav {
+      p {
+        color: #ffffff;
+      }
+      .route {
+        color: #ffffff;
+      }
+      .routeImg {
+        background-color: #ffffff;
+        svg {
+          path {
+            stroke: #3d5aff;
+          }
+        }
+      }
+      .modalContainer {
+        button {
+          background-color: #ffffff;
+          svg {
+            path {
+              stroke: #3d5aff;
+            }
           }
         }
       }

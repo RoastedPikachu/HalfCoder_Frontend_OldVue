@@ -1,5 +1,5 @@
 <template>
-  <section id="Companies">
+  <section id="Companies" :class="{ whiteCompaniesTheme: !isDarkTheme }">
     <h2>Популярные компании</h2>
     <div id="Companies_info">
       <div class="companies_infoCompany" v-for="company of companies.slice(0, 4)" :key="company.id" v-show="isLoaded">
@@ -28,6 +28,8 @@
 
 <script lang=ts>
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import store from '@/store/index';
   import axios from 'axios';
 
   interface Ambassador {
@@ -59,9 +61,14 @@
     name: 'CompaniesComp',
     data() {
       return {
-        isLoaded: false,
-        companies: [] as Company[],
-        loadingCompanies: [
+      
+      }
+    },
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const isLoaded = ref(false);
+      const companies = ref([] as Company[]);
+      const loadingCompanies = ref([
           {
             id: 0
           },
@@ -74,7 +81,19 @@
           {
             id: 3
           }
-        ]
+        ]);
+
+      onMounted(() => {
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+      });
+
+      return {
+        isDarkTheme,
+        isLoaded,
+        companies,
+        loadingCompanies
       }
     },
     methods: {
@@ -97,6 +116,22 @@
 </script>
 
 <style lang="scss" scoped>
+  section {
+    background-color: #141414;
+    h2 {
+      color: #ffffff;
+    }
+    #Companies_info {
+      .companies_infoCompany {
+        span {
+          p {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+
   #Companies {
     display: flex;
     flex-wrap: wrap;
@@ -104,14 +139,14 @@
     margin-top: 20px;
     width: 100%;
     height: 290px;
-    background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     font-family: 'Space Grotesk', sans-serif;
+    transition: 500ms ease;
     h2 {
       margin-top: 12px;
-      color: #ffffff;
       font-size: 18px;
+      transition: 500ms ease;
     }
     #Companies_info {
       display: flex;
@@ -147,7 +182,7 @@
           align-items: center;
           width: 42.5px;
           height: 32.5px;
-          background-color: #1e1e1e;
+          background-color: transparent;
           border: 0;
           border-radius: 50px;
           outline: none;
@@ -168,9 +203,9 @@
         }
         span {
           p {
-            color: #ffffff;
             font-size: 14px;
             font-family: 'Inter', sans-serif;
+            transition: 500ms ease;
           }
           p:last-child {
             margin-top: 7.5px;
@@ -196,6 +231,22 @@
           p:last-child {
             margin-top: 7.5px;
             width: 80%;
+          }
+        }
+      }
+    }
+  }
+
+  .whiteCompaniesTheme {
+    background-color: #ffffff;
+    h2 {
+      color: #1e1e1e;
+    }
+    #Companies_info {
+      .companies_infoCompany {
+        span {
+          p {
+            color: #1e1e1e;
           }
         }
       }

@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span :class="{ whiteSettingsTheme: !isDarkTheme }">
     <img src="@/assets/settings_icon.svg" alt="Настройки">
     <router-link to="/settings" class="profile_menuIcons_route">Settings</router-link>
   </span>
@@ -7,9 +7,29 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import store from '@/store';
 
   export default defineComponent({
-    name: 'SettingsLinkComp'
+    name: 'SettingsLinkComp',
+    data() {
+      return {
+        
+      }
+    },
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+
+      onMounted(() => {
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+      });
+
+      return {
+        isDarkTheme
+      }
+    },
   })
 </script>
 
@@ -19,6 +39,7 @@
     align-items: flex-end;
     width: 100%;
     height: 18px;
+    background-color: transparent;
     cursor: pointer;
     img {
       width: 20px;
@@ -37,6 +58,12 @@
     }
     .profile_menuIcons_route:hover {
       color: #3d5aff;
+    }
+  }
+
+  .whiteSettingsTheme {
+    .profile_menuIcons_route {
+      color: #1e1e1e;
     }
   }
 </style>
