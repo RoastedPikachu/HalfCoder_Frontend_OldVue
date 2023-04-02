@@ -1,5 +1,5 @@
 <template>
-  <div id="Profile_menuIcons">
+  <div id="Profile_menuIcons" :class="{ whiteProfileMenuTheme: !isDarkTheme }">
     <span>
       <img src="@/assets/home_icon.svg" alt="Feed">
       <p>Feed</p>
@@ -26,13 +26,14 @@
     </span>
     <SettingsLinkComp/>
   </div>
-  <div id="Profile_checkProfile" v-if="isSignIn">
+  <div id="Profile_checkProfile" :class="{ whiteButtonTheme: !isDarkTheme }" v-if="isSignIn">
     <button>Просмотр профиля</button>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
   import store from '@/store/index';
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
 
@@ -40,11 +41,25 @@
     name: 'ProfileMenuComp',
     data() {
       return {
-        isSignIn: false
+  
       }
     },
-    mounted() {
-      this.isSignIn = store.state.isSignIn;
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const isSignIn = ref(false);
+
+      onMounted(() => {
+        isSignIn.value = store.state.isSignIn;
+
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+      });
+
+      return {
+        isDarkTheme,
+        isSignIn
+      }
     },
     components: {
       SettingsLinkComp
@@ -53,6 +68,20 @@
 </script>
 
 <style lang="scss" scoped>
+  div {
+    color: #ffffff;
+    span {
+      .route {
+        color: #ffffff;
+      }
+    }
+    button {
+      background-color: #141414;
+    }
+    button:hover {
+      color: #ffffff;
+    }
+  }
   #Profile_menuIcons {
     display: flex;
     justify-content: center;
@@ -60,7 +89,7 @@
     margin-top: 20px;
     width: 87.5%;
     height: 220px;
-    color: #ffffff;
+    transition: 500ms ease;
     span {
       display: flex;
       align-items: flex-end;
@@ -82,7 +111,6 @@
       .route {
         margin-left: 10px;
         height: 22px;
-        color: #ffffff;
         font-size: 20px;
         font-weight: 700; 
         font-family: 'Space Grotesk', sans-serif;
@@ -109,14 +137,28 @@
       font-size: 16px;
       font-weight: 700;
       font-family: 'Space Grotesk', sans-serif;
-      background-color: #141414;
       border: 0;
       transition: 500ms ease;
       outline: none;
       cursor: pointer;
     }
+  }
+
+  .whiteProfileMenuTheme {
+    color: #1e1e1e;
+    span {
+      .route {
+        color: #1e1e1e;
+      }
+    }
+  }
+
+  .whiteButtonTheme {
+    button {
+      background-color: #ffffff;
+    }
     button:hover {
-      color: #ffffff;
+      color: #1e1e1e;
     }
   }
 </style>

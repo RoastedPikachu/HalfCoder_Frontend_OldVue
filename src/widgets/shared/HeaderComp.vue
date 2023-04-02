@@ -154,6 +154,7 @@
       transition: 500ms ease;
       p {
         color: #3d5aff;
+        transition: 500ms ease;
       }
     }
     nav {

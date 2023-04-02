@@ -1,5 +1,5 @@
 <template>
-  <section id="Profile">
+  <section id="Profile" :class="{ whiteProfileTheme: !isDarkTheme }">
     <div id="Profile_topLine"></div>
     <div id="Profile_mainInfo">
       <img :src="userImage" alt="Фото профиля">
@@ -25,6 +25,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
   import store from '@/store/index';
   import ProfileMenuComp from '@/widgets/features/ProfileMenuComp.vue';
 
@@ -32,19 +33,22 @@
     name: 'ProfileSignInComp',
     data() {
       return {
-        userImage: '',
-        userName: '',
-        employment: '',
-        posts: 0,
-        followers: 0,
-        views: 0,
-        postsCountText: '',
-        followersCountText: '',
-        viewsCountText: '',
+        
       }
     },
-    methods: {
-      setCountText(numArr:number[], targetArr:string[], textArr:string[][]) {
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const userImage = ref('');
+      const userName = ref('');
+      const employment = ref('');
+      const posts = ref(0);
+      const followers = ref(0);
+      const views = ref(0);
+      const postsCountText = ref('');
+      const followersCountText = ref('');
+      const viewsCountText = ref('');
+
+      const setCountText = (numArr:number[], targetArr:string[], textArr:string[][]) => {
         for(let i = 0; i < numArr.length; i++) {
           let n:number = numArr[i] % 100;
 
@@ -58,24 +62,42 @@
             targetArr[i] = textArr[i][2];
           }
         } 
-        this.postsCountText = targetArr[0];
-        this.followersCountText = targetArr[1];
-        this.viewsCountText = targetArr[2]; 
+        postsCountText.value = targetArr[0];
+        followersCountText.value = targetArr[1];
+        viewsCountText.value = targetArr[2]; 
       }
-    },
-    mounted() {
-      this.setCountText([this.posts, this.followers, this.views], [this.postsCountText, 
-        this.followersCountText, this.viewsCountText] ,[['Пост', 'Поста', 'Постов'], 
-        ['Подписчик', 'Подписчика', 'Подписчиков'], ['Просмотр', 'Просмотра', 'Просмотров']]);
 
-      setInterval(() => {
-        this.userImage = store.state.userImage;
-        this.userName = `${store.state.firstName} ${store.state.secondName}`;
-        this.employment = store.state.employment;
-        this.posts = store.state.posts;
-        this.followers = store.state.followers;
-        this.views = store.state.views;
-      }, 250);
+      onMounted(() => {
+        setCountText([posts.value, followers.value, views.value], [postsCountText.value, 
+          followersCountText.value, viewsCountText.value] ,[['Пост', 'Поста', 'Постов'], 
+          ['Подписчик', 'Подписчика', 'Подписчиков'], ['Просмотр', 'Просмотра', 'Просмотров']]);
+
+          setInterval(() => {
+            userImage.value = store.state.userImage;
+            userName.value = `${store.state.firstName} ${store.state.secondName}`;
+            employment.value = store.state.employment;
+            posts.value = store.state.posts;
+            followers.value = store.state.followers;
+            views.value = store.state.views;
+          }, 250);
+
+          setInterval(() => {
+            isDarkTheme.value = store.state.isDarkTheme;
+          }, 150);
+      }); 
+
+      return {
+        isDarkTheme,
+        userImage,
+        userName,
+        employment,
+        posts,
+        followers,
+        views,
+        postsCountText,
+        followersCountText,
+        viewsCountText
+      }
     },
     components: {
       ProfileMenuComp
@@ -84,6 +106,24 @@
 </script>
 
 <style lang="scss" scoped>
+  section {
+    background-color: #141414;
+    #Profile_mainInfo {
+      h2 {
+        color: #ffffff;
+      }
+    }
+    #Profile_secondaryInfo {
+      div {
+        p {
+          color: #ffffff;
+        }
+        p:last-child {
+          color: #747474;
+        }
+      }
+    }
+  }
   #Profile {
     position: relative;
     display: flex;
@@ -91,9 +131,9 @@
     flex-wrap: wrap;
     width: 100%;
     height: 600px;
-    background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
+    transition: 500ms ease;
     #Profile_topLine {
       position: absolute;
       width: 100%;
@@ -118,10 +158,10 @@
       h2 {
         width: 100%;
         margin-top: 7px;
-        color: #ffffff;
         font-size: 16px;
         font-family: 'Inter', sans-serif;
         text-align: center;
+        transition: 500ms ease;
       }
       p {
         margin-top: 7px;
@@ -146,11 +186,10 @@
         font-family: 'Space Grotesk', sans-serif;
         text-align: center;
         p {
-          color: #ffffff;
           font-size: 16px;
+          transition: 500ms ease;
         }
         p:last-child {
-          color: #747474;
           font-size: 12px;
         } 
       }
@@ -167,6 +206,22 @@
       border: 2px solid #747474;
       border-width: 2px 0 0;
       border-radius: 5px;
+    }
+  }
+
+  .whiteProfileTheme {
+    background-color: #ffffff;
+    #Profile_mainInfo {
+      h2 {
+        color: #1e1e1e;
+      }
+    }
+    #Profile_secondaryInfo {
+      div {
+        p {
+          color: #1e1e1e;
+        }
+      }
     }
   }
 </style>
