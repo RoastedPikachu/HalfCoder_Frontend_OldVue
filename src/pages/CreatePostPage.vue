@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <section>
     <h1>Твой контент:</h1>
     <div id="editorjs"></div>
@@ -150,4 +150,4 @@
       transform: translateY(7.5px);
     }
   }
-</style>
+</style> -->
