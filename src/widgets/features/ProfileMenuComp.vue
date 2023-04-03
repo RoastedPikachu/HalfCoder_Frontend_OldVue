@@ -89,7 +89,7 @@
     margin-top: 20px;
     width: 87.5%;
     height: 220px;
-    transition: 500ms ease;
+    transition: 400ms ease;
     span {
       display: flex;
       align-items: flex-end;
@@ -114,7 +114,7 @@
         font-size: 20px;
         font-weight: 700; 
         font-family: 'Space Grotesk', sans-serif;
-        transition: 500ms ease;
+        transition: 400ms ease;
         text-decoration: none;
       }
       .route:hover {
@@ -138,7 +138,7 @@
       font-weight: 700;
       font-family: 'Space Grotesk', sans-serif;
       border: 0;
-      transition: 500ms ease;
+      transition: 400ms ease;
       outline: none;
       cursor: pointer;
     }

@@ -49,7 +49,7 @@
 
   body {
     background-color: #1e1e1e;
-    transition: 500ms ease;
+    transition: 400ms ease;
   }
 
 </style>

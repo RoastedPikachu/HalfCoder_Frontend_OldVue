@@ -49,14 +49,14 @@
       color: #747474;
       line-height: 25px;
       text-decoration: none;
-      transition: 500ms ease;
+      transition: 400ms ease;
       outline: none;
     }
     .route {
       color: #747474;
       line-height: 25px;
       text-decoration: none;
-      transition: 500ms ease;
+      transition: 400ms ease;
       outline: none;
     }
     .route:hover {
@@ -84,7 +84,7 @@
       a {
         width: 26px;
         height: 26px;
-        transition: 500ms ease;
+        transition: 400ms ease;
         img {
           width: 100%;
           height: 100%;

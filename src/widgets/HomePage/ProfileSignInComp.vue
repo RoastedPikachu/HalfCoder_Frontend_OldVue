@@ -133,7 +133,7 @@
     height: 600px;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
-    transition: 500ms ease;
+    transition: 400ms ease;
     #Profile_topLine {
       position: absolute;
       width: 100%;
@@ -161,7 +161,7 @@
         font-size: 16px;
         font-family: 'Inter', sans-serif;
         text-align: center;
-        transition: 500ms ease;
+        transition: 400ms ease;
       }
       p {
         margin-top: 7px;
@@ -187,7 +187,7 @@
         text-align: center;
         p {
           font-size: 16px;
-          transition: 500ms ease;
+          transition: 400ms ease;
         }
         p:last-child {
           font-size: 12px;

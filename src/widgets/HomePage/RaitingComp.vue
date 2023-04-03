@@ -33,9 +33,11 @@
   import axios from 'axios';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
 
+  // Дочерние интерфейсы объекта юзер
+
   interface Profile {
     sex: null,
-    work: null,
+    work: string,
     birthday: null,
     phone: null,
     country: null,
@@ -49,6 +51,8 @@
     count: number,
     all: object
   }
+
+  // Сам интерфейс юзера
 
   interface User {
     id: number,
@@ -173,7 +177,7 @@
     border-radius: 5px;
     color: #747474; 
     font-family: 'Space Grotesk', sans-serif;
-    transition: 500ms ease;
+    transition: 400ms ease;
     h2 {
       margin-top: 12px; 
       width: 100%;
@@ -254,7 +258,7 @@
       font-size: 12px;
       font-family: 'Inter', sans-serif;
       text-decoration: none;
-      transition: 500ms ease;
+      transition: 400ms ease;
       outline: none;
       text-align: center;
       cursor: pointer;

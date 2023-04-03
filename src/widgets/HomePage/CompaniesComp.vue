@@ -32,6 +32,8 @@
   import store from '@/store/index';
   import axios from 'axios';
 
+  // Дочерние интерфейсы объекта компания
+
   interface Ambassador {
     username: string,
     first_name: string,
@@ -41,6 +43,8 @@
   interface Track {
     title: string
   }
+
+  // Интерфейс самой компании
 
   interface Company {
     id: number,
@@ -142,11 +146,11 @@
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     font-family: 'Space Grotesk', sans-serif;
-    transition: 500ms ease;
+    transition: 400ms ease;
     h2 {
       margin-top: 12px;
       font-size: 18px;
-      transition: 500ms ease;
+      transition: 400ms ease;
     }
     #Companies_info {
       display: flex;
@@ -190,7 +194,7 @@
           i {
             color: #747474;
             font-size: 18px;
-            transition: 500ms ease;
+            transition: 400ms ease;
           }
           i:hover {
             color: #3d5aff
@@ -205,7 +209,7 @@
           p {
             font-size: 14px;
             font-family: 'Inter', sans-serif;
-            transition: 500ms ease;
+            transition: 400ms ease;
           }
           p:last-child {
             margin-top: 7.5px;

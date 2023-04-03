@@ -44,7 +44,7 @@
       font-size: 14px;
       font-weight: 500;
       font-family: 'Space Grotesk', sans-serif;
-      transition: 500ms ease;
+      transition: 400ms ease;
       text-decoration: none;
     }
     .routeButton:hover {

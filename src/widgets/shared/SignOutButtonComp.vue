@@ -66,7 +66,7 @@
       color: #ffffff;
       font-size: 20px;
       font-weight: 600;
-      transition: 500ms ease;
+      transition: 400ms ease;
     }
     p:hover {
       color: #3d5aff;

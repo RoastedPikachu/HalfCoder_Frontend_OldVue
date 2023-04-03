@@ -107,7 +107,7 @@
     height: 280px;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
-    transition: 500ms ease;
+    transition: 400ms ease;
     z-index: 10;
     #ModalProfileWindow_profileButton {
       margin-top: 10px;

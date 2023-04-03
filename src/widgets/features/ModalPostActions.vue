@@ -64,7 +64,7 @@
         font-size: 14px;
         font-weight: 700;
         font-family: 'Space Grotesk', sans-serif;
-        transition: 500ms ease;
+        transition: 400ms ease;
       }
     }
     button:nth-child(1) {

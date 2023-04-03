@@ -57,7 +57,7 @@
     background-color: #1b1b1b;
     border: 2px solid #a8b3cf;
     border-radius: 15px;
-    transition: 500ms ease;
+    transition: 400ms ease;
     i {
       position: absolute;
       top: 7.5%;
@@ -92,7 +92,7 @@
       color: #0e1217;
       font-weight: 700;
       font-family: 'Inter', sans-serif;
-      transition: 500ms ease;
+      transition: 400ms ease;
       cursor: pointer;
     }
     button:hover {

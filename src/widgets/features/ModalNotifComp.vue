@@ -43,7 +43,7 @@
     mounted() {
       setInterval(() => {
         this.isDarkTheme = store.state.isDarkTheme;
-      }, 100);
+      }, 150);
     },
     props: {
       active: Boolean

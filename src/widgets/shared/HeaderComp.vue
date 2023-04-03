@@ -144,17 +144,17 @@
     height: 60px;
     background-color: #111111;
     font-weight: 700;
-    transition: 500ms ease;
+    transition: 400ms ease;
     outline: none;
     h1 {
       display: flex;
       color: #ffffff;
       font-size: 36px;
       font-family: 'Space Grotesk', sans-serif;
-      transition: 500ms ease;
+      transition: 400ms ease;
       p {
         color: #3d5aff;
-        transition: 500ms ease;
+        transition: 400ms ease;
       }
     }
     nav {
@@ -168,7 +168,7 @@
         color: #747474;
         font-size: 16px;
         text-decoration: none;
-        transition: 500ms ease;
+        transition: 400ms ease;
         outline: none;
         cursor: pointer;
       }
@@ -179,7 +179,7 @@
         color: #747474;
         font-size: 16px;
         text-decoration: none;
-        transition: 500ms ease;
+        transition: 400ms ease;
         outline: none;
       }
       .route:hover {
@@ -194,11 +194,11 @@
         background-color: #1e1e1e;
         border: 0px;
         border-radius: 10px;
-        transition: 500ms ease;
+        transition: 400ms ease;
         outline: none;
         svg {
           path {
-            transition: 500ms ease;
+            transition: 400ms ease;
           }
         }
         svg:hover {
@@ -230,7 +230,7 @@
           cursor: pointer;
           svg {
             path {
-              transition: 500ms ease;
+              transition: 400ms ease;
             }
           }
           svg:hover {

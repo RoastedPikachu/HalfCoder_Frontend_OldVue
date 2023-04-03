@@ -111,13 +111,13 @@
     height: 30px;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
-    transition: 500ms ease;
+    transition: 400ms ease;
     .recomendation {
       color: #747474;
       font-size: 16px;
       font-family: 'Space Grotesk', sans-serif;
       text-decoration: none;
-      transition: 500ms ease;
+      transition: 400ms ease;
       outline: none;
       cursor: pointer;
     }

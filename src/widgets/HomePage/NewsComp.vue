@@ -3,8 +3,8 @@
     <h2>Новости</h2>
     <div id="News_info">
       <div class="News_infoItem" v-for="item of news" :key="item.id">
-        <a :href="item.link">{{ item.description }}</a>
-        <p>{{ item.appearanceTime }}</p>
+        <a :href="item.link">{{ item.title }}</a>
+        <p>{{ item.ago }}</p>
       </div>
     </div>
   </section>
@@ -14,6 +14,39 @@
   import { defineComponent } from 'vue';  
   import { ref, onMounted } from 'vue';
   import store from '@/store/index';
+  import axios from 'axios';
+
+  // Дочерние интерфейсы объекта новости
+
+  interface From_user {
+    username: string,
+    first_name: string,
+    last_name: string,
+    link: string
+  }
+
+  interface Category {
+    title: string,
+    views: number,
+    link: string
+  }
+
+  interface Body {
+    text: string
+  } 
+
+  // Интерфейс новостей
+
+  interface News {
+    title: string,
+    link: string,
+    views: number,
+    from_user: From_user,
+    category: Category,
+    body: Body,
+    photo: string,
+    ago: string,
+  }
 
   export default defineComponent({
     name: 'NewsComp',
@@ -24,42 +57,30 @@
     },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
-      const news = ref([
-          {
-            id: 0,
-            link: '',
-            description: 'Яндекс выложил код счётчика Метрики в opensource',
-            appearanceTime: '3 часа назад'
-          },
-          {
-            id: 1,
-            link: '',
-            description: 'Яндекс выложил код счётчика Метрики в opensource',
-            appearanceTime: '2 часа назад'
-          },
-          {
-            id: 2,
-            link: '',
-            description: 'Яндекс выложил код счётчика Метрики в opensource',
-            appearanceTime: '4 часа назад'
-          },
-          {
-            id: 3,
-            description: 'Яндекс выложил код счётчика Метрики в opensource',
-            appearanceTime: '5 часов назад'
-          }
-        ]);
+      const news = ref([] as News[]);
 
       onMounted(() => {
         setInterval(() => {
           isDarkTheme.value = store.state.isDarkTheme;
         }, 150);
       })
-
+    
       return {
         isDarkTheme,
         news
       }
+    },
+    methods: {
+      async getNews() {
+        const url = new URL('http://62.109.10.224:500/api/v1/news/latest/');
+
+        const result = await axios.get(url.toString());
+
+        this.news = Object.values(result.data);
+      }
+    },
+    mounted() {
+      this.getNews();
     }
   })
 </script>
@@ -75,6 +96,9 @@
         a {
           color: #a5a5a5;
         }
+        a:hover {
+          color: #ffffff;
+        }
       }
     }
   }
@@ -89,11 +113,11 @@
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     font-family: 'Space Grotesk', sans-serif;
-    transition: 500ms ease;
+    transition: 400ms ease;
     h2 {
       margin-top: 12px;
       font-size: 18px;
-      transition: 500ms ease;
+      transition: 400ms ease;
     }
     #News_info {
       display: flex;
@@ -110,19 +134,18 @@
         height: 45px; 
         cursor: pointer;
         a {
+          width: 100%;
           font-size: 14px;
           font-family: 'Inter', sans-serif;
           text-decoration: none;
-          transition: 500ms ease;
+          transition: 400ms ease;
           outline: none;
         }
-        a:hover {
-          color: #ffffff;
-        }
-        p:last-child {
+        p {
+          width: 100%;
           color: #747474;
           font-size: 12px;
-          transition: 500ms ease;
+          transition: 400ms ease;
         }
       }
     }
@@ -137,6 +160,9 @@
       .News_infoItem {
         a {
           color: #747474;
+        }
+        a:hover {
+          color: #1e1e1e;
         }
       }
     }

@@ -80,7 +80,7 @@
         font-size: 14px;
         font-family: 'Inter', sans-serif;
         text-align: left;
-        transition: 500ms ease;
+        transition: 400ms ease;
       }
       p:last-child {
         color: #747474;

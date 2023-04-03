@@ -164,7 +164,7 @@
       border-radius: 5px;
       color: #747474;
       font-family: 'Space Grotesk', sans-serif;
-      transition: 500ms ease;
+      transition: 400ms ease;
       overflow: hidden;
       .mainBlock_childPosts_topInfo {
         display: flex;
@@ -191,7 +191,7 @@
               color: #ffffff;
               font-size: 14px;
               font-family: 'Inter', sans-serif;
-              transition: 500ms ease;
+              transition: 400ms ease;
             }
             p:last-child {
               font-size: 12px;
@@ -209,7 +209,7 @@
             color: #747474;
             font-size: 24px;
             outline: none;
-            transition: 500ms ease;
+            transition: 400ms ease;
             cursor: pointer;
           }
           button:hover {
@@ -239,7 +239,7 @@
           i {
             color: #747474;
             font-size: 24px;
-            transition: 500ms ease;
+            transition: 400ms ease;
             cursor: pointer;
           }
           i:hover {

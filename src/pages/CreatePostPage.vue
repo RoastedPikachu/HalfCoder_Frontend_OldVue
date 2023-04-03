@@ -1,14 +1,14 @@
-<!-- <template>
+<template>
   <section>
     <h1>Твой контент:</h1>
     <div id="editorjs"></div>
-    <button @click="saveArticleData()">Сохранить статеечку</button>
+    <!-- <button @click="saveArticleData()">Сохранить статеечку</button> -->
   </section>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import EditorJS from '@editorjs/editorjs';
+  /*import EditorJS from '@editorjs/editorjs';
   import Header from '@editorjs/header';
   import Paragraph from "@editorjs/paragraph";
   import Quote from '@editorjs/quote';
@@ -21,14 +21,14 @@
   import AttachesTool from '@editorjs/attaches';
   import Marker from '@editorjs/marker';
   import InlineCode from '@editorjs/inline-code';
-  import ImageTool from '@editorjs/image';
+  import ImageTool from '@editorjs/image';*/
 
   export default defineComponent({
     name: 'CreatePostPage',
     data() {
       return {
         value: null,
-        editor: new EditorJS({
+        /*editor: new EditorJS({
           holder: 'editorjs',
           placeholder: 'Начни писать и вдохновение придёт',
           data: {
@@ -92,17 +92,17 @@
           onReady: () => {
             console.log('Editor.js is ready to work!')
           }
-        })
+        })*/
       }
     },
-    methods: {
+    /*methods: {
       saveArticleData() {
         this.editor.save().then(savedData => {
           console.log(savedData);
           console.log(this.editor);
         })
       }
-    },
+    },*/
   })
 </script>
 

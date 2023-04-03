@@ -52,7 +52,7 @@
       font-size: 20px;
       font-weight: 700;
       font-family: 'Space Grotesk', sans-serif;
-      transition: 500ms ease;
+      transition: 400ms ease;
       text-decoration: none;
       outline: none;
     }
