@@ -148,15 +148,15 @@
 <style lang="scss" scoped>
 
   #MainBlock_childPosts {
-    width: auto;
+    width: 65%;
     height: auto;
     .mainBlock_childPosts_info {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       margin-top: 17px;
-      margin-left: 20px;
-      width: 580px;
+      margin-left: 3.5%;
+      width: 100%;
       min-height: 440px;
       height: auto;
       background-color: #141414;

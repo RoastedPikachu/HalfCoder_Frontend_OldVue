@@ -263,8 +263,14 @@
       p {
         color: #ffffff;
       }
+      p:hover {
+        color: #1d2b7d;
+      }
       .route {
         color: #ffffff;
+      }
+      .route:hover {
+        color: #1d2b7d;
       }
       .routeImg {
         background-color: #ffffff;

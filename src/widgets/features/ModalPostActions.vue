@@ -1,5 +1,5 @@
 <template>
-  <div class="modalPostActions" v-if="modalActionsActive">
+  <div class="modalPostActions" v-if="modalActionsActive" :class="{ whitePostActionsTheme: !isDarkTheme }">
     <button>
       <img src="@/assets/bookmark_icon.svg" alt="В закладки">
       <p>В закладки</p>
@@ -13,9 +13,24 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import store from '@/store/index';
 
   export default defineComponent({
     name: 'ModalPostActions',
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme); 
+
+      onMounted(() => {
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+      });
+
+      return {
+        isDarkTheme
+      }
+    },
     props: {
       modalActionsActive: Boolean
     }
@@ -38,6 +53,7 @@
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     z-index: 10;
+    transition: 400ms ease;
     button {
       display: flex;
       justify-content: flex-start;
@@ -75,6 +91,13 @@
       p {
         color: #3d5aff;
       }
+    }
+  }
+
+  .whitePostActionsTheme {
+    background-color: #ffffff;
+    button {
+      background-color: #ffffff;
     }
   }
 </style>

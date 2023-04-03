@@ -76,6 +76,7 @@
       }
     }
     button {
+      color: #3d5aff;
       background-color: #141414;
     }
     button:hover {
@@ -133,7 +134,6 @@
     border-width: 2px 0 0;
     border-radius: 0px 0px 5px 5px;
     button {
-      color: #3d5aff;
       font-size: 16px;
       font-weight: 700;
       font-family: 'Space Grotesk', sans-serif;
@@ -158,7 +158,7 @@
       background-color: #ffffff;
     }
     button:hover {
-      color: #1e1e1e;
+      color: #1d2b7d;
     }
   }
 </style>

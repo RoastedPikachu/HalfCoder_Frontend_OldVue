@@ -142,6 +142,7 @@
           outline: none;
         }
         p {
+          margin-top: -10px;
           width: 100%;
           color: #747474;
           font-size: 12px;
@@ -162,7 +163,7 @@
           color: #747474;
         }
         a:hover {
-          color: #1e1e1e;
+          color: #3d5aff;
         }
       }
     }

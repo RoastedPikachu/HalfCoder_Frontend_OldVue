@@ -106,8 +106,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-left: 20px;
-    width: 100%;
+    margin-left: 2.25%;
+    width: 96.85%;
     height: 30px;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;

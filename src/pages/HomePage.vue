@@ -71,21 +71,21 @@
     #MainBlock_info {
       display: flex;
       flex-direction: column;
-      width: 280px;
+      width: 30%;
       height: 890px;
     }
     #MainBlock_child {
       display: flex;
       flex-wrap: wrap;
-      width: 932px;
-    }
-    #MainBlock_asideRight {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 17px;
-      margin-left: 20px;
-      width: 307px;
-      height: 627px;
+      width: 99%;
+      #MainBlock_asideRight {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 17px;
+        margin-left: 4.5%;  
+        width: 30%;
+        height: 627px;
+      }
     }
   }
 </style>
