@@ -2,7 +2,11 @@
   <section id="News" :class="{ whiteNewsTheme: !isDarkTheme }">
     <h2>Новости</h2>
     <div id="News_info">
-      <div class="News_infoItem" v-for="item of news" :key="item.id">
+      <div class="loadingNews" v-for="item of loadingNews" :key="item.id" v-show="!isLoaded">
+        <p></p>
+        <p></p>
+      </div>
+      <div class="News_infoItem" v-for="item of news.slice(0, 4)" :key="item.id" v-show="isLoaded">
         <a :href="item.link">{{ item.title }}</a>
         <p>{{ item.ago }}</p>
       </div>
@@ -57,7 +61,22 @@
     },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
+      const isLoaded = ref(false);
       const news = ref([] as News[]);
+      const loadingNews = ref([
+        {
+          id: 0,
+        },
+        {
+          id: 1,
+        },
+        {
+          id: 2,
+        },
+        {
+          id: 3,
+        }
+      ]);
 
       onMounted(() => {
         setInterval(() => {
@@ -67,7 +86,9 @@
     
       return {
         isDarkTheme,
-        news
+        isLoaded,
+        news,
+        loadingNews
       }
     },
     methods: {
@@ -77,6 +98,10 @@
         const result = await axios.get(url.toString());
 
         this.news = Object.values(result.data);
+
+        if(this.news.length) {
+          this.isLoaded = true;
+        }
       }
     },
     mounted() {
@@ -148,6 +173,20 @@
           font-size: 12px;
           transition: 400ms ease;
         }
+      }
+    }
+    .loadingNews {
+      width: 100%;
+      height: 45px; 
+      p {
+        width: 80%;
+        height: 12.5px;
+        background-color: rgba(116, 116, 116, 0.5);
+        border-radius: 2.5px;
+      }
+      p:last-child {
+        margin-top: 10px;
+        width: 60%;
       }
     }
   }

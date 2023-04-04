@@ -77,13 +77,13 @@
     #MainBlock_child {
       display: flex;
       flex-wrap: wrap;
-      width: 99%;
+      width: 100%;
       #MainBlock_asideRight {
         display: flex;
         flex-wrap: wrap;
         margin-top: 17px;
         margin-left: 4.5%;  
-        width: 30%;
+        width: 30.5%;
         height: 627px;
       }
     }

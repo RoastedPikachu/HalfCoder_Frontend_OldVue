@@ -107,7 +107,7 @@
     justify-content: space-around;
     align-items: center;
     margin-left: 2.25%;
-    width: 96.85%;
+    width: 97.5%;
     height: 30px;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;

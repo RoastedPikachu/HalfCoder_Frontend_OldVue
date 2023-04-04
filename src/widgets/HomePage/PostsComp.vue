@@ -2,13 +2,18 @@
   <section id="MainBlock_childPosts">
     <div class="mainBlock_childPosts_info" :class="{ whitePostsTheme: !isDarkTheme}" v-for="post of posts" :key="post.id">
       <div class="mainBlock_childPosts_topInfo">
-        <div class="mainBlock_childPosts_userInfo">
-          <img :src="post.userImage" :alt="post.userName">
-          <span>
-            <p>{{ post.userName }}</p>
-            <p>{{ post.userSpeciality }}</p>
-          </span>
+        <div class="mainBlock_childPosts_userInfo_loading" v-show="!isLoaded">
+          <ItemBrieflyInfoCompLoading/>
         </div>
+
+        <div class="mainBlock_childPosts_userInfo" v-show="isLoaded">
+          <ItemBrieflyInfoComp
+            :name="`${post.author.first_name} ${post.author.last_name}`"
+            :image="post.author.photo"
+            :employment="post.author.profile.work"
+          />
+        </div>
+
         <div class="mainBlock_childPosts_button">
           <button @click="changeModalActionsActive(post)">
             <i class="fa-solid fa-ellipsis"></i>
@@ -16,8 +21,16 @@
           <ModalPostActions :modalActionsActive="post.modalActionsActive"/>
         </div>
       </div>
-      <p>{{ post.text }}</p>
-      <img :src="post.postImage" :alt="post.text">
+
+      <span class="postText_loading" v-show="!isLoaded">
+        <p></p>
+        <p></p>
+      </span>
+      <p v-show="isLoaded">{{ post.title }}</p>
+
+      <div class="postImage_loading" v-show="!isLoaded"></div>
+      <img :src="post.photo" :alt="post.title" v-show="isLoaded">
+
       <div class="mainBlock_childPosts_activityInfo">
         <span>
           <i class="fa-solid fa-heart"></i>
@@ -25,6 +38,7 @@
           <i class="fa-solid fa-share"></i>
           <p>{{ post.reposts }}</p>
         </span>
+
         <span>
           <i class="fa-solid fa-eye"></i>
           <p>{{ post.views }}</p>
@@ -38,20 +52,55 @@
   import { defineComponent } from 'vue';
   import { ref, onMounted } from 'vue';
   import store from '@/store/index';
+  import axios from 'axios';
   import ModalPostActions from '@/widgets/features/ModalPostActions.vue';
+  import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
+  import ItemBrieflyInfoCompLoading from '@/widgets/shared/ItemBrieflyInfoCompLoading.vue';
+
+  // Дочерние интерфейсы для поста
+
+  interface Profile {
+    birthday: string,
+    country: string,
+    education: string,
+    hobby: string,
+    phone: string,
+    quote: string,
+    sex: string,
+    website: string,
+    work: string,
+  }
+
+  interface Author {
+    type: string,
+    id: number,
+    username: string,
+    first_name: string,
+    last_name: string,
+    photo: string
+    link: string
+    profile: Profile
+  } 
+
+  // Сам интерфейс пост
 
   interface Post {
     id: number,
-    userImage: string,
-    userName: string,
-    userSpeciality: string,
-    text: string,
-    postImage: string,
+    title: string,
+    body: {
+      text: string
+    },
+    author: Author,
+    views: number,
+    category: string,
+    tags: object,
     likes: number,
     reposts: number,
-    views: number,
-    modalActionsActive: boolean
-  }
+    link: string,
+    date_published: string,
+    time_to_read: number,
+    photo: string
+  } 
 
   export default defineComponent({
     name: 'PostsComp',
@@ -62,45 +111,83 @@
     },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
+      const isLoaded = ref(false);
       const activeId = ref(0);
       const posts = ref([
-          {
+        {
+          id: 0,
+          title: '',
+          body: {
+            text: ''
+          },
+          author: {
+            type: '',
             id: 0,
-            userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-            userName: 'Lorem Ipsum',
-            userSpeciality: 'Frontend developer',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum accumsan mauris, et pharetra nibh rhoncus in. Morbi',
-            postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
-            likes: 15,
-            reposts: 25, 
-            views: 54,
-            modalActionsActive: false,
+            username: '',
+            first_name: '',
+            last_name: '',
+            photo: '',
+            link: '',
+            profile: {
+              birthday: '',
+              country: '',
+              education: '',
+              hobby: '',
+              phone: '',
+              quote: '',
+              sex: '',
+              website: '',
+              work: '',
+            }
           },
-          {
-            id: 1,
-            userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-            userName: 'Lorem Ipsum',
-            userSpeciality: 'Frontend developer',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum accumsan mauris, et pharetra nibh rhoncus in. Morbi et sodales.',
-            postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
-            likes: 15,
-            reposts: 25, 
-            views: 54,
-            modalActionsActive: false,
+          views: 0,
+          category: '',
+          tags: {},
+          likes: 0,
+          reposts: 0,
+          link: '',
+          date_published: '',
+          time_to_read: '',
+          photo: ''
+        },
+        {
+          id: 1,
+          title: '',
+          body: {
+            text: ''
           },
-          {
-            id: 2,
-            userImage: 'https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png',
-            userName: 'Lorem Ipsum',
-            userSpeciality: 'Frontend developer',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum accumsan mauris, et pharetra nibh rhoncus in. Morbi et sodales.',
-            postImage: 'https://sportishka.com/uploads/posts/2022-09/1662113882_3-sportishka-com-p-krasivaya-priroda-gori-krasivo-3.jpg',
-            likes: 15,
-            reposts: 25, 
-            views: 54,
-            modalActionsActive: false,
-          }
-        ]);
+          author: {
+            type: '',
+            id: 0,
+            username: '',
+            first_name: '',
+            last_name: '',
+            photo: '',
+            link: '',
+            profile: {
+              birthday: '',
+              country: '',
+              education: '',
+              hobby: '',
+              phone: '',
+              quote: '',
+              sex: '',
+              website: '',
+              work: '',
+            }
+          },
+          views: 0,
+          category: '',
+          tags: {},
+          likes: 0,
+          reposts: 0,
+          link: '',
+          date_published: 0,
+          time_to_read: 0,
+          photo: ''
+        }
+      ]);
+      const userName = ref('');
 
       const changeModalActionsActive = (post:Post):void => {
         post.modalActionsActive = !post.modalActionsActive;
@@ -134,13 +221,37 @@
 
       return {
         isDarkTheme,
+        isLoaded,
         activeId,
         posts,
-        changeModalActionsActive
+        changeModalActionsActive,
+        userName
       }
     },
+    methods: {
+      async getPosts() {
+        const url = new URL('http://62.109.10.224:500/api/v1/article/recommended/');
+
+        const token = document.cookie.slice(67, 206);
+
+        const result = await axios.post(url.toString(), { token: token }, {
+          headers: {'Content-Type': 'application/json;charset=utf-8'}
+        });
+
+        this.posts = (Object.values(result.data));
+
+        if(this.posts.length) {
+          this.isLoaded = true;
+        }
+      }
+    },
+    mounted() {
+      this.getPosts();
+    },
     components: {
-      ModalPostActions
+      ModalPostActions,
+      ItemBrieflyInfoComp,
+      ItemBrieflyInfoCompLoading
     }
   })
 </script>
@@ -156,7 +267,8 @@
       flex-wrap: wrap;
       margin-top: 17px;
       margin-left: 3.5%;
-      width: 100%;
+      padding: 0 2.5%;
+      width: 95%;
       min-height: 440px;
       height: auto;
       background-color: #141414;
@@ -175,28 +287,11 @@
           display: flex;
           align-items: center;
           width: 100%;
-          img {
-            width: 40px;
-            height: 40px;
-            background-color: #747474;
-            border-radius: 50px;
-          }
-          span {
-            margin-left: 10px;
-            width: 100%;
-            p {
-              width: 80%;
-            }
-            p:first-child {
-              color: #ffffff;
-              font-size: 14px;
-              font-family: 'Inter', sans-serif;
-              transition: 400ms ease;
-            }
-            p:last-child {
-              font-size: 12px;
-            }
-          }
+        }
+        .mainBlock_childPosts_userInfo_loading {
+          display: flex;
+          align-items: center;
+          width: 100%;
         }
         .mainBlock_childPosts_button {
           position: relative;
@@ -220,9 +315,27 @@
       p {
         width: 90%;
       }
+      .postText_loading {
+        width: 90%;
+        p {
+          height: 12.5px;
+          background-color: rgba(116, 116, 116, 0.5);
+          border-radius: 2.5px;
+        }
+        p:last-child {
+          width: 75%;
+          margin-top: 7.5px;
+        }
+      }
       img {
         width: 90%;
         height: 250px;
+        border-radius: 5px;
+      }
+      .postImage_loading {
+        width: 90%;
+        height: 250px;
+        background-color: rgba(116, 116, 116, 0.5);
         border-radius: 5px;
       }
       .mainBlock_childPosts_activityInfo {

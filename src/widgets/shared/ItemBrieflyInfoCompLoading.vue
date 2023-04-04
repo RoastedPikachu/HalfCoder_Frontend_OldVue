@@ -1,11 +1,10 @@
 <template>
   <div id="ElemBrieflyInfo" :class="{ whiteBrieflyInfoTheme: !isDarkTheme }">
     <div class="ElemBrieflyInfo_Rating_infoUser_image">
-      <img :src="image" :alt="name">
     </div>
     <span>
-      <p>{{ name }}</p>
-      <p>{{ employment }}</p>
+      <p></p>
+      <p></p>
     </span>
   </div>
 </template>
@@ -16,10 +15,10 @@
   import store from '@/store';
 
   export default defineComponent({
-    name: 'ItemBrieflyInfoComp',
+    name: 'ItemBrieflyInfoCompLoading',
     data() {
       return {
-      
+
       }
     },
     setup() {
@@ -29,28 +28,16 @@
         setInterval(() => {
           isDarkTheme.value = store.state.isDarkTheme;
         }, 150);
-      });
+      })
 
       return {
         isDarkTheme
       }
-    },
-    props: {
-      image: String,
-      name: String,
-      employment: String
     }
   })
 </script>
 
 <style lang="scss" scoped>
-  div {
-    span {
-      p {
-        color: #ffffff;
-      }
-    }
-  }
 
   #ElemBrieflyInfo {
     display: flex;
@@ -61,38 +48,28 @@
       position: relative;
       width: 40px;
       height: 40px;
-      background-color: #747474;
+      background-color: rgba(116, 116, 116, 0.5);
       border-radius: 5px;
-      img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        color: #ffffff;
-      }
     }
     span {
       display: flex;
       flex-wrap: wrap;
       margin-left: 10px;
-      width: 70%;
+      width: 30%;
       p {
-        width: 100%;
+        width: 70%;
+        height: 12.5px;
+        background-color: rgba(116, 116, 116, 0.5);
+        border-radius: 2.5px;
         font-size: 14px;
         font-family: 'Inter', sans-serif;
         text-align: left;
         transition: 400ms ease;
       }
       p:last-child {
-        color: #747474;
+        margin-top: 7.5px;
+        width: 90%;
         font-size: 12px;
-      }
-    }
-  }
-
-  .whiteBrieflyInfoTheme {
-    span {
-      p {
-        color: #1e1e1e;
       }
     }
   }
