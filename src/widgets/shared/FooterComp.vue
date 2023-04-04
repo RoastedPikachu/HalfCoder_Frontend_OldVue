@@ -10,15 +10,15 @@
       <a href="/">Help</a>
       <a href="/">Privacy & terms</a>
     </span>
-    <span>©2023 &lt; HalfCoder /></span>
+    <span>©{{ year }} &lt; HalfCoder /></span>
     <span id="SocialNetworkLinks">
-      <a href="/" id="SocialNetworkLinks_Vk">
+      <a href="https://vk.com/halfcoder" id="SocialNetworkLinks_Vk">
         <img src="@/assets/grey_vk_icon.svg" alt="Вконтакте">
       </a>
-      <a href="/" id="SocialNetworkLinks_Tg">
+      <a href="https://t.me/halfcoder" id="SocialNetworkLinks_Tg">
         <img src="@/assets/grey_telegramm_icon.svg" alt="Telegram">
       </a>
-      <a href="/" id="SocialNetworkLinks_Dzen">
+      <a href="https://m.dzen.ru/halfcoder" id="SocialNetworkLinks_Dzen">
         <img src="@/assets/dzen_icon.svg" alt="Дзен">
       </a>
     </span>
@@ -27,9 +27,22 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref } from 'vue';
 
   export default defineComponent({
     name: 'FooterComp',
+    data() {
+      return {
+
+      }
+    },
+    setup() {
+      const year = ref(new Date().getFullYear());
+
+      return {
+        year
+      }
+    }
   })
 </script>
 

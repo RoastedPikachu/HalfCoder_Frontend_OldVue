@@ -6,23 +6,23 @@
     </span>
     <span>
       <img src="@/assets/connections_icon.svg" alt="Связи">
-      <router-link to="/createPost" class="route">Connections</router-link>
+      <router-link to="/createPost" class="route">Связи</router-link>
     </span>
     <span>
       <img src="@/assets/news_icon.svg" alt="Последние новости">
-      <p>Latest News</p>
+      <p>Последние новости</p>
     </span>
     <span>
       <img src="@/assets/events_icon.svg" alt="События">
-      <p>Events</p>
+      <router-link to="/events" class="route">События</router-link>
     </span>
     <span>
       <img src="@/assets/groups_icon.svg" alt="Группы">
-      <p>Groups</p>
+      <p>Группы</p>
     </span>
     <span>
       <img src="@/assets/notifications_icon.svg" alt="Уведомления">
-      <p>Notifications</p>
+      <p>Уведомления</p>
     </span>
     <SettingsLinkComp/>
   </div>

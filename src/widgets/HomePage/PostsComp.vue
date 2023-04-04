@@ -18,7 +18,7 @@
           <button @click="changeModalActionsActive(post)">
             <i class="fa-solid fa-ellipsis"></i>
           </button>
-          <ModalPostActions :modalActionsActive="post.modalActionsActive"/>
+          <ModalPostActions :modalActionsActive="post.modal_actions_active"/>
         </div>
       </div>
 
@@ -99,7 +99,8 @@
     link: string,
     date_published: string,
     time_to_read: number,
-    photo: string
+    photo: string,
+    modal_actions_active: boolean
   } 
 
   export default defineComponent({
@@ -148,7 +149,8 @@
           link: '',
           date_published: '',
           time_to_read: '',
-          photo: ''
+          photo: '',
+          modal_actions_active: false,
         },
         {
           id: 1,
@@ -184,18 +186,19 @@
           link: '',
           date_published: 0,
           time_to_read: 0,
-          photo: ''
+          photo: '',
+          modal_actions_active: false,
         }
       ]);
       const userName = ref('');
 
       const changeModalActionsActive = (post:Post):void => {
-        post.modalActionsActive = !post.modalActionsActive;
+        post.modal_actions_active = !post.modal_actions_active;
         activeId.value = post.id;
 
         posts.value.forEach((item) => {
           if(item.id !== activeId.value) {
-            item.modalActionsActive = false;
+            item.modal_actions_active = false;
           }
         })
       }
@@ -208,7 +211,7 @@
             if(!target.closest('.mainBlock_childPosts_button')) {
               let currentPost = posts.value.find(item => item.id === activeId.value);
               if(currentPost !== undefined) {
-                currentPost.modalActionsActive = false;
+                currentPost.modal_actions_active = false;
               }
             }
           }
