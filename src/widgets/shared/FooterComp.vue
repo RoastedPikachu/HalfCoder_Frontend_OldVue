@@ -1,14 +1,9 @@
 <template>
   <footer>
     <span>
-      <a href="/">О нас</a>
-      <router-link to="/settings" class="route">Настройки</router-link>
-      <a href="/">Поддержка</a>
-      <router-link to="/docs/termsOfUse" class="route">Документы</router-link>
-    </span>
-    <span>
-      <a href="/">Помощь</a>
-      <a href="/">Privacy & terms</a>
+      <a href="/" target="blank">О нас</a>
+      <a href="/" target="blank">Поддержка</a>
+      <router-link to="/docs/termsOfUse" class="route" target="_blank">Документы</router-link>
     </span>
     <span>©{{ year }} &lt; HalfCoder /></span>
     <span id="SocialNetworkLinks">
@@ -82,12 +77,9 @@
     span {
       display: flex;
       justify-content: space-around;
-      width: 60%;
+      width: 85%;
       text-align: center;
       line-height: 25px;
-    }
-    span:first-child {
-      width: 100%;
     }
     span:last-child {
       display: flex;

@@ -59,7 +59,7 @@
     padding: 0 12.5%;
     font-weight: 700;
     aside {
-      background-color: #141414;
+      background-color: $DarkBgBlocksTheme;
     }
     #MainBlock_LeftOtherInfo {
       display: flex;
@@ -67,12 +67,12 @@
       flex-wrap: wrap;
       width: 280px;
       height: 300px;
-      border: 2px solid rgba(116, 116, 116, 0.5);
+      border: 2px solid $BorderColor;
       border-radius: 5px;
       transition: 400ms ease;
     }
     .whiteOtherInfoTheme {
-      background-color: rgba(116, 116, 116, 0.05);
+      background-color: $WhiteBgBlocksTheme;
     }
   }
 </style>

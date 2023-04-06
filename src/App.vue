@@ -18,7 +18,7 @@
       const isDarkTheme = ref(store.state.isDarkTheme);
 
       const changeBodyTheme = () => {
-        if(isDarkTheme.value === true) {
+        if(isDarkTheme.value) {
           document.body.style.backgroundColor="#1e1e1e";
         } else {
           document.body.style.backgroundColor="#ffffff";
@@ -48,7 +48,7 @@
   }
 
   body {
-    background-color: #1e1e1e;
+    background-color: $DarkBgTheme;
     transition: 400ms ease;
   }
 

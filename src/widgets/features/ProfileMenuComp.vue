@@ -69,18 +69,18 @@
 
 <style lang="scss" scoped>
   div {
-    color: #ffffff;
+    color: $DarkMenuFontColor;
     span {
       .route {
-        color: #ffffff;
+        color: $DarkMenuFontColor;
       }
     }
     button {
-      color: #3d5aff;
-      background-color: #141414;
+      color: $BlueButtonFontColor;
+      background-color: $DarkBgBlocksTheme;
     }
     button:hover {
-      color: #ffffff;
+      color: $DarkMenuFontColor;
     }
   }
   #Profile_menuIcons {
@@ -108,19 +108,19 @@
         height: 22px;
         font-size: 20px;
         font-weight: 700;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: $SpaceGrotesk;
       }
       .route {
         margin-left: 10px;
         height: 22px;
         font-size: 20px;
         font-weight: 700; 
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: $SpaceGrotesk;
         transition: 400ms ease;
         text-decoration: none;
       }
       .route:hover {
-        color: #3d5aff;
+        color: $HoverColor;
       }
     }
   }
@@ -131,13 +131,13 @@
     align-items: center;
     width: 100%;
     height: 50px;
-    border: 1px solid rgba(116, 116, 116, 0.5);
+    border: 1px solid $BorderColor;
     border-width: 2px 0 0;
     border-radius: 0px 0px 5px 5px;
     button {
       font-size: 16px;
       font-weight: 700;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: $SpaceGrotesk;
       border: 0;
       transition: 400ms ease;
       outline: none;
@@ -146,20 +146,20 @@
   }
 
   .whiteProfileMenuTheme {
-    color: #1e1e1e;
+    color: $WhiteMenuFontColor;
     span {
       .route {
-        color: #1e1e1e;
+        color: $WhiteMenuFontColor;
       }
     }
   }
 
   .whiteButtonTheme {
     button {
-      background-color: #ffffff;
+      background-color: $WhiteBgBlocksTheme;
     }
     button:hover {
-      color: #1d2b7d;
+      color: $DarkBlueButtonFontColor;
     }
   }
 </style>
