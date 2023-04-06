@@ -106,20 +106,22 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/styles/_variables.scss";
+
   section {
-    background-color: #141414;
+    background-color: $DarkBgBlocksTheme;
     #Profile_mainInfo {
       h2 {
-        color: #ffffff;
+        color: $DarkHeadingColor;
       }
     }
     #Profile_secondaryInfo {
       div {
         p {
-          color: #ffffff;
+          color: $DarkNumberColor;
         }
         p:last-child {
-          color: #747474;
+          color: $DescColor;
         }
       }
     }
@@ -131,7 +133,7 @@
     flex-wrap: wrap;
     width: 100%;
     height: 600px;
-    border: 2px solid rgba(116, 116, 116, 0.5);
+    border: 2px solid $BorderColor;
     border-radius: 5px;
     transition: 400ms ease;
     #Profile_topLine {
@@ -152,7 +154,7 @@
       img {
         width: 75px;
         height: 75px;
-        background-color: #ffffff;
+        background-color: $LoadingColor;
         border-radius: 15px;
         z-index: 9;
       }
@@ -160,16 +162,16 @@
         width: 100%;
         margin-top: 7px;
         font-size: 16px;
-        font-family: 'Inter', sans-serif;
+        font-family: $Inter;
         text-align: center;
         transition: 400ms ease;
       }
       p {
         margin-top: 7px;
-        color: #747474;
+        color: $DescColor;
         font-size: 14px;
         font-weight: 700;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: $SpaceGrotesk;
         text-align: center;
       }
       p:last-child {
@@ -185,7 +187,7 @@
       height: 45px;
       div {
         font-weight: 700;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: $SpaceGrotesk;
         text-align: center;
         p {
           font-size: 16px;
@@ -197,7 +199,7 @@
       }
       div:nth-child(2) {
         width: 25%;
-        border: 1px solid #747474;
+        border: 1px solid $BorderColor;
         border-width: 0 2px 0;
       }
     }
@@ -205,23 +207,23 @@
       position: relative;
       width: 87.5%;
       height: 1px;
-      border: 2px solid #747474;
+      border: 2px solid $BorderColor;
       border-width: 2px 0 0;
       border-radius: 5px;
     }
   }
 
   .whiteProfileTheme {
-    background-color: rgba(116, 116, 116, 0.05);
+    background-color: $WhiteBgBlocksTheme;
     #Profile_mainInfo {
       h2 {
-        color: #1e1e1e;
+        color: $WhiteHeadingColor;
       }
     }
     #Profile_secondaryInfo {
       div {
         p {
-          color: #1e1e1e;
+          color: $WhiteNumberColor;
         }
       }
     }

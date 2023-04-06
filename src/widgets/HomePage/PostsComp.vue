@@ -260,6 +260,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/styles/_variables.scss";
 
   #MainBlock_childPosts {
     width: 65%;
@@ -274,11 +275,11 @@
       width: 95%;
       min-height: 440px;
       height: auto;
-      background-color: #141414;
-      border: 2px solid rgba(116, 116, 116, 0.5);
+      background-color: $DarkBgBlocksTheme;
+      border: 2px solid $BorderColor;
       border-radius: 5px;
       color: #747474;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: $SpaceGrotesk;
       transition: 400ms ease;
       overflow: hidden;
       .mainBlock_childPosts_topInfo {
@@ -304,14 +305,14 @@
             align-self: flex-start;
             background: none;
             border: 0;
-            color: #747474;
+            color: $IconColor;
             font-size: 24px;
             outline: none;
             transition: 400ms ease;
             cursor: pointer;
           }
           button:hover {
-            color: #3d5aff;
+            color: $HoverColor;
           }
         }
       }
@@ -322,7 +323,7 @@
         width: 90%;
         p {
           height: 12.5px;
-          background-color: rgba(116, 116, 116, 0.5);
+          background-color: $LoadingColor;
           border-radius: 2.5px;
         }
         p:last-child {
@@ -338,7 +339,7 @@
       .postImage_loading {
         width: 90%;
         height: 250px;
-        background-color: rgba(116, 116, 116, 0.5);
+        background-color: $LoadingColor;
         border-radius: 5px;
       }
       .mainBlock_childPosts_activityInfo {
@@ -353,13 +354,13 @@
           align-items: center;
           width: 25%;
           i {
-            color: #747474;
+            color: $IconColor;
             font-size: 24px;
             transition: 400ms ease;
             cursor: pointer;
           }
           i:hover {
-            color: #3d5aff;
+            color: $HoverColor;
           }
           p {
             margin-left: 7.5px;
@@ -375,7 +376,7 @@
 
   #MainBlock_childPosts {
     .whitePostsTheme {
-    background-color: rgba(116, 116, 116, 0.05);
+    background-color: $WhiteBgBlocksTheme;
       .mainBlock_childPosts_topInfo {
         .mainBlock_childPosts_userInfo {
           span {

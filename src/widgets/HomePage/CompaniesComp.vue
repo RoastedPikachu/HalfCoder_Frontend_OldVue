@@ -10,7 +10,7 @@
         </span>
         <button>
           <i class="fa-solid fa-eye"></i>
-        </button>
+        </button> 
       </div>
       <div class="companies_infoLoadingCompany" v-for="loadingCompany of loadingCompanies" :key="loadingCompany.id" v-show="!isLoaded">
         <div></div>
@@ -120,10 +120,12 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/styles/_variables.scss";
+
   section {
-    background-color: #141414;
+    background-color: $DarkBgBlocksTheme;
     h2 {
-      color: #ffffff;
+      color: $DarkHeadingColor;
     }
     #Companies_info {
       .companies_infoCompany {
@@ -143,9 +145,9 @@
     margin-top: 20px;
     width: 100%;
     height: 290px;
-    border: 2px solid rgba(116, 116, 116, 0.5);
+    border: 2px solid $BorderColor;
     border-radius: 5px;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: $SpaceGrotesk;
     transition: 400ms ease;
     h2 {
       margin-top: 12px;
@@ -192,28 +194,28 @@
           outline: none;
           cursor: pointer;
           i {
-            color: #747474;
+            color: $IconColor;
             font-size: 18px;
             transition: 400ms ease;
           }
           i:hover {
-            color: #3d5aff
+            color: $HoverColor
           }
         }
       }
       .companies_infoCompany {
         img {
-          background-color: #ffffff;
+          background-color: $LoadingColor;
         }
         span {
           p {
             font-size: 14px;
-            font-family: 'Inter', sans-serif;
+            font-family: $Inter;
             transition: 400ms ease;
           }
           p:last-child {
             margin-top: 7.5px;
-            color: #747474;
+            color: $DescColor;
             font-size: 12px;
           }
         }
@@ -222,14 +224,14 @@
         div {
           width: 57.5px;
           height: 40px;
-          background-color: rgba(116, 116, 116, 0.5);
+          background-color: $LoadingColor;
           border-radius: 5px;
         }
         span {
           p {
             width: 60%;
             height: 12.5px;
-            background-color: rgba(116, 116, 116, 0.5);
+            background-color: $LoadingColor;
             border-radius: 2.5px;
           }
           p:last-child {
@@ -242,15 +244,15 @@
   }
 
   .whiteCompaniesTheme {
-    background-color: rgba(116, 116, 116, 0.05);
+    background-color: $WhiteBgBlocksTheme;
     h2 {
-      color: #1e1e1e;
+      color: $WhiteHeadingColor;
     }
     #Companies_info {
       .companies_infoCompany {
         span {
           p {
-            color: #1e1e1e;
+            color: #1e1e1e; 
           }
         }
       }

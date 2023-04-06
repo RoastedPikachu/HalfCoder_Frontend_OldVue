@@ -109,21 +109,23 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/styles/_variables.scss";
+
   section {
-    background-color: #141414;
+    background-color: $DarkBgBlocksTheme;
     h2 {
-      color: #ffffff;
+      color: $DarkHeadingColor;
     }
     form {
-      color: #747474;
+      color: $DarkFormFontColor;
       .mainBlock_Settings_InputsContainers {
         input {
-          background-color: #1e1e1e;
+          background-color: $DarkInputsColor;
         }
       }
       #MainBlock_Settings_textareaContainer {
         textarea {
-          background-color: #1e1e1e;
+          background-color: $DarkInputsColor;
         }
       }
     }
@@ -133,10 +135,10 @@
     padding: 20px 30px;
     width: 720px;
     height: 490px;
-    border: 2px solid rgba(116, 116, 116, 0.5);
+    border: 2px solid $BorderColor;
     border-radius: 5px;
     font-weight: 700;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: $SpaceGrotesk;
     transition: 400ms ease;
     h2 {
       width: 205px;
@@ -152,7 +154,7 @@
       width: 100%;
       height: 85%;
       font-size: 14px;
-      font-family: 'Inter', sans-serif;
+      font-family: $Inter;
       transition: 400ms ease;
       .mainBlock_Settings_InputsContainers {
         display: flex;
@@ -172,9 +174,9 @@
             padding-left: 15px;
             width: 90%;
             height: 30px;
-            border: 1.5px solid #747474;
+            border: 1.5px solid $InputsBorderColor;
             border-radius: 5px;
-            color: #747474;
+            color: $DarkFormFontColor;
             outline: none;
             transition: 400ms ease;
           }
@@ -194,10 +196,10 @@
           padding-left: 15px;
           width: 100%;
           height: 130px;
-          border: 1.5px solid #747474;
+          border: 1.5px solid $InputsBorderColor;
           border-radius: 5px;
-          color: #747474;
-          font-family: 'Inter', sans-serif;
+          color: $DarkFormFontColor;
+          font-family: $Inter;
           outline: none;
           resize: none; 
           transition: 400ms ease;
@@ -209,10 +211,10 @@
         align-items: center;
         width: 160px;
         height: 35px;
-        background-color: #3d5aff;
+        background-color: $BgButtonColor;
         border: 0;
         border-radius: 5px;
-        color: #ffffff;
+        color: $ButtonFontColor;
         font-size: 12px;
         font-weight: 700;
         outline: none;
@@ -221,20 +223,20 @@
     }
   }
   .whiteSettingsTheme {
-    background-color: rgba(116, 116, 116, 0.05);
+    background-color: $WhiteBgBlocksTheme;
     h2 {
-      color: #3d5aff;
+      color: $WhiteFormFontColor;
     }
     form {
-      color: #3d5aff;
+      color: $WhiteFormFontColor;
       .mainBlock_Settings_InputsContainers {
         input {
-          background-color: #ffffff;
+          background-color: $WhiteInputsColor;
         }
       }
       #MainBlock_Settings_textareaContainer {
         textarea {
-          background-color: #ffffff;
+          background-color: $WhiteInputsColor;
         }
       }
     }

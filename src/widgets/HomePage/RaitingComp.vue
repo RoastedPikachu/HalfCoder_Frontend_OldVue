@@ -160,10 +160,12 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/styles/_variables.scss";
+
   section {
-    background-color: #141414;
+    background-color: $DarkBgBlocksTheme;
     h2 {
-      color: #ffffff;
+      color: $DarkHeadingColor;
     }
   }
 
@@ -173,10 +175,10 @@
     justify-content: center;
     width: 100%;
     height: 330px;
-    border: 2px solid rgba(116, 116, 116, 0.5);
+    border: 2px solid $BorderColor;
     border-radius: 5px;
-    color: #747474; 
-    font-family: 'Space Grotesk', sans-serif;
+    color: $RatingFontColor; 
+    font-family: $SpaceGrotesk;
     transition: 400ms ease;
     h2 {
       margin-top: 12px; 
@@ -217,7 +219,7 @@
           height: 100%;
           p {
             height: 12.5px;
-            background-color: rgba(116, 116, 116, 0.5);
+            background-color: $LoadingColor;
             border-radius: 2.5px;
           }
           p:first-child {
@@ -230,7 +232,7 @@
         .rating_loadingInfoUser_image {
           width: 42.5px;
           height: 100%;
-          background-color: rgba(116, 116, 116, 0.5);
+          background-color: $LoadingColor;
           border-radius: 5px;
         }
         .rating_loadingInfoUser_info {
@@ -239,7 +241,7 @@
           width: 52.5%;
           p {
             height: 12.5px;
-            background-color: rgba(116, 116, 116, 0.5);
+            background-color: $LoadingColor;
             border-radius: 2.5px;
           }
           p:first-child {
@@ -254,9 +256,9 @@
     #Rating_moreUsers {
       width: 100%;
       height: 30px;
-      color: #747474;
+      color: $RatingFontColor;
       font-size: 12px;
-      font-family: 'Inter', sans-serif;
+      font-family: $Inter;
       text-decoration: none;
       transition: 400ms ease;
       outline: none;
@@ -264,14 +266,14 @@
       cursor: pointer;
     }
     #Rating_moreUsers:hover {
-      color: #3d5aff;
+      color: $HoverColor;
     }
   }
 
   .whiteRatingTheme {
-    background-color: rgba(116, 116, 116, 0.05);
+    background-color: $WhiteBgBlocksTheme;
     h2 {
-      color: #1e1e1e;
+      color: $WhiteHeadingColor;
     }
   }
 </style>

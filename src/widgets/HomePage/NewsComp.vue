@@ -194,7 +194,7 @@
   }
 
   .whiteNewsTheme {
-    background-color: $WhiteBgTheme;
+    background-color: $WhiteBgBlocksTheme;
     h2 {
       color: $WhiteHeadingColor;
     }

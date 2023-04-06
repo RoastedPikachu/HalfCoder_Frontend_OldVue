@@ -98,8 +98,10 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/styles/_variables.scss";
+
   section {
-    background-color: #141414;
+    background-color: $DarkBgBlocksTheme;
   }
 
   #RecommendedCategories {
@@ -109,25 +111,25 @@
     margin-left: 2.25%;
     width: 97.5%;
     height: 30px;
-    border: 2px solid rgba(116, 116, 116, 0.5);
+    border: 2px solid $BorderColor;
     border-radius: 5px;
     transition: 400ms ease;
     .recomendation {
       color: #747474;
       font-size: 16px;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: $SpaceGrotesk;
       text-decoration: none;
       transition: 400ms ease;
       outline: none;
       cursor: pointer;
     }
     .recomendation:hover {
-      color: #3d5aff;
+      color: $HoverColor;
     }
     .recomendation_loading {
       width: 90px;
       height: 10px;
-      background-color: rgba(116, 116, 116, 0.5);
+      background-color: $LoadingColor;
       border-radius: 2.5px;
     }
     button {
@@ -142,6 +144,6 @@
   }
 
   .whiteRecommendTheme {
-    background-color: rgba(116, 116, 116, 0.05);
+    background-color: $WhiteBgBlocksTheme;
   }
 </style>
