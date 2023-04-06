@@ -22,6 +22,8 @@
 
       const logOut = ():void => {
         store.commit('CHANGE_SIGN_IN_STATUS'); 
+        store.commit('DELETE_THEME_COLOR_STATUS');
+
         document.cookie = `token; path=/; max-age=-1`;
 
         store.commit('CLEAR_USER_DATA');

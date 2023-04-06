@@ -140,6 +140,7 @@
       height: 50px;
       background-image: url('@/assets/test_bgImage.png');
       background-size: cover;
+      border-radius: 2.5px 2.5px 0 0;
     }
     #Profile_mainInfo {
       display: flex;
@@ -183,6 +184,7 @@
       width: 235px;
       height: 45px;
       div {
+        font-weight: 700;
         font-family: 'Space Grotesk', sans-serif;
         text-align: center;
         p {
@@ -210,7 +212,7 @@
   }
 
   .whiteProfileTheme {
-    background-color: #ffffff;
+    background-color: rgba(116, 116, 116, 0.05);
     #Profile_mainInfo {
       h2 {
         color: #1e1e1e;

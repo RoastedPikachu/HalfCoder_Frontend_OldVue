@@ -1,13 +1,13 @@
 <template>
   <footer>
     <span>
-      <a href="/">About</a>
-      <router-link class="route" to="/settings">Settings</router-link>
-      <a href="/">Support</a>
-      <a href="/">Docs</a>
+      <a href="/">О нас</a>
+      <router-link to="/settings" class="route">Настройки</router-link>
+      <a href="/">Поддержка</a>
+      <router-link to="/docs/termsOfUse" class="route">Документы</router-link>
     </span>
     <span>
-      <a href="/">Help</a>
+      <a href="/">Помощь</a>
       <a href="/">Privacy & terms</a>
     </span>
     <span>©{{ year }} &lt; HalfCoder /></span>
@@ -52,11 +52,12 @@
     justify-content: space-around;
     flex-wrap: wrap;
     margin-top: 17px;
-    padding: 0 7.5%;
-    width: 85%;
+    padding: 0 2.5%;
+    width: 95%;
     height: 60px;
     color: #747474;
     font-size: 12px;
+    font-weight: 700;
     font-family: 'Space Grotesk', sans-serif;
     a {
       color: #747474;

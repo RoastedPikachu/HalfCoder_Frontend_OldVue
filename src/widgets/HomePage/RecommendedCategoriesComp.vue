@@ -142,6 +142,6 @@
   }
 
   .whiteRecommendTheme {
-    background-color: #ffffff;
+    background-color: rgba(116, 116, 116, 0.05);
   }
 </style>

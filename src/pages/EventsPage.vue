@@ -23,15 +23,25 @@
       </span>
       <div id="MainInfoAboutEvents_container">
         <div class="mainInfoAboutEvents_eventBlock" v-for="event of events" :key="event.id">
-          <img src="" alt="Изображение события">
-          <div class="mainInfoAboutEvents_eventBlock_tag">
-            <p>{{ event.mainTag }}</p>
+          <div class="loadingPhoto" v-show="!isLoaded"></div>
+          <img :src="event.photo" alt="Изображение события" v-show="isLoaded">
+
+          <div class="loadingTag" v-show="!isLoaded"></div>
+          <div class="mainInfoAboutEvents_eventBlock_tag" v-show="isLoaded">
+            <p>{{ event.category }}</p>
           </div>
-          <div class="mainInfoAboutEvents_eventBlock_text">
+
+          <div class="loadingText" v-show="!isLoaded">
+            <p></p>
+            <p></p>
+            <p></p>
+          </div>
+          <div class="mainInfoAboutEvents_eventBlock_text" v-show="isLoaded">
             <p>{{ event.title }}</p>
-            <p>{{ event.date }}</p>
+            <p>{{ event.created_at }}</p>
             <p>{{ event.place }}</p>
           </div>
+
           <span>
             <button>Интересно</button>
             <button>
@@ -52,59 +62,101 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref } from 'vue';
+  import axios from 'axios';
   import HeaderComp from '@/widgets/shared/HeaderComp.vue';
   import ProfileSignInComp from '@/widgets/HomePage/ProfileSignInComp.vue';
   import FooterComp from '@/widgets/shared/FooterComp.vue';
+
+  interface Event {
+    id: number,
+    category: string,
+    title: string,
+    created_at: string,
+    place: string,
+    photo: string,
+  }
 
   export default defineComponent({
     name: 'EventsPage',
     data() {
       return {
-        events: [
-          {
-            id: 0,
-            mainTag: 'Новые языки',
-            title: 'Какие языки программирования появились недавно?',
-            date: 'Понедельник, Август 30, в 9:30',
-            place: 'Москва'
-          },
-          {
-            id: 1,
-            mainTag: 'Новые языки',
-            title: 'Какие языки программирования появились недавно?',
-            date: 'Понедельник, Август 30, в 9:30',
-            place: 'Москва'
-          },
-          {
-            id: 2,
-            mainTag: 'Новые языки',
-            title: 'Какие языки программирования появились недавно?',
-            date: 'Понедельник, Август 30, в 9:30',
-            place: 'Москва'
-          },
-          {
-            id: 3,
-            mainTag: 'Новые языки',
-            title: 'Какие языки программирования появились недавно?',
-            date: 'Понедельник, Август 30, в 9:30',
-            place: 'Москва'
-          },
-          {
-            id: 4,
-            mainTag: 'Новые языки',
-            title: 'Какие языки программирования появились недавно?',
-            date: 'Понедельник, Август 30, в 9:30',
-            place: 'Москва'
-          },
-          {
-            id: 5,
-            mainTag: 'Новые языки',
-            title: 'Какие языки программирования появились недавно?',
-            date: 'Понедельник, Август 30, в 9:30',
-            place: 'Москва'
-          }
-        ]
+        
       }
+    },
+    setup() {
+      const isLoaded = ref(false);
+      const events = ref([
+        {
+          id: 0,
+          category: '',
+          title: '',
+          created_at: '',
+          place: '',
+          photo: '',
+        },
+        {
+          id: 1,
+          category: '',
+          title: '',
+          created_at: '',
+          place: '',
+          photo: '',
+        },
+        {
+          id: 2,
+          category: '',
+          title: '',
+          created_at: '',
+          place: '',
+          photo: '',
+        },
+        {
+          id: 3,
+          category: '',
+          title: '',
+          created_at: '',
+          place: '',
+          photo: '',
+        },
+        {
+          id: 4,
+          category: '',
+          title: '',
+          created_at: '',
+          place: '',
+        },
+        {
+          id: 5,
+          category: '',
+          title: '',
+          created_at: '',
+          place: '',
+        }
+      ] as Event[]);
+
+      return {
+        isLoaded,
+        events,
+      }
+    },
+    methods: {
+      async getEventsByCategory() {
+        const url = new URL('http://62.109.10.224:500/api/v1/event/all/');
+
+        const result = await axios.post(url.toString(), { event_category: 'all' }, {
+          headers: {'Content-Type': 'application/json;charset=utf-8'}
+        });
+
+        this.events = (Object.values(result.data));
+
+        if(result) {
+          this.isLoaded = true;
+        }
+      }
+    },
+    mounted() {
+      this.getEventsByCategory();
     },
     components: {
       HeaderComp,
@@ -211,21 +263,29 @@
           flex-wrap: wrap;
           margin-top: 20px;
           width: 31%;
-          height: 325px;
+          height: 340px;
           border: 2px solid rgba(116, 116, 116, 0.5);
           border-radius: 5px;
           img {
+            margin-top: -4%;
             width: 100%;
-            height: 40%;
+            height: 47.5%;
             border: 2px solid rgba(116, 116, 116, 0.5);
             border-width: 0 0 2px;
+          }
+          .loadingPhoto {
+            margin-top: -4.5%;
+            width: 100%;
+            height: 47.5%;
+            background-color: rgba(116, 116, 116, 0.5);
+            border-radius: 2.5px 2.5px 0 0;
           }
           .mainInfoAboutEvents_eventBlock_tag {
             position: absolute;
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 42.5%;
+            top: 45%;
             left: 5%;
             width: 110px;
             height: 22.5px;
@@ -236,13 +296,26 @@
             font-family: 'Space Grotesk', sans-serif;
             cursor: pointer;
           }
+          .loadingTag {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 45%;
+            left: 5%;
+            width: 110px;
+            height: 22.5px;
+            background-color: #3d5aff; 
+            border-radius: 2.5px;
+          }
           .mainInfoAboutEvents_eventBlock_text {
             display: flex;
             justify-content: flex-start;
             align-items: center;
             flex-wrap: wrap;
-            margin-top: 5%;
+            margin-top: 2.5%;
             padding: 0 5%;
+            width: 90%;
             height: 25%;
             p {
               width: 100%;
@@ -260,11 +333,32 @@
               margin-top: 3%;
             }
           }
+          .loadingText {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0 5%;
+            width: 90%;
+            height: 25%;
+            p {
+              width: 100%;
+              height: 12.5px;
+              background-color: rgba(116, 116, 116, 0.5);
+              border-radius: 2.5px;
+            }
+            p:nth-child(2) {
+              width: 70%;
+            }
+            p:nth-child(3) {
+              margin-top: -3%;
+              width: 40%;
+            }
+          }
           span {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: -2.5%;
             padding: 0 5%;
             width: 90%;
             height: 10%;
@@ -272,6 +366,7 @@
               display: flex;
               justify-content: center;
               align-items: center;
+              margin-top: -5%;
               height: 100%;
               background-color: rgba(61, 90, 255, 0.2);
               border-radius: 5px;
@@ -293,6 +388,7 @@
             }
           }
         }
+  
       }
     }
   }

@@ -243,7 +243,7 @@
 
         this.posts = (Object.values(result.data));
 
-        if(this.posts.length) {
+        if(result) {
           this.isLoaded = true;
         }
       }
@@ -375,7 +375,7 @@
 
   #MainBlock_childPosts {
     .whitePostsTheme {
-    background-color: #ffffff;
+    background-color: rgba(116, 116, 116, 0.05);
       .mainBlock_childPosts_topInfo {
         .mainBlock_childPosts_userInfo {
           span {

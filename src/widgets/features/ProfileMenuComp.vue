@@ -2,7 +2,7 @@
   <div id="Profile_menuIcons" :class="{ whiteProfileMenuTheme: !isDarkTheme }">
     <span>
       <img src="@/assets/home_icon.svg" alt="Feed">
-      <p>Feed</p>
+      <p>Новости</p>
     </span>
     <span>
       <img src="@/assets/connections_icon.svg" alt="Связи">
@@ -88,6 +88,7 @@
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 20px;
+    padding: 0 6.25%;
     width: 87.5%;
     height: 220px;
     transition: 400ms ease;

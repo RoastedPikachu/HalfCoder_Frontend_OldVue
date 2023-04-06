@@ -1,7 +1,7 @@
 <template>
   <HeaderComp/>
   <section id="MainBlock">
-    <aside id="MainBlock_LeftOtherInfo">
+    <aside id="MainBlock_LeftOtherInfo" :class="{ whiteOtherInfoTheme: !isDarkTheme }">
       <ProfileMenuComp/>
       <FooterComp/>
     </aside>
@@ -11,6 +11,8 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import store from '@/store/index';
   import HeaderComp from '@/widgets/shared/HeaderComp.vue';
   import FooterComp from '@/widgets/shared/FooterComp.vue';
   import ProfileMenuComp from '@/widgets/features/ProfileMenuComp.vue';
@@ -20,11 +22,25 @@
     name: 'SettingsPage',
     data() {
       return {
-        token: ''
+      
       }
     },
-    mounted() {
-      this.token = document.cookie.slice(67);
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const token = ref('');
+
+      onMounted(() => {
+        token.value = document.cookie.slice(67);
+
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+      });
+
+      return {
+        isDarkTheme,
+        token,
+      }
     },
     components: {
       HeaderComp,
@@ -42,15 +58,21 @@
     width: 75%;
     padding: 0 12.5%;
     font-weight: 700;
-  }
-  #MainBlock_LeftOtherInfo {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 280px;
-    height: 300px;
-    background-color: #141414;
-    border: 2px solid #747474;
-    border-radius: 5px;
+    aside {
+      background-color: #141414;
+    }
+    #MainBlock_LeftOtherInfo {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 280px;
+      height: 300px;
+      border: 2px solid rgba(116, 116, 116, 0.5);
+      border-radius: 5px;
+      transition: 400ms ease;
+    }
+    .whiteOtherInfoTheme {
+      background-color: rgba(116, 116, 116, 0.05);
+    }
   }
 </style>

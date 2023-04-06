@@ -1,5 +1,5 @@
 <template>
-  <section id="MainBlock_Settings">
+  <section id="MainBlock_Settings" :class="{ whiteSettingsTheme: !isDarkTheme}">
     <h2>Настройки аккаунта</h2>
     <form>
       <div class="mainBlock_Settings_InputsContainers">
@@ -44,6 +44,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
   import store from '@/store/index';
   import flatpickr from "flatpickr";
 
@@ -51,58 +52,97 @@
     name: 'SettingsComp',
     data() {
       return {
-        firstName: '',
-        secondName: '',
-        userName: '',
-        dateOfBirth: '',
-        phoneNumber: '',
-        email: '',
-        aboutUser: ''
+        
       }
     },
-    methods: {
-      setChanges():void {
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+      const firstName = ref('');
+      const secondName = ref('');
+      const userName = ref('');
+      const dateOfBirth = ref('');
+      const phoneNumber = ref('');
+      const email = ref('');
+      const aboutUser = ref('');
+
+      const setChanges = ():void => {
         let payload = {
-          firstName: this.firstName,
-          secondName: this.secondName,
-          userName: this.userName,
-          dateOfBirth: this.dateOfBirth,
-          phoneNumber: this.phoneNumber,
-          email: this.email,
-          aboutUser: this.aboutUser
+          firstName: firstName.value,
+          secondName: secondName.value,
+          userName: userName.value,
+          dateOfBirth: dateOfBirth.value,
+          phoneNumber: phoneNumber.value,
+          email: email.value,
+          aboutUser: aboutUser.value
         }
         
         store.commit('SET_FULL_USER_DATA', payload);
       }
+
+      onMounted(() => {
+        firstName.value = store.state.firstName;
+        secondName.value = store.state.secondName;
+        userName.value = store.state.userName;
+        phoneNumber.value = store.state.phoneNumber;
+        email.value = store.state.email;
+        aboutUser.value = store.state.aboutUser;
+
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+        setTimeout(() => flatpickr("input[type=datetime-local]", {}), 500);
+      });
+
+      return {
+        isDarkTheme,
+        firstName,
+        secondName,
+        userName,
+        dateOfBirth,
+        phoneNumber,
+        email,
+        aboutUser,
+        setChanges
+      }
     },
-    mounted() {
-      this.firstName = store.state.firstName;
-      this.secondName = store.state.secondName;
-      this.userName = store.state.userName;
-      this.phoneNumber = store.state.phoneNumber;
-      this.email = store.state.email;
-      this.aboutUser = store.state.aboutUser;
-      setTimeout(() => flatpickr("input[type=datetime-local]", {}), 500);
-    }
   })
 </script>
 
 <style lang="scss" scoped>
+  section {
+    background-color: #141414;
+    h2 {
+      color: #ffffff;
+    }
+    form {
+      color: #747474;
+      .mainBlock_Settings_InputsContainers {
+        input {
+          background-color: #1e1e1e;
+        }
+      }
+      #MainBlock_Settings_textareaContainer {
+        textarea {
+          background-color: #1e1e1e;
+        }
+      }
+    }
+  }
   #MainBlock_Settings {
     margin-left: 20px;
     padding: 20px 30px;
     width: 720px;
     height: 490px;
-    background-color: #141414;
     border: 2px solid rgba(116, 116, 116, 0.5);
     border-radius: 5px;
     font-weight: 700;
     font-family: 'Space Grotesk', sans-serif;
+    transition: 400ms ease;
     h2 {
       width: 205px;
-      color: #ffffff;
       font-size: 20px;
       text-align: center;
+      transition: 400ms ease;
     }
     form {
       display: flex;
@@ -111,9 +151,9 @@
       margin-top: 20px;
       width: 100%;
       height: 85%;
-      color: #747474;
       font-size: 14px;
       font-family: 'Inter', sans-serif;
+      transition: 400ms ease;
       .mainBlock_Settings_InputsContainers {
         display: flex;
         justify-content: space-between;
@@ -132,11 +172,11 @@
             padding-left: 15px;
             width: 90%;
             height: 30px;
-            background-color: #1e1e1e;
             border: 1.5px solid #747474;
             border-radius: 5px;
             color: #747474;
             outline: none;
+            transition: 400ms ease;
           }
           input:last-child {
             width: 100%;
@@ -154,13 +194,13 @@
           padding-left: 15px;
           width: 100%;
           height: 130px;
-          background-color: #1e1e1e;
           border: 1.5px solid #747474;
           border-radius: 5px;
           color: #747474;
           font-family: 'Inter', sans-serif;
           outline: none;
           resize: none; 
+          transition: 400ms ease;
         }
       }
       button {
@@ -177,6 +217,25 @@
         font-weight: 700;
         outline: none;
         cursor: pointer;
+      }
+    }
+  }
+  .whiteSettingsTheme {
+    background-color: rgba(116, 116, 116, 0.05);
+    h2 {
+      color: #3d5aff;
+    }
+    form {
+      color: #3d5aff;
+      .mainBlock_Settings_InputsContainers {
+        input {
+          background-color: #ffffff;
+        }
+      }
+      #MainBlock_Settings_textareaContainer {
+        textarea {
+          background-color: #ffffff;
+        }
       }
     }
   }

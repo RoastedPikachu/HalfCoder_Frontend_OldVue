@@ -269,7 +269,7 @@
   }
 
   .whiteRatingTheme {
-    background-color: #ffffff;
+    background-color: rgba(116, 116, 116, 0.05);
     h2 {
       color: #1e1e1e;
     }

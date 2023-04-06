@@ -44,6 +44,9 @@ export default createStore<State>({
     CHANGE_THEME_COLOR_STATUS(state) {
       state.isDarkTheme = !state.isDarkTheme;
     },
+    DELETE_THEME_COLOR_STATUS(state) {
+      state.isDarkTheme = true;
+    },
     SET_USER_EMPLOYMENT(state, employment:string) {
       state.employment = employment;
     },

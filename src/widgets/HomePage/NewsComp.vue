@@ -111,18 +111,20 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/styles/_variables.scss";
+
   section {
-    background-color: #141414;
+    background-color: $DarkBgBlocksTheme;
     h2 {
-      color: #ffffff;
+      color: $DarkHeadingColor;
     }
     #News_info {
       .News_infoItem {
         a {
-          color: #a5a5a5;
+          color: $DarkNewsTitleColor;
         }
         a:hover {
-          color: #ffffff;
+          color: $NewsTitleHoverColor;
         }
       }
     }
@@ -135,7 +137,7 @@
     margin-top: 17px;
     width: 100%;
     height: 300px;
-    border: 2px solid rgba(116, 116, 116, 0.5);
+    border: 2px solid $BorderColor;
     border-radius: 5px;
     font-family: 'Space Grotesk', sans-serif;
     transition: 400ms ease;
@@ -169,7 +171,7 @@
         p {
           margin-top: -10px;
           width: 100%;
-          color: #747474;
+          color: $DescColor;
           font-size: 12px;
           transition: 400ms ease;
         }
@@ -181,7 +183,7 @@
       p {
         width: 80%;
         height: 12.5px;
-        background-color: rgba(116, 116, 116, 0.5);
+        background-color: $LoadingColor;
         border-radius: 2.5px;
       }
       p:last-child {
@@ -192,17 +194,17 @@
   }
 
   .whiteNewsTheme {
-    background-color: #ffffff;
+    background-color: $WhiteBgTheme;
     h2 {
-      color: #1e1e1e;
+      color: $WhiteHeadingColor;
     }
     #News_info {
       .News_infoItem {
         a {
-          color: #747474;
+          color: $WhiteNewsTitleColor;
         }
         a:hover {
-          color: #3d5aff;
+          color: $HoverColor;
         }
       }
     }
