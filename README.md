@@ -13,6 +13,10 @@
 
 Если у вас возникают какие-либо баги, то пишите на эту почту: **boriskarabytwork@gmail.com**
 
+Component diagram:
+
+![Component diagram](ComponentDiagram.png)
+
 ### Создатели проекта: 
 
 Frontend: https://github.com/RoastedPikachu
