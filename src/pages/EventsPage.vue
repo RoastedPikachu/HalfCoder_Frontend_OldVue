@@ -5,7 +5,7 @@
       <ProfileSignInComp/>
       <FooterComp/>
     </aside>
-    <div id="MainInfoAboutEvents">
+    <div class="mainInfoAboutEvents" :class="{ whiteEventsTheme: !isDarkTheme }">
       <span id="MainInfoAboutEvents_Top">
         <h2>Мероприятия</h2>  
         <button>
@@ -62,8 +62,9 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import axios from 'axios';
+  import store from '@/store/index';
   import HeaderComp from '@/widgets/shared/HeaderComp.vue';
   import ProfileSignInComp from '@/widgets/HomePage/ProfileSignInComp.vue';
   import FooterComp from '@/widgets/shared/FooterComp.vue';
@@ -86,6 +87,7 @@
     },
     setup() {
       const isLoaded = ref(false);
+      const isDarkTheme = ref(store.state.isDarkTheme);
       const events = ref([
         {
           id: 0,
@@ -135,8 +137,15 @@
         }
       ] as Event[]);
 
+      onMounted(() => {
+        setInterval(() => {
+          isDarkTheme.value = store.state.isDarkTheme;
+        }, 150);
+      })
+
       return {
         isLoaded,
+        isDarkTheme,
         events,
       }
     },
@@ -167,6 +176,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/styles/_variables.scss";
+
   #mainBlock {
     display: flex;
     justify-content: space-between;
@@ -181,21 +192,23 @@
       width: 23.5%;
       height: 680px;
     }
-    #MainInfoAboutEvents {
+    .mainInfoAboutEvents {
       padding: 2.5% 2.5%;
       width: 70%;
       height: 840px;
-      background-color: #141414;
-      border: 2px solid rgba(116, 116, 116, 0.5);
+      background-color: $DarkBgBlocksTheme;
+      border: 2px solid $BorderColor;
       border-radius: 5px;
+      transition: 400ms ease;
       #MainInfoAboutEvents_Top {
         display: flex;
         justify-content: space-between;
         width: 100%;
         height: 40px;
         h2 {
-          color: #ffffff;
-          font-family: 'Space Grotesk', sans-serif;
+          color: $DarkHeadingColor;
+          font-family: $SpaceGrotesk;
+          transition: 400ms ease;
         }
         button {
           display: flex;
@@ -209,14 +222,14 @@
           transition: 500ms ease;
           cursor: pointer;
           i {
-            color: #3d5aff;
+            color: $BlueButtonFontColor;
             font-size: 16px;
           }
           p {
-            color: #3d5aff;
+            color: $BlueButtonFontColor;
             font-size: 14px;
             font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: $SpaceGrotesk;
           }
         }
         button:hover {
@@ -234,7 +247,7 @@
         p {
           margin-left: 3%;
           height: 35px;
-          color: #747474;
+          color: $DarkFormFontColor;
           font-size: 18px;
           font-weight: 700;
           font-family: 'Space Grotesk', sans-serif;
@@ -246,7 +259,7 @@
           margin-left: 0;
         }
         p:hover {
-          color: #3d5aff;
+          color: $HoverColor;
         }
       }
       #MainInfoAboutEvents_container {
@@ -264,20 +277,20 @@
           margin-top: 20px;
           width: 31%;
           height: 340px;
-          border: 2px solid rgba(116, 116, 116, 0.5);
+          border: 2px solid $BorderColor;
           border-radius: 5px;
           img {
             margin-top: -4%;
             width: 100%;
             height: 47.5%;
-            border: 2px solid rgba(116, 116, 116, 0.5);
+            border: 2px solid $BorderColor;
             border-width: 0 0 2px;
           }
           .loadingPhoto {
             margin-top: -4.5%;
             width: 100%;
             height: 47.5%;
-            background-color: rgba(116, 116, 116, 0.5);
+            background-color: $LoadingColor;
             border-radius: 2.5px 2.5px 0 0;
           }
           .mainInfoAboutEvents_eventBlock_tag {
@@ -289,11 +302,11 @@
             left: 5%;
             width: 110px;
             height: 22.5px;
-            background-color: #3d5aff;
+            background-color: $BgButtonColor;
             border-radius: 2.5px;
-            color: #ffffff;
+            color: $ButtonFontColor;
             font-size: 12px;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: $SpaceGrotesk;
             cursor: pointer;
           }
           .loadingTag {
@@ -305,7 +318,7 @@
             left: 5%;
             width: 110px;
             height: 22.5px;
-            background-color: #3d5aff; 
+            background-color: $BgButtonColor; 
             border-radius: 2.5px;
           }
           .mainInfoAboutEvents_eventBlock_text {
@@ -322,12 +335,13 @@
               color: #747474;
               font-size: 12px;
               font-weight: 600;
-              font-family: 'Space Grotesk', sans-serif;
+              font-family: $SpaceGrotesk;
+              transition: 400ms ease;
             }
             p:first-child {
-              color: #ffffff;
+              color: $DarkHeadingColor;
               font-size: 14px;
-              font-family: 'Inter', sans-serif;
+              font-family: $Inter;
             }
             p:nth-child(2) {
               margin-top: 3%;
@@ -344,7 +358,7 @@
             p {
               width: 100%;
               height: 12.5px;
-              background-color: rgba(116, 116, 116, 0.5);
+              background-color: $LoadingColor;
               border-radius: 2.5px;
             }
             p:nth-child(2) {
@@ -376,8 +390,8 @@
             button:first-child {
               width: 50%;
               background-color: rgba(61, 90, 255, 0.2);
-              border: 1.5px solid #3d5aff;
-              color: #3d5aff;
+              border: 1.5px solid $BgButtonColor;
+              color: $BgButtonColor;
             }
             button:last-child {
               width: 14%;
@@ -389,6 +403,23 @@
           }
         }
   
+      }
+    }
+    .whiteEventsTheme {
+      background-color: $WhiteBgBlocksTheme;
+      #MainInfoAboutEvents_Top {
+        h2 {
+          color: $WhiteHeadingColor;
+        }
+      }
+      #MainInfoAboutEvents_container {
+        .mainInfoAboutEvents_eventBlock {
+          .mainInfoAboutEvents_eventBlock_text {
+            p:first-child {
+              color: $WhiteHeadingColor;
+            }
+          }
+        }
       }
     }
   }
