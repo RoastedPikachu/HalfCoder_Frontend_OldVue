@@ -2,20 +2,20 @@
   <section id="Profile" :class="{ whiteProfileTheme: !isDarkTheme }">
     <div id="Profile_topLine"></div>
     <div id="Profile_mainInfo">
-      <img :src="userImage" alt="Фото профиля">
-      <h2>{{ userName }}</h2>
-      <p>{{ employment }}</p>
+      <img :src="userInfo.image" alt="Фото профиля">
+      <h2>{{ userInfo.name }}</h2>
+      <p>{{ userInfo.employment }}</p>
       <p>I'd love to change the world, but they won't give me the source code</p>
     </div>
     <span id="Profile_secondaryInfo">
       <div>
-        <p>{{ followers }}</p> 
+        <p>{{ userInfo.followers }}</p> 
         <p>{{ followersCountText }}</p></div>
       <div>
-        <p>{{ posts }}</p>
+        <p>{{ userInfo.posts }}</p>
         <p>{{ postsCountText }}</p></div>
       <div>
-        <p>{{ views }}</p>
+        <p>{{ userInfo.views }}</p>
         <p>{{ viewsCountText }}</p></div>
     </span>
     <div id="Profile_centerLine"></div>
@@ -29,21 +29,27 @@
   import store from '@/store/index';
   import ProfileMenuComp from '@/widgets/features/ProfileMenuComp.vue';
 
+  interface UserInfo {
+    image: string,
+    name: string,
+    employment: string,
+    posts: number,
+    followers: number,
+    views: number
+  }
+
   export default defineComponent({
     name: 'ProfileSignInComp',
-    data() {
-      return {
-        
-      }
-    },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
-      const userImage = ref('');
-      const userName = ref('');
-      const employment = ref('');
-      const posts = ref(0);
-      const followers = ref(0);
-      const views = ref(0);
+      const userInfo = ref({
+        image: '',
+        name: '',
+        employment: '',
+        posts: 0,
+        followers: 0,
+        views: 0
+      } as UserInfo);
       const postsCountText = ref('');
       const followersCountText = ref('');
       const viewsCountText = ref('');
@@ -68,19 +74,19 @@
       }
 
       onMounted(() => {
-        setCountText([posts.value, followers.value, views.value], [postsCountText.value, 
+        setCountText([userInfo.value.posts, userInfo.value.followers, userInfo.value.views], [postsCountText.value, 
           followersCountText.value, viewsCountText.value] ,[['Пост', 'Поста', 'Постов'], 
           ['Подписчик', 'Подписчика', 'Подписчиков'], ['Просмотр', 'Просмотра', 'Просмотров']]);
-
-          setInterval(() => {
-            userImage.value = store.state.userImage;
-            userName.value = `${store.state.firstName} ${store.state.secondName}`;
-            employment.value = store.state.employment;
-            posts.value = store.state.posts;
-            followers.value = store.state.followers;
-            views.value = store.state.views;
-          }, 250);
       }); 
+
+      watch(userInfo, () => {
+        userInfo.value.image = store.state.userImage;
+        userInfo.value.name = `${store.state.firstName} ${store.state.secondName}`;
+        userInfo.value.employment = store.state.employment;
+        userInfo.value.posts = store.state.posts;
+        userInfo.value.followers = store.state.followers;
+        userInfo.value.views = store.state.views;
+      });
 
       watch(() => store.state.isDarkTheme, () => {
         isDarkTheme.value = store.state.isDarkTheme;
@@ -88,12 +94,7 @@
 
       return {
         isDarkTheme,
-        userImage,
-        userName,
-        employment,
-        posts,
-        followers,
-        views,
+        userInfo,
         postsCountText,
         followersCountText,
         viewsCountText

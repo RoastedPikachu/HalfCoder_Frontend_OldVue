@@ -11,7 +11,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref, onMounted, watch } from 'vue';
+  import { ref, watch } from 'vue';
   import store from '@/store/index';
 
   export default defineComponent({
@@ -25,11 +25,9 @@
         isCookieOpen.value = store.state.isCookieOpen;
       }
 
-      onMounted(() => {
-        setInterval(() => { 
-          isCookieOpen.value = store.state.isCookieOpen;
-        }, 250);
-      });
+      watch(isCookieOpen, () => {
+        isCookieOpen.value = store.state.isCookieOpen;
+      })
 
       watch(() => store.state.isDarkTheme, () => {
         isDarkTheme.value = store.state.isDarkTheme;

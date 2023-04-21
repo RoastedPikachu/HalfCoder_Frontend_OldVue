@@ -96,10 +96,10 @@
             }
           }
         });
+      });
 
-        setInterval(() => {
-          image.value = store.state.userImage;
-        }, 250);
+      watch(image, () => {
+        image.value = store.state.userImage;
       });
 
       watch(() => store.state.isDarkTheme, () => {

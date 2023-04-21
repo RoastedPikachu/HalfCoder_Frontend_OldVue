@@ -33,7 +33,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref, onMounted, watch } from 'vue';
+  import { ref, watch } from 'vue';
   import store from '@/store/index';
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
 
@@ -48,7 +48,7 @@
       const isDarkTheme = ref(store.state.isDarkTheme);
       const isSignIn = ref(false);
 
-      onMounted(() => {
+      watch(isSignIn, () => {
         isSignIn.value = store.state.isSignIn;
       });
 

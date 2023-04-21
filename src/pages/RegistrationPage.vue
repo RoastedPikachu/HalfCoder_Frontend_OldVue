@@ -185,6 +185,7 @@
         input {
           width: 20px;
           height: 75%;
+          cursor: pointer;
         }
         label {
           margin-left: 2.5%;

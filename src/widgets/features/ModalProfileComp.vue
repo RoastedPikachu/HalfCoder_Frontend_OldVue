@@ -1,9 +1,9 @@
 <template>
   <div id="ModalProfileWindow" :class="{ whiteModalProfileTheme: !isDarkTheme }" v-if="active">
     <ItemBrieflyInfoComp
-      :name="name"
-      :image="image"
-      :employment="employment"
+      :name="userInfo.name"
+      :image="userInfo.image"
+      :employment="userInfo.employment"
     />
     <button id="ModalProfileWindow_profileButton">Профиль</button>
     <div id="ModalProfileWindow_buttons">
@@ -22,32 +22,38 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref, onMounted, watch } from 'vue';
+  import { ref, watch } from 'vue';
   import store from '@/store';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
   import SupportLinkComp from '@/widgets/shared/SupportLinkComp.vue';
   import SignOutButtonComp from '@/widgets/shared/SignOutButtonComp.vue';
 
+  interface UserInfo {
+    name: string,
+    employment: string,
+    image: string
+  }
+
   export default defineComponent({
     name: "ModalProfileComp",
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
       const starStatus = ref(false);
-      const name = ref('');
-      const employment = ref('');
-      const image = ref('https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png');
+      const userInfo = ref({
+        name: store.state.userName,
+        employment: store.state.employment,
+        image: store.state.userImage
+      } as UserInfo);
 
       const changeTheme = () => {
         store.dispatch('changeThemeColor');
       }
 
-      onMounted(() => {
-        setInterval(() => {
-          name.value = store.state.userName;
-          image.value = store.state.userImage;
-          employment.value = store.state.employment;
-        }, 250);
+      watch(userInfo, () => {
+        userInfo.value.name = store.state.userName;
+        userInfo.value.employment = store.state.employment;
+        userInfo.value.image = store.state.userImage;
       });
       
       watch(() => store.state.isDarkTheme, () => {
@@ -57,9 +63,7 @@
       return {
         isDarkTheme,
         starStatus,
-        name,
-        employment,
-        image,
+        userInfo,
         changeTheme
       }
     },

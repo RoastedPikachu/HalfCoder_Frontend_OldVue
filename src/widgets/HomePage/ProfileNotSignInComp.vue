@@ -11,11 +11,6 @@
 
   export default defineComponent({
     name: 'ProfileNotSignInComp',
-    data() {
-      return {
-
-      }
-    },
     components: {
       ProfileMenuComp
     }
