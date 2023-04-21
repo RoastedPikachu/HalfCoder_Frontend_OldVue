@@ -47,7 +47,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, watch } from 'vue';
   import store from '@/store/index';
   import ModalProfileComp from '@/widgets/features/ModalProfileComp.vue';
   import ModalNotifComp from '@/widgets/features/ModalNotifComp.vue';
@@ -55,11 +55,6 @@
 
   export default defineComponent({
     name: 'HeaderComp',
-    data() {
-      return {
-        
-      }
-    },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
       const isSignIn = ref(store.state.isSignIn);
@@ -105,9 +100,10 @@
         setInterval(() => {
           image.value = store.state.userImage;
         }, 250);
-        setInterval(() => {
-          isDarkTheme.value = store.state.isDarkTheme;
-        }, 150);
+      });
+
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
       });
 
       return {

@@ -44,12 +44,6 @@ export default createStore<State>({
     CHANGE_THEME_COLOR_STATUS(state) {
       state.isDarkTheme = !state.isDarkTheme;
     },
-    DELETE_THEME_COLOR_STATUS(state) {
-      state.isDarkTheme = true;
-    },
-    SET_USER_EMPLOYMENT(state, employment:string) {
-      state.employment = employment;
-    },
     SET_FIRST_USER_DATA(state, payload) {
       state.firstName = payload.firstName;
       state.secondName = payload.secondName;
@@ -61,7 +55,7 @@ export default createStore<State>({
       state.views = payload.views;
       state.isCookieOpen = true;
     },
-    SET_FULL_USER_DATA(state, payload) {
+    CHANGE_USER_DATA(state, payload) {
       state.firstName = payload.firstName;
       state.secondName = payload.secondName;
       state.userName = payload.userName;
@@ -78,9 +72,31 @@ export default createStore<State>({
       state.phoneNumber = '';
       state.email = '';
       state.aboutUser = '';
+
+      state.isDarkTheme = true;
     },
     CLOSE_COOKIE(state) {
       state.isCookieOpen = false;
+    }
+  },
+  actions: {
+    changeSignInStatus({commit}) {
+      commit('CHANGE_SIGN_IN_STATUS');
+    },
+    changeThemeColor({commit}) {
+      commit('CHANGE_THEME_COLOR_STATUS');
+    },
+    clearDataAboutUser({commit}) {
+      commit('CLEAR_USER_DATA');
+    },
+    closeCookieBlock({commit}) {
+      commit('CLOSE_COOKIE');
+    },
+    changeDataAboutUser({commit}, payload) {
+      commit('CHANGE_USER_DATA', payload);
+    },
+    setFirstDataAboutUser({commit}, payload) {
+      commit('SET_FIRST_USER_DATA', payload);
     }
   },
   plugins: [createPersistedState()]

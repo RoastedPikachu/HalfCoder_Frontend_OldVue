@@ -25,7 +25,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, watch } from 'vue';
   import store from '@/store/index';
   import ProfileMenuComp from '@/widgets/features/ProfileMenuComp.vue';
 
@@ -80,11 +80,11 @@
             followers.value = store.state.followers;
             views.value = store.state.views;
           }, 250);
-
-          setInterval(() => {
-            isDarkTheme.value = store.state.isDarkTheme;
-          }, 150);
       }); 
+
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
+      });
 
       return {
         isDarkTheme,

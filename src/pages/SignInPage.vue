@@ -27,6 +27,7 @@
 
 <script lang=ts>
   import { defineComponent } from 'vue';
+  import { ref } from 'vue';
   import axios from 'axios';
   import store from '@/store/index';
   import ErrorComp from '@/widgets/shared/ErrorComp.vue';
@@ -44,7 +45,12 @@
 
   export default defineComponent({
     name: 'SignInPage',
-    data() {
+    setup() {
+      const login = ref('');
+      const password = ref('');
+      const error = ref('');
+      const whenPohui = ref(false);
+
       return {
         login: '',
         password: '',
@@ -81,7 +87,7 @@
         payload.userName = result.data.user.username;
         payload.email = result.data.user.email;
 
-        store.commit('SET_FIRST_USER_DATA', payload);
+        store.dispatch('setFirstDataAboutUser', payload);
       },
       async setValuesLogin() {
         const url = new URL('http://62.109.10.224:500/api/v1/auth/login/');
@@ -97,7 +103,7 @@
         const status:number = result.data.status;
 
         switch(status) {
-          case 110: store.commit('CHANGE_SIGN_IN_STATUS');  
+          case 110: store.dispatch('changeSignInStatus');  
             this.getInfoAboutUser(token);
             document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
             this.$router.push('/');

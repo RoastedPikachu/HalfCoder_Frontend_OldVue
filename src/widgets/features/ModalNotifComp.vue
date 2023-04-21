@@ -31,19 +31,21 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, watch } from 'vue';
   import store from '@/store/index';
 
   export default defineComponent({
     name: 'ModalNotifComp',
-    data() {
+    setup() {
+      const isDarkTheme = ref(store.state.isDarkTheme);
+
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
+      });
+
       return {
-        isDarkTheme: store.state.isDarkTheme
+        isDarkTheme
       }
-    },
-    mounted() {
-      setInterval(() => {
-        this.isDarkTheme = store.state.isDarkTheme;
-      }, 150);
     },
     props: {
       active: Boolean

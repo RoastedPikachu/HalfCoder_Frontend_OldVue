@@ -62,7 +62,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref, onMounted } from 'vue';
+  import { ref, watch } from 'vue';
   import axios from 'axios';
   import store from '@/store/index';
   import HeaderComp from '@/widgets/shared/HeaderComp.vue';
@@ -80,11 +80,6 @@
 
   export default defineComponent({
     name: 'EventsPage',
-    data() {
-      return {
-        
-      }
-    },
     setup() {
       const isLoaded = ref(false);
       const isDarkTheme = ref(store.state.isDarkTheme);
@@ -137,11 +132,9 @@
         }
       ] as Event[]);
 
-      onMounted(() => {
-        setInterval(() => {
-          isDarkTheme.value = store.state.isDarkTheme;
-        }, 150);
-      })
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
+      });
 
       return {
         isLoaded,

@@ -22,7 +22,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref } from 'vue';
+  import { ref, onMounted, watch } from 'vue';
   import store from '@/store';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
   import SettingsLinkComp from '@/widgets/shared/SettingsLinkComp.vue';
@@ -31,11 +31,6 @@
 
   export default defineComponent({
     name: "ModalProfileComp",
-    data() {
-        return {
-
-        }
-    },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
       const starStatus = ref(false);
@@ -44,9 +39,20 @@
       const image = ref('https://avatanplus.com/files/resources/original/5ebf6e0aa0d9c1721bc5d9a3.png');
 
       const changeTheme = () => {
-        store.commit('CHANGE_THEME_COLOR_STATUS');
-        isDarkTheme.value = store.state.isDarkTheme;
+        store.dispatch('changeThemeColor');
       }
+
+      onMounted(() => {
+        setInterval(() => {
+          name.value = store.state.userName;
+          image.value = store.state.userImage;
+          employment.value = store.state.employment;
+        }, 250);
+      });
+      
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
+      });
 
       return {
         isDarkTheme,
@@ -56,13 +62,6 @@
         image,
         changeTheme
       }
-    },
-    mounted() {
-      setInterval(() => {
-        this.name = store.state.userName;
-        this.image = store.state.userImage;
-        this.employment = store.state.employment;
-      }, 250);
     },
     components: { 
       ItemBrieflyInfoComp,

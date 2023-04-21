@@ -21,6 +21,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref, onMounted } from 'vue';
   import store from '@/store';
   import HeaderComp from '@/widgets/shared/HeaderComp.vue';
   import ProfileSignInComp from '@/widgets/HomePage/ProfileSignInComp.vue';
@@ -35,15 +36,19 @@
 
   export default defineComponent({
     name: 'HomePage',
-    data() {
+    setup() {
+      const token = ref('');
+      const isSignIn = ref(false);
+
+      onMounted(() => {
+        token.value = document.cookie.slice(67);
+        isSignIn.value = store.state.isSignIn;
+      });
+
       return {
-        token: '',
-        isSignIn: false
+        token,
+        isSignIn
       }
-    },
-    mounted() {
-      this.token = document.cookie.slice(67);
-      this.isSignIn = store.state.isSignIn;
     },
     components: {
       HeaderComp,

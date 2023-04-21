@@ -11,22 +11,17 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, watch } from 'vue';
   import store from '@/store/index';
 
   export default defineComponent({
     name: 'CookieComp',
-    data() {
-      return {
-        
-      }
-    },
     setup() {
       const isCookieOpen = ref(false);
       const isDarkTheme = ref(store.state.isDarkTheme);
 
       const closeCookie = ():void => {
-        store.commit('CLOSE_COOKIE');
+        store.dispatch('closeCookieBlock');
         isCookieOpen.value = store.state.isCookieOpen;
       }
 
@@ -34,10 +29,10 @@
         setInterval(() => { 
           isCookieOpen.value = store.state.isCookieOpen;
         }, 250);
+      });
 
-        setInterval(() => {
-          isDarkTheme.value = store.state.isDarkTheme;
-        }, 150)
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
       });
 
       return {

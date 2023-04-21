@@ -47,21 +47,31 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { ref } from 'vue';
   import axios from 'axios';
   import ErrorComp from '@/widgets/shared/ErrorComp.vue';
 
   export default defineComponent({
     name: 'RegistrationPage',
-    data() {
+    setup() {
+      const name = ref('');
+      const secondName = ref('');
+      const userName = ref('');
+      const email = ref('');
+      const password = ref('');
+      const repeatedPassword = ref('');
+      const agreeToTermsOfUse = ref('');
+      const error = ref('');
+
       return {
-        name: '',
-        secondName: '',
-        userName: '',
-        email: '',
-        password: '',
-        repeatedPassword: '',
-        agreeToTermsOfUse: false,
-        error: '',
+        name,
+        secondName,
+        userName,
+        email,
+        password,
+        repeatedPassword,
+        agreeToTermsOfUse,
+        error
       }
     },
     methods: {

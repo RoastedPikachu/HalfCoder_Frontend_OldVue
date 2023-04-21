@@ -44,17 +44,12 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, watch } from 'vue';
   import store from '@/store/index';
   import flatpickr from "flatpickr";
 
   export default defineComponent({
     name: 'SettingsComp',
-    data() {
-      return {
-        
-      }
-    },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
       const firstName = ref('');
@@ -76,7 +71,7 @@
           aboutUser: aboutUser.value
         }
         
-        store.commit('SET_FULL_USER_DATA', payload);
+        store.dispatch('changeDataAboutUser', payload);
       }
 
       onMounted(() => {
@@ -87,10 +82,11 @@
         email.value = store.state.email;
         aboutUser.value = store.state.aboutUser;
 
-        setInterval(() => {
-          isDarkTheme.value = store.state.isDarkTheme;
-        }, 150);
         setTimeout(() => flatpickr("input[type=datetime-local]", {}), 500);
+      });
+
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
       });
 
       return {

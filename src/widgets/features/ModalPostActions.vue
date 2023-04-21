@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { ref, onMounted } from 'vue';
+  import { ref, watch } from 'vue';
   import store from '@/store/index';
 
   export default defineComponent({
@@ -21,10 +21,8 @@
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme); 
 
-      onMounted(() => {
-        setInterval(() => {
-          isDarkTheme.value = store.state.isDarkTheme;
-        }, 150);
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
       });
 
       return {

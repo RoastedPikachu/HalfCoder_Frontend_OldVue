@@ -28,7 +28,7 @@
 
 <script lang="ts"> 
   import { defineComponent } from 'vue';
-  import { ref, onMounted } from 'vue';
+  import { ref, watch } from 'vue';
   import store from '@/store/index';
   import axios from 'axios';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
@@ -119,10 +119,8 @@
         }
       }
 
-      onMounted(() => {
-        setInterval(() => {
-          isDarkTheme.value = store.state.isDarkTheme;
-        }, 150);
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
       });
 
       return {

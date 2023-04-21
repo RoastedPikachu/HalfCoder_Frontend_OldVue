@@ -7,34 +7,26 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'; 
-  import { ref, onMounted } from 'vue';
+  import { ref, watch } from 'vue';
   import store from '@/store/index';
 
   export default defineComponent({
     name: 'SignOutButtonComp',
-    data() {
-      return {
-        
-      }
-    },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
 
       const logOut = ():void => {
-        store.commit('CHANGE_SIGN_IN_STATUS'); 
-        store.commit('DELETE_THEME_COLOR_STATUS');
+        store.dispatch('changeSignInStatus'); 
+        store.dispatch('clearDataAboutUser');
 
         document.cookie = `token; path=/; max-age=-1`;
 
-        store.commit('CLEAR_USER_DATA');
-        store.commit('CLOSE_COOKIE');
+        store.dispatch('closeCookieBlock');
         location.reload();
       }
 
-      onMounted(() => {
-        setInterval(() => {
-          isDarkTheme.value = store.state.isDarkTheme;
-        }, 150);
+      watch(() => store.state.isDarkTheme, () => {
+        isDarkTheme.value = store.state.isDarkTheme;
       });
 
       return {

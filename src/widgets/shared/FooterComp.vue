@@ -26,11 +26,6 @@
 
   export default defineComponent({
     name: 'FooterComp',
-    data() {
-      return {
-
-      }
-    },
     setup() {
       const year = ref(new Date().getFullYear());
 
