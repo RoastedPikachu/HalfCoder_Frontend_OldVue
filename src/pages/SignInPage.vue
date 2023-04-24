@@ -92,15 +92,20 @@
       async setValuesLogin() {
         const url = new URL('http://79.174.12.75:80/api/account/auth/login/');
 
-        const result = await axios.post(url.toString(), {
+        let result;
+        axios.post(url.toString(), {
           username: this.login,
           password: this.password,
         }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
-        });
-
-        console.log(result);
-
+        })
+          .then((res) => {
+            result = res;
+          })
+          .catch((e) => {
+            this.$router.push('/techWorks');
+          })
+        
         const token:string = result.data.token;
         const status:number | string = result.data.status;
 

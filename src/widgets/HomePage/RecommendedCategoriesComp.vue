@@ -80,7 +80,14 @@
       async getRecommendedCategories() {
         const url = new URL('http://79.174.12.75:80/api/article/category/popular/');
 
-        const result = await axios.get(url.toString()); 
+        let result;
+        axios.get(url.toString())
+          .then((res) => {
+            result = res;
+          })
+          .catch((e) => {
+            this.$router.push('/techWorks');
+          })
 
         this.categories = Object.values(result.data);
 

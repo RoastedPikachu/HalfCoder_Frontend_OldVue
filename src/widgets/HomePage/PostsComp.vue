@@ -237,11 +237,16 @@
 
         const token = document.cookie.slice(127);
 
-        const result = await axios.post(url.toString(), { token: token }, {
+        let result;
+        axios.post(url.toString(), { token: token }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
-        }); 
-
-        console.log(result);
+        })
+          .then((res) => {
+            result = res;
+          })
+          .catch((e) => {
+            this.$router.push('/techWorks');
+          })
 
         this.posts = (Object.values(result.data));
 

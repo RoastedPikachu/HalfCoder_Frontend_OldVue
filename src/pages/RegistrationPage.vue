@@ -78,7 +78,8 @@
       async setValuesRegistration() {
         const url = new URL('http://79.174.12.75:80/api/account/auth/register/');
 
-        const result = await axios.post(url.toString(), {
+        let result;
+        axios.post(url.toString(), {
           first_name: this.name,
           last_name: this.secondName,
           username: this.userName,
@@ -86,9 +87,13 @@
           password: this.password
         }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
-        });
-
-        console.log(result);
+        })
+          .then((res) => {
+            result = res;
+          })
+          .catch((e) => {
+            this.$router.push('/techWorks');
+          })
 
         const status:number | string = result.data.status;
 

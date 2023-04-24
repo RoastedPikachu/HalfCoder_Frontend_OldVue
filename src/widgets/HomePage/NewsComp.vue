@@ -93,7 +93,14 @@
       async getNews() {
         const url = new URL('http://79.174.12.75:80/api/news/latest/');
 
-        const result = await axios.get(url.toString());
+        let result;
+        axios.get(url.toString())
+          .then((res) => {
+            result = res;
+          })
+          .catch((e) => {
+            this.$router.push('/techWorks');
+          })
 
         this.news = Object.values(result.data);
 

@@ -102,7 +102,14 @@
       async getCompanies() {
         const url = new URL('http://79.174.12.75:80/api/company/popular/');
 
-        const result = await axios.get(url.toString());
+        let result;
+        axios.get(url.toString())
+          .then((res) => {
+            result = res;
+          })
+          .catch((e) => {
+            this.$router.push('/techWorks');
+          })
 
         this.companies = Object.values(result.data);
 

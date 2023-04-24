@@ -146,9 +146,16 @@
       async getEventsByCategory() {
         const url = new URL('http://79.174.12.75:80/api/event/all/');
 
-        const result = await axios.post(url.toString(), { event_category: 'all' }, {
+        let result;
+        axios.post(url.toString(), { event_category: 'all' }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
-        });
+        })
+          .then((res) => {
+            result = res;
+          })
+          .catch((e) => {
+            this.$router.push('/techWorks');
+          })
 
         this.events = (Object.values(result.data));
 
