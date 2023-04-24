@@ -60,7 +60,7 @@
     },
     methods: {
       async getInfoAboutUser(token:string) {
-        const url = new URL('http://62.109.10.224:500/api/v1/account/data/');
+        const url = new URL('http://79.174.12.75:80/api/account/read/data/');
         let payload:Payload = {
           posts: 0,
           followers: 0,
@@ -90,7 +90,7 @@
         store.dispatch('setFirstDataAboutUser', payload);
       },
       async setValuesLogin() {
-        const url = new URL('http://62.109.10.224:500/api/v1/auth/login/');
+        const url = new URL('http://79.174.12.75:80/api/account/auth/login/');
 
         const result = await axios.post(url.toString(), {
           username: this.login,
@@ -99,22 +99,21 @@
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         });
 
+        console.log(result);
+
         const token:string = result.data.token;
-        const status:number = result.data.status;
+        const status:number | string = result.data.status;
 
         switch(status) {
-          case 110: store.dispatch('changeSignInStatus');  
+          case 'success': store.dispatch('changeSignInStatus');  
             this.getInfoAboutUser(token);
             document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
             this.$router.push('/');
             break;
-          case 111: this.error= 'Ошибка входа';
-            break;   
-          case 112: this.error = 'Некорректные данные';
+          case 4: 'Пользователь с таким именем не найден';
             break;
-          case 113: this.error = 'Пользователь не найден';
+          case 5: 'Неверный пароль';
             break;
-          case 114: this.error = 'Неверный пароль';
         } 
 
         this.login = '';

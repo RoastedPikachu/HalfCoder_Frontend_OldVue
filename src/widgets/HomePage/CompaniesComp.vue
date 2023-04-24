@@ -100,7 +100,7 @@
     },
     methods: {
       async getCompanies() {
-        const url = new URL('http://62.109.10.224:500/api/v1/company/popular/');
+        const url = new URL('http://79.174.12.75:80/api/company/popular/');
 
         const result = await axios.get(url.toString());
 

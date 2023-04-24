@@ -6,7 +6,9 @@ import SignInPage from '@/pages/SignInPage.vue';
 import CreatePostPage from '@/pages/CreatePostPage.vue';
 import EventsPage from '@/pages/EventsPage.vue';
 import TermsOfUsePage from '@/pages/TermsOfUsePage.vue';
-
+import APIErrorPage from '@/pages/APIErrorPage.vue';
+import TechnicalWorksPage from '@/pages/TechnicalWorksPage.vue';
+ 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -42,6 +44,20 @@ const routes: Array<RouteRecordRaw> = [
     path: '/docs/termsOfUse',
     name: 'termsOfUse',
     component: TermsOfUsePage
+  },
+  {
+    path: '/404',
+    name: 'errorPage',
+    component: APIErrorPage
+  },
+  {
+    path: '/techWorks',
+    name: 'techWorksPage',
+    component: TechnicalWorksPage
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/404',
   }
     //component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
 ]

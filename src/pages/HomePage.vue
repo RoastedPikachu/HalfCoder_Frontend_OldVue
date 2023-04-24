@@ -81,13 +81,14 @@
     }
     #MainBlock_child {
       display: flex;
+      justify-content: flex-start;
       flex-wrap: wrap;
       width: 100%;
       #MainBlock_asideRight {
         display: flex;
         flex-wrap: wrap;
         margin-top: 17px;
-        margin-left: 4.5%;  
+        margin-left: 4%;  
         width: 30.5%;
         height: 627px;
       }

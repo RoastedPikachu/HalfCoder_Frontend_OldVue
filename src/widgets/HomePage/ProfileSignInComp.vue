@@ -43,12 +43,12 @@
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
       const userInfo = ref({
-        image: '',
-        name: '',
-        employment: '',
-        posts: 0,
-        followers: 0,
-        views: 0
+        image: store.state.userImage,
+        name: `${store.state.firstName} ${store.state.secondName}`,
+        employment: store.state.employment,
+        posts: store.state.posts,
+        followers: store.state.followers,
+        views: store.state.views
       } as UserInfo);
       const postsCountText = ref('');
       const followersCountText = ref('');

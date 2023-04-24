@@ -91,7 +91,7 @@
     },
     methods: {
       async getNews() {
-        const url = new URL('http://62.109.10.224:500/api/v1/news/latest/');
+        const url = new URL('http://79.174.12.75:80/api/news/latest/');
 
         const result = await axios.get(url.toString());
 

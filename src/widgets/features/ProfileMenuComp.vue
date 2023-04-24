@@ -39,11 +39,6 @@
 
   export default defineComponent({
     name: 'ProfileMenuComp',
-    data() {
-      return {
-  
-      }
-    },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
       const isSignIn = ref(false);

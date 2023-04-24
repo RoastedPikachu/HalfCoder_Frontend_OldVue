@@ -233,13 +233,15 @@
     },
     methods: {
       async getPosts() {
-        const url = new URL('http://62.109.10.224:500/api/v1/article/recommended/');
+        const url = new URL('http://79.174.12.75:80/api/article/tape/');
 
-        const token = document.cookie.slice(67, 206);
+        const token = document.cookie.slice(127);
 
         const result = await axios.post(url.toString(), { token: token }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
-        });
+        }); 
+
+        console.log(result);
 
         this.posts = (Object.values(result.data));
 

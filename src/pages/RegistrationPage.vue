@@ -76,29 +76,32 @@
     },
     methods: {
       async setValuesRegistration() {
-        const url = new URL('http://62.109.10.224:500/api/v1/auth/register/');
+        const url = new URL('http://79.174.12.75:80/api/account/auth/register/');
 
         const result = await axios.post(url.toString(), {
           first_name: this.name,
           last_name: this.secondName,
           username: this.userName,
           email: this.email,  
-          password: this.password,
-          repeatedPassword: this.repeatedPassword
+          password: this.password
         }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         });
 
-        const status:number = result.data.status;
+        console.log(result);
+
+        const status:number | string = result.data.status;
 
         switch(status) {
-          case 100: this.$router.push('/signIn');
+          case 'success': this.$router.push('/signIn');
             break;
-          case 101: this.error = 'Неккоректные данные';
+          case 6: this.error = 'Пустое поле';
             break;
-          case 102: this.error = 'Такой пользователь уже существует';
+          case 7: this.error = 'Некорректный email';
             break;
-          case 103: this.error = 'Пользователь с такой почтой уже существует';
+          case 8: this.error = 'Пользователь с такой почтой уже существует';
+            break;
+          case 9: this.error = 'Пользователь с таким именем и фамилией уже существует';
             break;
         }
 

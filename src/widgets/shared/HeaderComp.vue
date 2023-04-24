@@ -62,7 +62,7 @@
       const modalNotifActive = ref(false);
       const modalProfileActive = ref(false);
       const modalSignInActive = ref(false);
-      const image = ref('');
+      const image = ref(store.state.userImage);
 
       const changeNotifeActive = ():void => {
         modalNotifActive.value = !modalNotifActive.value;

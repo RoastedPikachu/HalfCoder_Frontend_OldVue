@@ -135,7 +135,7 @@
     },
     methods: {
       async getElems() {
-        const url = new URL('http://62.109.10.224:500/api/v1/rating/popular/');
+        const url = new URL('http://79.174.12.75:80/api/account/read/rating/popular/');
 
         const result = await axios.get(url.toString());
 

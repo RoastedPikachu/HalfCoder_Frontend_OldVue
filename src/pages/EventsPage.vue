@@ -144,7 +144,7 @@
     },
     methods: {
       async getEventsByCategory() {
-        const url = new URL('http://62.109.10.224:500/api/v1/event/all/');
+        const url = new URL('http://79.174.12.75:80/api/event/all/');
 
         const result = await axios.post(url.toString(), { event_category: 'all' }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
