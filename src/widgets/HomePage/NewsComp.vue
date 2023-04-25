@@ -93,20 +93,19 @@
       async getNews() {
         const url = new URL('http://79.174.12.75:80/api/news/latest/');
 
-        let result;
         axios.get(url.toString())
           .then((res) => {
-            result = res;
+            const result = res;
+
+            this.news = Object.values(result.data);
+
+            if(this.news.length) {
+              this.isLoaded = true;
+            }
           })
           .catch((e) => {
             this.$router.push('/techWorks');
-          })
-
-        this.news = Object.values(result.data);
-
-        if(this.news.length) {
-          this.isLoaded = true;
-        }
+          });
       }
     },
     mounted() {

@@ -146,22 +146,21 @@
       async getEventsByCategory() {
         const url = new URL('http://79.174.12.75:80/api/event/all/');
 
-        let result;
-        axios.post(url.toString(), { event_category: 'all' }, {
+        axios.get(url.toString(), {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         })
           .then((res) => {
-            result = res;
+            const result = res;
+
+            this.events = (Object.values(result.data));
+
+            if(result) {
+              this.isLoaded = true;
+            }
           })
           .catch((e) => {
             this.$router.push('/techWorks');
           })
-
-        this.events = (Object.values(result.data));
-
-        if(result) {
-          this.isLoaded = true;
-        }
       }
     },
     mounted() {
@@ -307,6 +306,7 @@
             color: $ButtonFontColor;
             font-size: 12px;
             font-family: $SpaceGrotesk;
+            text-align: center;
             cursor: pointer;
           }
           .loadingTag {

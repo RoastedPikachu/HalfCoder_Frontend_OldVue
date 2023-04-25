@@ -37,17 +37,27 @@
   export default defineComponent({
     name: 'HomePage',
     setup() {
-      const token = ref('');
+      const token = ref('' as string | undefined);
       const isSignIn = ref(false);
 
+      const getCookie = (name:string) => {
+        let matches = document.cookie.match(new RegExp(
+          //eslint-disable-next-line
+          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      }
+
       onMounted(() => {
-        token.value = document.cookie.slice(67);
+        token.value = getCookie('token') ;
+        console.log(token.value);
         isSignIn.value = store.state.isSignIn;
       });
 
       return {
         token,
-        isSignIn
+        isSignIn,
+        getCookie
       }
     },
     components: {

@@ -192,7 +192,7 @@
       ]);
       const userName = ref('');
 
-      const changeModalActionsActive = (post:Post):void => {
+      const changeModalActionsActive = (post):void => {
         post.modal_actions_active = !post.modal_actions_active;
         activeId.value = post.id;
 
@@ -232,27 +232,33 @@
       }
     },
     methods: {
+      getCookie(name:string) {
+        let matches = document.cookie.match(new RegExp(
+          //eslint-disable-next-line
+          "(?:^|; )" + name.replace(`${/([\.$?*|{}\(\)\[\]\\\/\+^])/g}`, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      },
       async getPosts() {
         const url = new URL('http://79.174.12.75:80/api/article/tape/');
 
-        const token = document.cookie.slice(127);
+        const token = this.getCookie('token');
 
-        let result;
         axios.post(url.toString(), { token: token }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         })
           .then((res) => {
-            result = res;
+            const result = res;
+
+            this.posts = Object.values(result.data);
+
+            if(result) {
+              this.isLoaded = true;
+            }
           })
           .catch((e) => {
             this.$router.push('/techWorks');
-          })
-
-        this.posts = (Object.values(result.data));
-
-        if(result) {
-          this.isLoaded = true;
-        }
+          });
       }
     },
     mounted() {
