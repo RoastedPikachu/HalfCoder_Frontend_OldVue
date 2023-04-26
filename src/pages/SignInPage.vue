@@ -52,10 +52,10 @@
       const whenPohui = ref(false);
 
       return {
-        login: '',
-        password: '',
-        error: '',
-        whenPohui: false
+        login,
+        password,
+        error,
+        whenPohui
       }
     },
     methods: {
@@ -72,27 +72,31 @@
           email: ''
         };
 
-        const result = await axios.post(url.toString(), {
-          token: token
-        }, {
+        axios.post(url.toString(), { token: token }, {
           headers: {'Content-Type': 'application/json;charset=utf-8'}
-        });
+        })
+          .then((res) => {
+            const result = res;
 
-        payload.posts = result.data.user.post_from_user;
-        payload.followers = result.data.user.subs_to_user;
-        payload.views = result.data.user.views_to_user;
-        payload.firstName = result.data.user.first_name;
-        payload.secondName = result.data.user.last_name;
-        payload.userImage = result.data.user.photo;
-        payload.userName = result.data.user.username;
-        payload.email = result.data.user.email;
+            payload.posts = 0;
+            payload.followers = 0;
+            payload.views = 0;
+            payload.firstName = result.data.first_name;
+            payload.secondName = result.data.last_name;
+            payload.userImage = result.data.photo;
+            payload.userName = result.data.username;
+            payload.email = result.data.email;
 
-        store.dispatch('setFirstDataAboutUser', payload);
+            store.dispatch('setFirstDataAboutUser', payload);
+          })
+          .catch((e) => {
+            console.log(e);
+            this.error = 'Упс, что-то пошло не так';
+          });
       },
       async setValuesLogin() {
         const url = new URL('http://79.174.12.75:80/api/account/auth/login/');
 
-        let result;
         axios.post(url.toString(), {
           username: this.login,
           password: this.password,
@@ -100,26 +104,25 @@
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         })
           .then((res) => {
-            result = res;
+            const result = res;
+            const token:string = result.data.token;
+            const status:number | string = result.data.status;
+
+            switch(status) {
+              case 'success': store.dispatch('changeSignInStatus');  
+                this.getInfoAboutUser(token);
+                document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
+                this.$router.push('/');
+                break;
+              case 4: this.error = 'User с таким именем не найден';
+                break;
+              case 5: this.error = 'Неверный пароль';
+                break;
+            } 
           })
           .catch((e) => {
             this.$router.push('/techWorks');
-          })
-        
-        const token:string = result.data.token;
-        const status:number | string = result.data.status;
-
-        switch(status) {
-          case 'success': store.dispatch('changeSignInStatus');  
-            this.getInfoAboutUser(token);
-            document.cookie =`token=${token}; path=/; max-age=2592000; secure=true`;
-            this.$router.push('/');
-            break;
-          case 4: 'Пользователь с таким именем не найден';
-            break;
-          case 5: 'Неверный пароль';
-            break;
-        } 
+          });
 
         this.login = '';
         this.password = '';
@@ -150,8 +153,8 @@
       align-items: center;
       flex-wrap: wrap;
       padding: 15px 15px;
-      width: 290px;
-      height: 310px;
+      width: 310px;
+      height: 320px;
       background-color: #141414;
       border: 2px solid rgba(116, 116, 116, 0.5);
       border-radius: 5px;
@@ -172,7 +175,7 @@
         width: 100%;
         height: 250px;
         .signIn_inputs {
-          width: 87.5%;
+          width: 90%;
           height: 52.5px;
           p {
             height: 22.5px;

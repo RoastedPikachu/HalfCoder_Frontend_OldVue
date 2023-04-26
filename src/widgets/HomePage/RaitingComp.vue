@@ -3,7 +3,7 @@
     <h2>Рейтинг</h2>
     <div id="Rating_info">
       <div class="rating_infoUser" v-for="elem of elements.slice(0, 4)" :key="elem.id" v-show="isLoaded">
-        <p>{{ elem.rating }} points</p>
+        <p>{{ elem.rating || 0 }} points</p>
         <ItemBrieflyInfoComp  
           :name="elem.username"
           :image="elem.photo"

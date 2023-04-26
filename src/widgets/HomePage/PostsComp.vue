@@ -35,8 +35,12 @@
         <span>
           <i class="fa-solid fa-heart"></i>
           <p>{{ post.likes }}</p>
+
           <i class="fa-solid fa-share"></i>
           <p>{{ post.reposts }}</p>
+
+          <i class="fa-solid fa-comment"></i>
+          <p>{{ Object.values(post.comments).length }}</p>
         </span>
 
         <span>
@@ -100,6 +104,7 @@
     date_published: string,
     time_to_read: number,
     photo: string,
+    comments: [],
     modal_actions_active: boolean
   } 
 
@@ -150,6 +155,7 @@
           date_published: '',
           time_to_read: '',
           photo: '',
+          comments: {},
           modal_actions_active: false,
         },
         {
@@ -187,6 +193,7 @@
           date_published: 0,
           time_to_read: 0,
           photo: '',
+          comments: {},
           modal_actions_active: false,
         }
       ]);
@@ -250,7 +257,7 @@
           .then((res) => {
             const result = res;
 
-            this.posts = Object.values(result.data);
+            this.posts = Object.values(result.data);  
 
             if(result) {
               this.isLoaded = true;
@@ -365,7 +372,7 @@
           display: flex;
           justify-content: flex-start;
           align-items: center;
-          width: 25%;
+          width: 30%;
           i {
             color: $IconColor;
             font-size: 24px;

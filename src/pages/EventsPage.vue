@@ -300,7 +300,8 @@
             top: 45%;
             left: 5%;
             width: 110px;
-            height: 22.5px;
+            min-height: 22.5px;
+            height: auto;
             background-color: $BgButtonColor;
             border-radius: 2.5px;
             color: $ButtonFontColor;

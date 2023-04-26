@@ -23,14 +23,14 @@
     justify-content: flex-start;
     align-items: center;
     padding: 0 2.5%;  
-    width: 80%;
+    width: 85%;
     height: 35px;
     background-color: #101010;
     border: 1.5px solid #dc283a;
     border-radius: 5px;
     p {
       margin-left: 5%;
-      width: 80%;
+      width: 92.5%;
       color: #ffffff;
       font-size: 14px;
       font-weight: 400;

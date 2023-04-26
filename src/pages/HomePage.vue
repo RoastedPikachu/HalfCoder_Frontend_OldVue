@@ -50,7 +50,6 @@
 
       onMounted(() => {
         token.value = getCookie('token') ;
-        console.log(token.value);
         isSignIn.value = store.state.isSignIn;
       });
 

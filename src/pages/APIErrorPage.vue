@@ -25,24 +25,26 @@
 
 <style lang="scss" scoped>
   section {
-    display: flex;
+    display: grid;
     justify-content: center;
-    align-items: center;
+    align-content: center;
+    grid-template-columns: 100%;
     margin-top: 15px;
-    width: 75%;
+    width: 60%;
     height: 600px;
-    padding: 0 12.5%;
+    padding: 0 20.0%;
     div {
-      display: flex;
+      display: grid;
       justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      width: 70%;
+      justify-items: center;
+      align-content: center;
+      width: 100%;
       height: 350px;
       #Error {
+        justify-self: center;
         margin-top: 20px;
         margin-left: -5%;
-        width: 95%;
+        width: 60%;
         color: #ffffff;
         font-size: 40px;
         font-weight: 700;
@@ -51,9 +53,9 @@
       }
       h1 {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         margin-top: -20px;
-        width: 60%;
+        width: 75%;
         color: #ffffff;
         font-size: 126px;
         font-family: $SpaceGrotesk;

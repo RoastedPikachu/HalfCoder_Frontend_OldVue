@@ -78,7 +78,6 @@
       async setValuesRegistration() {
         const url = new URL('http://79.174.12.75:80/api/account/auth/register/');
 
-        let result;
         axios.post(url.toString(), {
           first_name: this.name,
           last_name: this.secondName,
@@ -89,26 +88,25 @@
           headers: {'Content-Type': 'application/json;charset=utf-8'}
         })
           .then((res) => {
-            result = res;
+            const result = res;
+            const status:number | string = result.data.status;
+
+            switch(status) {
+              case 'success': this.$router.push('/signIn');
+                break;
+              case 6: this.error = 'Пустое поле';
+                break;
+              case 7: this.error = 'Некорректный email';
+                break;
+              case 8: this.error = 'Пользователь с такой почтой уже существует';
+                break;
+              case 9: this.error = 'Пользователь с таким именем и фамилией уже существует';
+                break;
+            }
           })
           .catch((e) => {
             this.$router.push('/techWorks');
-          })
-
-        const status:number | string = result.data.status;
-
-        switch(status) {
-          case 'success': this.$router.push('/signIn');
-            break;
-          case 6: this.error = 'Пустое поле';
-            break;
-          case 7: this.error = 'Некорректный email';
-            break;
-          case 8: this.error = 'Пользователь с такой почтой уже существует';
-            break;
-          case 9: this.error = 'Пользователь с таким именем и фамилией уже существует';
-            break;
-        }
+          });
 
         this.name = '';
         this.secondName = '';

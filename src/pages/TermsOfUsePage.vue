@@ -105,9 +105,9 @@
 
 <style lang="scss" scoped>
   #TermsOfUse {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    justify-content: start;
+    grid-template-columns: 100%;
     padding: 2.5% 20%;
     width: 60%;
     h2 {
