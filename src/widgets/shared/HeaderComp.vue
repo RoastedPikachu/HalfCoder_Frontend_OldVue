@@ -146,7 +146,7 @@
       display: flex;
       color: #ffffff;
       font-size: 36px;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: $SpaceGrotesk;
       transition: 400ms ease;
       p {
         color: #3d5aff;
@@ -159,7 +159,7 @@
       align-items: center;
       width: 300px;
       height: 26px;
-      font-family: 'Inter', sans-serif;
+      font-family: $Inter;
       p {
         color: #747474;
         font-size: 16px;

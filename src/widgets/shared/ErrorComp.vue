@@ -34,7 +34,7 @@
       color: #ffffff;
       font-size: 14px;
       font-weight: 400;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: $SpaceGrotesk;
       text-align: left;
     }
   }

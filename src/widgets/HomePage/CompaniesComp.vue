@@ -124,8 +124,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "@/styles/_variables.scss";
-
   section {
     background-color: $DarkBgBlocksTheme;
     h2 {

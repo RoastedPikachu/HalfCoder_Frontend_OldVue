@@ -34,19 +34,34 @@
       <div class="mainBlock_childPosts_activityInfo">
         <span>
           <i class="fa-solid fa-heart"></i>
-          <p>{{ post.likes }}</p>
+          <p>{{ post.likes || 0 }}</p>
 
           <i class="fa-solid fa-share"></i>
-          <p>{{ post.reposts }}</p>
+          <p>{{ post.reposts || 0 }}</p>
 
           <i class="fa-solid fa-comment"></i>
-          <p>{{ Object.values(post.comments).length }}</p>
+          <p>{{ Object.values(post.comments).length || 0 }}</p>
         </span>
 
         <span>
           <i class="fa-solid fa-eye"></i>
-          <p>{{ post.views }}</p>
+          <p>{{ post.views || 0 }}</p>
         </span>
+      </div>
+      <div class="mainBlock_childPosts_comments">
+        <div class="mainBlock_childPosts_comments_place">
+          <CommentComp :isOtherComment="true"/>
+          <CommentComp :isOtherComment="false"/>
+        </div>
+        <button class="mainBlock_childPosts_comments_showMore">Показать больше</button>
+        <div class="mainBlock_childPosts_comments_addComment">
+          <input type="text" placeholder="Добавить комментарий...">
+          <button>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.22202 18.903C8.04732 19.5249 6.74874 18.3126 7.28858 17.098L10.0125 10.969L7.28852 4.84011C6.74871 3.62548 8.04732 2.41312 9.22196 3.03499L21.8724 9.7323C22.8652 10.2579 22.8652 11.6801 21.8724 12.2057L9.22202 18.903Z" stroke="#747474" stroke-width="2.5"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -60,6 +75,7 @@
   import ModalPostActions from '@/widgets/features/ModalPostActions.vue';
   import ItemBrieflyInfoComp from '@/widgets/shared/ItemBrieflyInfoComp.vue';
   import ItemBrieflyInfoCompLoading from '@/widgets/shared/ItemBrieflyInfoCompLoading.vue';
+  import CommentComp from '@/widgets/features/CommentComp.vue';
 
   // Дочерние интерфейсы для поста
 
@@ -110,11 +126,6 @@
 
   export default defineComponent({
     name: 'PostsComp',
-    data() {
-      return {
-        
-      }
-    },
     setup() {
       const isDarkTheme = ref(store.state.isDarkTheme);
       const isLoaded = ref(false);
@@ -274,14 +285,13 @@
     components: {
       ModalPostActions,
       ItemBrieflyInfoComp,
-      ItemBrieflyInfoCompLoading
+      ItemBrieflyInfoCompLoading,
+      CommentComp
     }
   })
 </script>
 
 <style lang="scss" scoped>
-  @import "@/styles/_variables.scss";
-
   #MainBlock_childPosts {
     width: 65%;
     height: auto;
@@ -291,9 +301,9 @@
       flex-wrap: wrap;
       margin-top: 17px;
       margin-left: 3.5%;
-      padding: 0 2.5%;
+      padding: 5px 2.5%;
       width: 95%;
-      min-height: 440px;
+      min-height: 460px;
       height: auto;
       background-color: $DarkBgBlocksTheme;
       border: 2px solid $BorderColor;
@@ -392,6 +402,75 @@
         }
       }
     }
+    .mainBlock_childPosts_comments {
+      margin-top: 10px;
+      padding: 0 5%;
+      width: 90%;
+      min-height: 100px;
+      height: auto;
+      border: 2px solid rgba(116, 116, 116, 0.5);
+      border-width: 2px 0 0 0;
+      .mainBlock_childPosts_comments_place {
+        padding-top: 5px;
+        width: 100%;
+        min-height: 110px;
+      }
+      .mainBlock_childPosts_comments_showMore {
+        width: 100%;
+        background: none;
+        border: none;
+        color: #3d5aff;
+        font-size: 12px;
+        font-weight: 700;
+        text-align: center;
+        cursor: pointer;
+      }
+      .mainBlock_childPosts_comments_addComment {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        input {
+          padding-left: 2.5%;
+          width: 87.5%;
+          height: 35px;
+          background-color: #1b1b1b;
+          border: none;
+          border-radius: 5px;
+          color: #ffffff;
+          font-size: 14px;
+          font-family: $SpaceGrotesk;
+          transition: 400ms ease;
+          outline: none;
+        }
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 35px;
+          height: 35px;
+          background-color: #1b1b1b;
+          border: none;
+          border-radius: 50px;
+          transition: 400ms ease;
+          cursor: pointer;
+          svg {
+            margin-top: 1.5px;
+            margin-left: -5px;
+            path {
+              transition: 400ms ease;
+            }
+          }
+        }
+        button:hover {
+          svg {
+            path {
+              stroke: #3d5aff;
+            }
+          }
+        }
+      }
+    }
   }
 
   #MainBlock_childPosts {
@@ -403,6 +482,19 @@
             p:first-child {
               color: #1e1e1e;
             }
+          }
+        }
+      }
+      .mainBlock_childPosts_comments {
+        .mainBlock_childPosts_comments_addComment {
+          input {
+            background-color: #ffffff;
+            border: 2px solid rgba(116, 116, 116, 0.5);
+            color: #747474;
+          }
+          button {
+            background-color: #ffffff;
+            border: 2px solid rgba(116, 116, 116, 0.5);
           }
         }
       }

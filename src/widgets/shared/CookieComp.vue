@@ -17,7 +17,7 @@
   export default defineComponent({
     name: 'CookieComp',
     setup() {
-      const isCookieOpen = ref(false);
+      const isCookieOpen = ref(store.state.isCookieOpen);
       const isDarkTheme = ref(store.state.isDarkTheme);
 
       const closeCookie = ():void => {
@@ -25,7 +25,7 @@
         isCookieOpen.value = store.state.isCookieOpen;
       }
 
-      watch(isCookieOpen, () => {
+      watch(() => store.state.isCookieOpen, () => {
         isCookieOpen.value = store.state.isCookieOpen;
       })
 
@@ -98,7 +98,7 @@
       height: 35%;
       font-size: 14px;
       font-weight: 400;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: $SpaceGrotesk;
       text-align: center; 
       transition: 400ms ease;
     }
@@ -111,7 +111,7 @@
       border: none;
       border-radius: 10px;
       font-weight: 700;
-      font-family: 'Inter', sans-serif;
+      font-family: $Inter;
       transition: 400ms ease;
       cursor: pointer;
     }

@@ -48,7 +48,7 @@
     color: #747474;
     font-size: 12px;
     font-weight: 700;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: $SpaceGrotesk;
     a {
       color: #747474;
       line-height: 25px;
