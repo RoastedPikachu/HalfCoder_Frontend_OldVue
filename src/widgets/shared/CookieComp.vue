@@ -63,12 +63,11 @@
     }
   }
   #CookieBlock {
-    position: relative;
     position: fixed;
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    grid-template-columns: 100%;
     left: 10%;
     bottom: 5%;
     padding: 0 2.5%;
@@ -85,17 +84,17 @@
       cursor: pointer;
     }
     svg {
-      margin-top: 20px;
-      width: 55%;
-      height: 20%;
+      margin-top: 0px;
+      width: 100%;
+      height: 40%;
       path {
         transition: 400ms ease;
       }
     }
     p {
-      margin-top: -10%;
+      margin-top: -27.5%;
       width: 100%;
-      height: 35%;
+      height: auto;
       font-size: 14px;
       font-weight: 400;
       font-family: $SpaceGrotesk;
@@ -107,7 +106,7 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      height: 10%;
+      height: 32.5px;
       border: none;
       border-radius: 10px;
       font-weight: 700;
