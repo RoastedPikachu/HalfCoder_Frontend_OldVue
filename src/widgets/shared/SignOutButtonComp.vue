@@ -1,6 +1,7 @@
 <template>
-  <span @click="logOut()" :class="{ whiteSignOutTheme: !isDarkTheme }">
+  <span :class="{ whiteSignOutTheme: !isDarkTheme }" @click="logOut()">
     <img src="@/assets/exitProfile_icon.svg" alt="Выйти из профиля">
+
     <p>Выход</p>
   </span>
 </template>

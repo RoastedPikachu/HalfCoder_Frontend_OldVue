@@ -1,9 +1,21 @@
 <template>
   <section id="RecommendedCategories" :class="{ whiteRecommendTheme: !isDarkTheme }">
-    <p class="recomendation_loading" v-for="loadingCategory of loadingCategories" :key="loadingCategory.id" v-show="!isLoaded"></p>
-    <router-link :to="category.link" class="recomendation" v-for="category of categories.slice(0, 10)" :key="category.id" v-show="isLoaded">
+    <p class="recomendation_loading" 
+      v-for="loadingCategory of loadingCategories" 
+      :key="loadingCategory.id" 
+      v-show="!isLoaded"
+    ></p>
+
+    <router-link 
+      :to="category.link" 
+      class="recomendation" 
+      v-for="category of categories.slice(0, 10)" 
+      :key="category.id" 
+      v-show="isLoaded"
+    >
       {{ category.title }}
     </router-link>
+
     <button>  
       <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <rect x="19" width="18" height="19" transform="rotate(90 19 0)" fill="url(#pattern0)"/>

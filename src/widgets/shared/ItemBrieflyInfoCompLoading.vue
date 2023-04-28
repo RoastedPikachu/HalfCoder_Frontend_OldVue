@@ -1,7 +1,7 @@
 <template>
   <div id="ElemBrieflyInfo" :class="{ whiteBrieflyInfoTheme: !isDarkTheme }">
-    <div class="ElemBrieflyInfo_Rating_infoUser_image">
-    </div>
+    <div class="ElemBrieflyInfo_Rating_infoUser_image"></div>
+    
     <span>
       <p></p>
       <p></p>

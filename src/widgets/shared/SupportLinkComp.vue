@@ -1,6 +1,7 @@
 <template>
   <span :class="{ whiteSupportTheme: !isDarkTheme }">
     <img src="@/assets/support_icon.svg" alt="Тех поддержка">
+    
     <p>Поддержка</p>
   </span>
 </template>

@@ -1,6 +1,7 @@
 <template>
   <header :class="{ whiteHeaderTheme: !isDarkTheme }">
     <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
+
     <nav>
       <router-link to="/" class="route">Главная</router-link>
 
@@ -20,16 +21,24 @@
             <path d="M17.6667 7.40112C17.6667 5.70343 16.9643 4.07529 15.714 2.87485C14.4638 1.6744 12.7681 1 11 1C9.23189 1 7.5362 1.6744 6.28596 2.87485C5.03571 4.07529 4.33333 5.70343 4.33333 7.40112C4.33333 14.8691 1 17.0028 1 17.0028H21C21 17.0028 17.6667 14.8691 17.6667 7.40112Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M12.9222 20.0033C12.7269 20.3064 12.4465 20.5581 12.1091 20.7329C11.7718 20.9079 11.3893 21 11 21C10.6106 21 10.2282 20.9079 9.89087 20.7329C9.55354 20.5581 9.27309 20.3064 9.07776 20.0033" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+          
           <div id="HasNotificationsStatus" v-if="hasNotificationsStatus"></div>
         </button>
-        <ModalNotifComp :active="modalNotifActive"/>
+
+        <ModalNotifComp 
+          :active="modalNotifActive"
+        />
       </div>
 
       <div class="modalContainer" v-if="isSignIn">
         <button id="ModalContainer_profile" @click="changeProfileActive()">
           <img :src="image" alt="Мой аватар">
         </button>
-        <ModalProfileComp :active="modalProfileActive" :token="token"/>
+
+        <ModalProfileComp 
+          :active="modalProfileActive" 
+          :token="token"
+        />
       </div>
 
       <div class="modalContainer" v-else>
@@ -39,7 +48,10 @@
             <path d="M21 21C21 17.13 16.518 14 11 14C5.48196 14 1 17.13 1 21" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <ModalSignInComp :active="modalSignInActive"/>
+
+        <ModalSignInComp 
+          :active="modalSignInActive"
+        />
       </div>
     </nav>
   </header>

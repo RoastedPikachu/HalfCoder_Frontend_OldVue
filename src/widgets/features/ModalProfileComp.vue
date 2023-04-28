@@ -1,16 +1,24 @@
 <template>
-  <div id="ModalProfileWindow" :class="{ whiteModalProfileTheme: !isDarkTheme }" v-if="active">
+  <div id="ModalProfileWindow" 
+    :class="{ whiteModalProfileTheme: !isDarkTheme }" 
+    v-if="active"
+  >
     <ItemBrieflyInfoComp
       :name="userInfo.name"
       :image="userInfo.image"
       :employment="userInfo.employment"
     />
+
     <button id="ModalProfileWindow_profileButton">Профиль</button>
+
     <div id="ModalProfileWindow_buttons">
       <SettingsLinkComp/>
       <SupportLinkComp/>
     </div>
-    <SignOutButtonComp :token="token"/>
+
+    <SignOutButtonComp 
+      :token="token"
+    />
     <div class="modalProfileWindow_changeTheme_container">
       <div id="ModalProfileWindow_changeTheme" class="modalProfileWindow_theme">
         <input type="checkbox" id="slide">

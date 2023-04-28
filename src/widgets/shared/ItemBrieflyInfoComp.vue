@@ -1,8 +1,12 @@
 <template>
   <div id="ElemBrieflyInfo" :class="{ whiteBrieflyInfoTheme: !isDarkTheme }">
     <div class="ElemBrieflyInfo_Rating_infoUser_image">
-      <img :src="image" :alt="name">
+      <img 
+        :src="image" 
+        :alt="name"
+      >
     </div>
+    
     <span>
       <p>{{ name }}</p>
       <p>{{ employment }}</p>

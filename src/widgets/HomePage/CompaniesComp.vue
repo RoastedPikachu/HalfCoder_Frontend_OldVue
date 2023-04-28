@@ -1,23 +1,40 @@
 <template>
   <section id="Companies" :class="{ whiteCompaniesTheme: !isDarkTheme }">
     <h2>Популярные компании</h2>
+
     <div id="Companies_info">
-      <div class="companies_infoCompany" v-for="company of companies.slice(0, 4)" :key="company.id" v-show="isLoaded">
-        <img :src="company.photo" :alt="company.name">
+      <div class="companies_infoCompany" 
+        v-for="company of companies.slice(0, 4)" 
+        :key="company.id" 
+        v-show="isLoaded"
+      >
+        <img 
+          :src="company.photo" 
+          :alt="company.name"
+        >
+
         <span>
           <p>{{ company.name }}</p>
           <p>{{ company.description }}</p>
         </span>
+
         <button>
           <i class="fa-solid fa-eye"></i>
         </button> 
       </div>
-      <div class="companies_infoLoadingCompany" v-for="loadingCompany of loadingCompanies" :key="loadingCompany.id" v-show="!isLoaded">
+
+      <div class="companies_infoLoadingCompany" 
+        v-for="loadingCompany of loadingCompanies" 
+        :key="loadingCompany.id" 
+        v-show="!isLoaded"
+      >
         <div></div>
+
         <span>
           <p></p>
           <p></p>
         </span>
+        
         <button>
           <i class="fa-solid fa-eye"></i>
         </button>

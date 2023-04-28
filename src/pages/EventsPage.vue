@@ -297,9 +297,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 2px 10px;
             top: 45%;
             left: 5%;
-            width: 110px;
+            width: auto;
             min-height: 22.5px;
             height: auto;
             background-color: $BgButtonColor;
@@ -307,7 +308,7 @@
             color: $ButtonFontColor;
             font-size: 12px;
             font-family: $SpaceGrotesk;
-            text-align: center;
+            text-align: left;
             cursor: pointer;
           }
           .loadingTag {

@@ -1,30 +1,43 @@
 <template>
-  <div id="ModalNotifWindow" :class="{ whiteNotifTheme: !isDarkTheme }" v-if="active">
+  <div id="ModalNotifWindow" 
+    :class="{ whiteNotifTheme: !isDarkTheme }" 
+    v-if="active"
+  >
     <span class="ModalNotifWindow_moderationStatus">
       <img src="@/assets/moderation_icon.svg" alt="Статус модерации">
+
       <p>Ваша статья отправлена на модерацию</p>
       <p>2ч.</p>
     </span>
+
     <span class="ModalNotifWindow_moderationStatus">
       <img src="@/assets/moderation_icon.svg" alt="Статус модерации">
+
       <p>Ваша статья отправлена на модерацию</p>
       <p>3ч.</p>
     </span>
+
     <span class="ModalNotifWindow_moderationStatus">
       <img src="@/assets/moderation_icon.svg" alt="Статус модерации">
+
       <p>Ваша статья отправлена на модерацию</p>
       <p>1ч.</p>
     </span>
+
     <span class="ModalNotifWindow_moderationStatus">
       <img src="@/assets/moderation_icon.svg" alt="Статус модерации">
+
       <p>Ваша статья отправлена на модерацию</p>
       <p>5ч.</p>
     </span>
+
     <span class="ModalNotifWindow_moderationStatus">
       <img src="@/assets/moderation_icon.svg" alt="Статус модерации">
+
       <p>Ваша статья отправлена на модерацию</p>
       <p>4ч.</p>
     </span>
+
     <button>Очистить</button>
   </div>
 </template>

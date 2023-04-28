@@ -1,27 +1,41 @@
 <template>
   <section id="Rating" :class="{ whiteRatingTheme: !isDarkTheme}">
     <h2>Рейтинг</h2>
+
     <div id="Rating_info">
-      <div class="rating_infoUser" v-for="elem of elements.slice(0, 4)" :key="elem.id" v-show="isLoaded">
+      <div class="rating_infoUser" 
+        v-for="elem of elements.slice(0, 4)" 
+        :key="elem.id" 
+        v-show="isLoaded"
+      >
         <p>{{ elem.rating || 0 }} points</p>
+
         <ItemBrieflyInfoComp  
           :name="elem.username"
           :image="elem.photo"
           :employment="elem.profile.work"
         />
       </div>
-      <div class="rating_loadingInfoUser" v-for="loadingElem of loadingElements" :key="loadingElem.id" v-show="!isLoaded">
+
+      <div class="rating_loadingInfoUser" 
+        v-for="loadingElem of loadingElements" 
+        :key="loadingElem.id" 
+        v-show="!isLoaded"
+      >
         <div class="rating_loadingInfoUser_score">
           <p></p>
           <p></p>
         </div>
+
         <div class="rating_loadingInfoUser_image"></div>
+
         <div class="rating_loadingInfoUser_info">
           <p></p>
           <p></p>
         </div>
       </div>
     </div>
+    
     <router-link to="/users" id="Rating_moreUsers">Ещё {{ countOfUsersResults }} {{countOfResultsText}}</router-link>
   </section>
 </template>

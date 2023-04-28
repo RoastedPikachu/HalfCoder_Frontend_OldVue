@@ -1,6 +1,10 @@
 <template>
   <section id="MainBlock_childPosts">
-    <div class="mainBlock_childPosts_info" :class="{ whitePostsTheme: !isDarkTheme}" v-for="post of posts" :key="post.id">
+    <div class="mainBlock_childPosts_info" 
+      :class="{ whitePostsTheme: !isDarkTheme, openComments: isCommentsOpen}" 
+      v-for="post of posts" 
+      :key="post.id" 
+    >
       <div class="mainBlock_childPosts_topInfo">
         <div class="mainBlock_childPosts_userInfo_loading" v-show="!isLoaded">
           <ItemBrieflyInfoCompLoading/>
@@ -18,7 +22,10 @@
           <button @click="changeModalActionsActive(post)">
             <i class="fa-solid fa-ellipsis"></i>
           </button>
-          <ModalPostActions :modalActionsActive="post.modal_actions_active"/>
+
+          <ModalPostActions 
+            :modalActionsActive="post.modal_actions_active"
+          />
         </div>
       </div>
 
@@ -29,7 +36,11 @@
       <p v-show="isLoaded">{{ post.title }}</p>
 
       <div class="postImage_loading" v-show="!isLoaded"></div>
-      <img :src="post.photo" :alt="post.title" v-show="isLoaded">
+      <img 
+        :src="post.photo" 
+        :alt="post.title" 
+        v-show="isLoaded"
+      >
 
       <div class="mainBlock_childPosts_activityInfo">
         <span>
@@ -39,7 +50,7 @@
           <i class="fa-solid fa-share"></i>
           <p>{{ post.reposts || 0 }}</p>
 
-          <i class="fa-solid fa-comment"></i>
+          <i class="fa-solid fa-comment" @click="isCommentsOpen = !isCommentsOpen"></i>
           <p>{{ Object.values(post.comments).length || 0 }}</p>
         </span>
 
@@ -48,14 +59,22 @@
           <p>{{ post.views || 0 }}</p>
         </span>
       </div>
-      <div class="mainBlock_childPosts_comments">
+
+      <div class="mainBlock_childPosts_comments" v-show="isCommentsOpen">
         <div class="mainBlock_childPosts_comments_place">
-          <CommentComp :isOtherComment="true"/>
-          <CommentComp :isOtherComment="false"/>
+          <CommentComp 
+            :isOtherComment="true"
+          />
+          <CommentComp 
+            :isOtherComment="false"
+          />
         </div>
+
         <button class="mainBlock_childPosts_comments_showMore">Показать больше</button>
+        
         <div class="mainBlock_childPosts_comments_addComment">
           <input type="text" placeholder="Добавить комментарий...">
+
           <button>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M9.22202 18.903C8.04732 19.5249 6.74874 18.3126 7.28858 17.098L10.0125 10.969L7.28852 4.84011C6.74871 3.62548 8.04732 2.41312 9.22196 3.03499L21.8724 9.7323C22.8652 10.2579 22.8652 11.6801 21.8724 12.2057L9.22202 18.903Z" stroke="#747474" stroke-width="2.5"/>
@@ -209,6 +228,7 @@
         }
       ]);
       const userName = ref('');
+      const isCommentsOpen = ref(false);
 
       const changeModalActionsActive = (post):void => {
         post.modal_actions_active = !post.modal_actions_active;
@@ -246,7 +266,8 @@
         activeId,
         posts,
         changeModalActionsActive,
-        userName
+        userName,
+        isCommentsOpen
       }
     },
     methods: {
@@ -296,6 +317,7 @@
     width: 65%;
     height: auto;
     .mainBlock_childPosts_info {
+      position: relative;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -303,7 +325,7 @@
       margin-left: 3.5%;
       padding: 5px 2.5%;
       width: 95%;
-      min-height: 460px;
+      min-height: 440px;
       height: auto;
       background-color: $DarkBgBlocksTheme;
       border: 2px solid $BorderColor;
@@ -311,7 +333,7 @@
       color: #747474;
       font-family: $SpaceGrotesk;
       transition: 400ms ease;
-      overflow: hidden;
+      //overflow: hidden;
       .mainBlock_childPosts_topInfo {
         display: flex;
         margin-top: 28px;
@@ -382,10 +404,10 @@
           display: flex;
           justify-content: flex-start;
           align-items: center;
-          width: 30%;
+          width: 35%;
           i {
             color: $IconColor;
-            font-size: 24px;
+            font-size: 20px;
             transition: 400ms ease;
             cursor: pointer;
           }
@@ -398,22 +420,25 @@
           }
         }
         span:last-child {
-          width: 10%;
+          width: 5%;
         }
       }
     }
     .mainBlock_childPosts_comments {
-      margin-top: 10px;
+      position: absolute;
+      margin-top: 430px;
       padding: 0 5%;
       width: 90%;
       min-height: 100px;
       height: auto;
+      background-color: #141414;    
       border: 2px solid rgba(116, 116, 116, 0.5);
-      border-width: 2px 0 0 0;
+      border-radius: 0 0 5px 5px;
+      z-index: 10;  
       .mainBlock_childPosts_comments_place {
         padding-top: 5px;
         width: 100%;
-        min-height: 110px;
+        min-height: 140px;
       }
       .mainBlock_childPosts_comments_showMore {
         width: 100%;

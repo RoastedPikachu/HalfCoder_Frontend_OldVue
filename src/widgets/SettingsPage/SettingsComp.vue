@@ -1,42 +1,50 @@
 <template>
   <section id="MainBlock_Settings" :class="{ whiteSettingsTheme: !isDarkTheme}">
     <h2>Настройки аккаунта</h2>
+
     <form>
       <div class="mainBlock_Settings_InputsContainers">
         <div>
           <p>Имя</p>
           <input type="text" v-model="firstName">
         </div>
+
         <div>
           <p>Фамилия</p>
           <input type="text" v-model="secondName">
         </div>
       </div>
+
       <div class="mainBlock_Settings_InputsContainers">
         <div>
           <p>Имя пользователя</p>
           <input type="text" v-model="userName">
         </div>
+
         <div>
           <p>Дата рождения</p>
           <input type="datetime-local" v-model="dateOfBirth">
         </div>
       </div>
+
       <div class="mainBlock_Settings_InputsContainers">
         <div>
           <p>Номер телефона</p>
           <input type="text" v-model="phoneNumber">
         </div>
+
         <div>
           <p>E-mail</p>
           <input type="email" v-model="email">
         </div>
       </div>
+
       <div id="MainBlock_Settings_textareaContainer">
         <p>О себе</p>
         <textarea maxlength="300" v-model="aboutUser"></textarea>
         <p>Лимит символов: 300</p>
       </div>
+      
       <button type="button" @click="setChanges()">Сохранить изменения</button>
     </form>
   </section>

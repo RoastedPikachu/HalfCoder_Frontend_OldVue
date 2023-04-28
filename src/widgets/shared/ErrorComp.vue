@@ -1,6 +1,7 @@
 <template>
   <div id="ErrorBlock" v-if="errLength">
     <img src="@/assets/error_icon.svg" alt="Крестик">
+    
     <p>{{ error }}</p>
   </div>
 </template>

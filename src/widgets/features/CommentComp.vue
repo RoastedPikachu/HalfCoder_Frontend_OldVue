@@ -4,10 +4,13 @@
       <p>Leha Ovchinnikov</p>
       <p>dsgnsfsuygdugxgsdgdsgsdgsdgsgsgsdh</p>
     </div>
+
     <img>
   </div>
+
   <div class="otherComment" v-if="isOtherComment">
     <img>
+    
     <div>
       <p>Leha Ovchinnikov</p>
       <p>shshsdhshdshshhshsgd</p>
@@ -35,6 +38,7 @@
     padding-top: 10px;
     width: 100%;
     height: auto;
+    transition: 400ms ease;
     div {
       margin-right: 2.5%;
       padding: 4px 10px;
@@ -71,6 +75,7 @@
     padding-top: 10px;
     width: 100%;
     height: auto;
+    transition: 400ms ease;
     img {
       width: 7.5%;
       height: 37.5px;

@@ -1,12 +1,22 @@
 <template>
   <section id="News" :class="{ whiteNewsTheme: !isDarkTheme }">
     <h2>Новости</h2>
+
     <div id="News_info">
-      <div class="loadingNews" v-for="item of loadingNews" :key="item.id" v-show="!isLoaded">
+      <div class="loadingNews" 
+        v-for="item of loadingNews" 
+        :key="item.id" 
+        v-show="!isLoaded"
+      >
         <p></p>
         <p></p>
       </div>
-      <div class="News_infoItem" v-for="item of news.slice(0, 4)" :key="item.id" v-show="isLoaded">
+
+      <div class="News_infoItem" 
+        v-for="item of news.slice(0, 4)" 
+        :key="item.id" 
+        v-show="isLoaded"
+      >
         <a :href="item.link">{{ item.title }}</a>
         <p>{{ item.ago }}</p>
       </div>

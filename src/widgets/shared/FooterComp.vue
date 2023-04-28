@@ -2,17 +2,23 @@
   <footer>
     <span>
       <a href="/" target="blank">О нас</a>
+
       <a href="/" target="blank">Поддержка</a>
+
       <router-link to="/docs/termsOfUse" class="route" target="_blank">Документы</router-link>
     </span>
+
     <span>©{{ year }} &lt; HalfCoder /></span>
+
     <span id="SocialNetworkLinks">
       <a href="https://vk.com/halfcoder" id="SocialNetworkLinks_Vk">
         <img src="@/assets/grey_vk_icon.svg" alt="Вконтакте">
       </a>
+
       <a href="https://t.me/halfcoder" id="SocialNetworkLinks_Tg">
         <img src="@/assets/grey_telegramm_icon.svg" alt="Telegram">
       </a>
+      
       <a href="https://m.dzen.ru/halfcoder" id="SocialNetworkLinks_Dzen">
         <img src="@/assets/dzen_icon.svg" alt="Дзен">
       </a>

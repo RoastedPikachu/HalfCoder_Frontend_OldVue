@@ -1,11 +1,17 @@
 <template>
-  <div class="modalPostActions" v-if="modalActionsActive" :class="{ whitePostActionsTheme: !isDarkTheme }">
+  <div class="modalPostActions" 
+    :class="{ whitePostActionsTheme: !isDarkTheme }"
+    v-if="modalActionsActive" 
+  >
     <button>
       <img src="@/assets/bookmark_icon.svg" alt="В закладки">
+
       <p>В закладки</p>
     </button>
+
     <button>
       <i class="fa-solid fa-flag"></i>
+
       <p>Репорт</p> 
     </button>
   </div>

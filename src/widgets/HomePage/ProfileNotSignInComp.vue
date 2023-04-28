@@ -1,6 +1,7 @@
 <template>
   <section id="Profile">
     <div id="Profile_topLine"></div>
+    
     <ProfileMenuComp/>
   </section>
 </template>

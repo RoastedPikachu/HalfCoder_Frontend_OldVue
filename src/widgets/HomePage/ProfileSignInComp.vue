@@ -1,24 +1,33 @@
 <template>
   <section id="Profile" :class="{ whiteProfileTheme: !isDarkTheme }">
     <div id="Profile_topLine"></div>
+
     <div id="Profile_mainInfo">
       <img :src="userInfo.image" alt="Фото профиля">
       <h2>{{ userInfo.name }}</h2>
       <p>{{ userInfo.employment }}</p>
       <p>I'd love to change the world, but they won't give me the source code</p>
     </div>
+    
     <span id="Profile_secondaryInfo">
       <div>
         <p>{{ userInfo.followers }}</p> 
-        <p>{{ followersCountText }}</p></div>
+        <p>{{ followersCountText }}</p>
+      </div>
+
       <div>
         <p>{{ userInfo.posts }}</p>
-        <p>{{ postsCountText }}</p></div>
+        <p>{{ postsCountText }}</p>
+      </div>
+
       <div>
         <p>{{ userInfo.views }}</p>
-        <p>{{ viewsCountText }}</p></div>
+        <p>{{ viewsCountText }}</p>
+      </div>
     </span>
+
     <div id="Profile_centerLine"></div>
+    
     <ProfileMenuComp/>
   </section>
 </template>
