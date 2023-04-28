@@ -2,43 +2,55 @@
   <section>
     <div id="Registration">
       <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
+
       <form>
-        <ErrorComp :error="error" :errLength="error.length"/>
+        <ErrorComp 
+          :error="error" 
+          :errLength="error.length"
+        />
         <div class="registration_inputs_container">
           <div class="registration_inputs">
             <p>Имя</p>
             <input type="text" placeholder="Введите имя" v-model="name">
           </div>
+
           <div class="registration_inputs">
             <p>Фамилия</p>
             <input type="text" placeholder="Введите фамилию" v-model="secondName">
           </div>
         </div>
+
         <div class="registration_inputs_container">
           <div class="registration_inputs">
             <p>Имя пользователя</p>
             <input type="text" placeholder="Введите имя пользователя" v-model="userName">
           </div>
+
           <div class="registration_inputs">
             <p>E-mail</p>
             <input type="text" placeholder="Введите e-mail" v-model="email">
           </div>
         </div>
+
         <div class="registration_inputs_container">
           <div class="registration_inputs">
             <p>Пароль</p>
             <input type="password" placeholder="Введите пароль" v-model="password">
           </div>
+
           <div class="registration_inputs">
             <p>Повторите пароль</p>
             <input type="password" placeholder="Введите пароль ещё раз" v-model="repeatedPassword">
           </div>
         </div>
+
         <div id="Registation_termsOfUse">
           <input type="checkbox" name="termsOfUse" v-model="agreeToTermsOfUse" > 
           <label for="termsOfUse">Я принимаю условия <router-link to="/docs/termsOfUse" target="_blank" id="Registation_termsOfUse_route">Пользовательского соглашения</router-link></label>
         </div>
+
         <button class="registration_button" type="button" @click="setValuesRegistration()" v-if="agreeToTermsOfUse">Зарегистрироваться</button>
+        
         <button class="registration_button registration_notActiveButton" type="button" v-if="!agreeToTermsOfUse">Зарегистрироваться</button>
       </form>
     </div>

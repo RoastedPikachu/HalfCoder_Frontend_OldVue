@@ -1,24 +1,34 @@
 <template>
   <section>
     <div id="vk_api_transport"></div>
+
     <div id="SignIn">
       <h1> <p>&lt;</p> HalfCoder <p>/></p> </h1>
+
       <form>
-        <ErrorComp :error="error" :errLength="error.length"/>
+        <ErrorComp 
+          :error="error" 
+          :errLength="error.length"
+        />
+
         <div class="signIn_inputs">
           <p>Имя пользователя/email</p>
           <input type="text" placeholder="Введите логин" v-model="login">
         </div>
+
         <div class="signIn_inputs">
           <p>Пароль</p>
           <input type="password" placeholder="Введите пароль" v-model="password">
         </div>
+
         <div id="signIn_ExternalButtons" v-if="whenPohui">
           <button></button>
           <button></button>
           <button @click="githubAuth()"></button>
         </div>
+
         <button id="signIn_FormButton" type="button" @click="setValuesLogin()">Войти</button>
+        
         <router-link to="/docs/termsOfUse" target="_blank" class="route">Пользовательское соглашение</router-link>
       </form>
     </div>

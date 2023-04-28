@@ -2,8 +2,11 @@
   <section>
     <div>
       <p id="Tech">Technical</p>
+
       <h1> <p>&lt;</p> Works <p>/></p> </h1>
+
       <p id="TechRuDesc">В данный момент сайт недоступен.</p>
+      
       <p id="TechEngDesc">The site is currently unavailable.</p>
     </div>
   </section>

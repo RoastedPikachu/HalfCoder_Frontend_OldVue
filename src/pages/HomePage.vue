@@ -1,21 +1,28 @@
 <template>
-  <HeaderComp :token="token"/>
+  <TheHeaderComp :token="token"/>
   <section id="MainBlock">
     <aside id="MainBlock_info">
       <ProfileSignInComp v-if="isSignIn"/>
+
       <ProfileNotSignInComp v-if="!isSignIn"/>
+
       <CompaniesComp/>
     </aside>
     <section id="MainBlock_child">
       <RecommendedCategoriesComp/> 
+
       <PostsComp/>
+
       <aside id="MainBlock_asideRight">
         <RaitingComp/>
+
         <NewsComp/>
-        <FooterComp/>
+
+        <TheFooterComp/>
       </aside>
     </section>
   </section>
+  
   <CookieComp/>
 </template>
 
@@ -23,7 +30,7 @@
   import { defineComponent } from 'vue';
   import { ref, onMounted } from 'vue';
   import store from '@/store';
-  import HeaderComp from '@/widgets/shared/HeaderComp.vue';
+  import TheHeaderComp from '@/widgets/shared/TheHeaderComp.vue';
   import ProfileSignInComp from '@/widgets/HomePage/ProfileSignInComp.vue';
   import ProfileNotSignInComp from '@/widgets/HomePage/ProfileNotSignInComp.vue';
   import CompaniesComp from '@/widgets/HomePage/CompaniesComp.vue';
@@ -31,7 +38,7 @@
   import PostsComp from '@/widgets/HomePage/PostsComp.vue';
   import RaitingComp from '@/widgets/HomePage/RaitingComp.vue';
   import NewsComp from '@/widgets/HomePage/NewsComp.vue';
-  import FooterComp from '@/widgets/shared/FooterComp.vue';
+  import TheFooterComp from '@/widgets/shared/TheFooterComp.vue';
   import CookieComp from '@/widgets/shared/CookieComp.vue';
 
   export default defineComponent({
@@ -60,7 +67,7 @@
       }
     },
     components: {
-      HeaderComp,
+      TheHeaderComp,
       ProfileSignInComp,
       ProfileNotSignInComp,
       CompaniesComp,
@@ -68,7 +75,7 @@
       PostsComp,
       RaitingComp,
       NewsComp,
-      FooterComp,
+      TheFooterComp,
       CookieComp
     },
   })

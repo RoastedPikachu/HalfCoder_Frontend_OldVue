@@ -6,7 +6,7 @@ import SignInPage from '@/pages/SignInPage.vue';
 import CreatePostPage from '@/pages/CreatePostPage.vue';
 import EventsPage from '@/pages/EventsPage.vue';
 import TermsOfUsePage from '@/pages/TermsOfUsePage.vue';
-import APIErrorPage from '@/pages/APIErrorPage.vue';
+import Error404Page from '@/pages/Error404Page.vue';
 import TechnicalWorksPage from '@/pages/TechnicalWorksPage.vue';
  
 const routes: Array<RouteRecordRaw> = [
@@ -47,8 +47,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/404',
-    name: 'errorPage',
-    component: APIErrorPage
+    name: 'error404Page',
+    component: Error404Page
   },
   {
     path: '/techWorks',

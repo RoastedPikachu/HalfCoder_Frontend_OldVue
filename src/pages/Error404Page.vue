@@ -1,5 +1,5 @@
 <template>
-  <HeaderComp/>
+  <TheHeaderComp/>
   <section>
     <div>
       <p id="Error">error</p>
@@ -13,12 +13,12 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { ref, onMounted, watch } from 'vue';
-  import HeaderComp from '@/widgets/shared/HeaderComp.vue';
+  import TheHeaderComp from '@/widgets/shared/TheHeaderComp.vue';
 
   export default defineComponent({
     name: 'APIErrorPage',
     components: {
-      HeaderComp
+      TheHeaderComp
     }
   })
 </script>

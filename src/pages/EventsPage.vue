@@ -1,18 +1,22 @@
 <template>
-  <HeaderComp/>
+  <TheHeaderComp/>
   <section id="mainBlock">
     <aside>
       <ProfileSignInComp/>
-      <FooterComp/>
+
+      <TheFooterComp/>
     </aside>
+
     <div class="mainInfoAboutEvents" :class="{ whiteEventsTheme: !isDarkTheme }">
       <span id="MainInfoAboutEvents_Top">
         <h2>Мероприятия</h2>  
+
         <button>
           <i class="fa-solid fa-plus"></i>
           <p>Создать мероприятие</p>
         </button>
       </span>
+
       <span id="MainInfoAboutEvents_Nav">
         <p>Топ</p>
         <p>Локальные</p>
@@ -21,8 +25,12 @@
         <p>Друзья</p>
         <p>Подписки</p>
       </span>
+
       <div id="MainInfoAboutEvents_container">
-        <div class="mainInfoAboutEvents_eventBlock" v-for="event of events" :key="event.id">
+        <div class="mainInfoAboutEvents_eventBlock" 
+          v-for="event of events" 
+          :key="event.id"
+        >
           <div class="loadingPhoto" v-show="!isLoaded"></div>
           <img :src="event.photo" alt="Изображение события" v-show="isLoaded">
 
@@ -44,6 +52,7 @@
 
           <span>
             <button>Интересно</button>
+            
             <button>
               <svg width="17" height="18" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.8332 15C13.0298 15 13.9998 14.0599 13.9998 12.9C13.9998 11.7402 13.0298 10.8 11.8332 10.8C10.6365 10.8 9.6665 11.7402 9.6665 12.9C9.6665 14.0599 10.6365 15 11.8332 15Z" stroke="#3D5AFF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -65,9 +74,9 @@
   import { ref, watch } from 'vue';
   import axios from 'axios';
   import store from '@/store/index';
-  import HeaderComp from '@/widgets/shared/HeaderComp.vue';
+  import TheHeaderComp from '@/widgets/shared/TheHeaderComp.vue';
   import ProfileSignInComp from '@/widgets/HomePage/ProfileSignInComp.vue';
-  import FooterComp from '@/widgets/shared/FooterComp.vue';
+  import TheFooterComp from '@/widgets/shared/TheFooterComp.vue';
 
   interface Event {
     id: number,
@@ -167,9 +176,9 @@
       this.getEventsByCategory();
     },
     components: {
-      HeaderComp,
+      TheHeaderComp,
       ProfileSignInComp,
-      FooterComp
+      TheFooterComp
     }
   })
 </script>

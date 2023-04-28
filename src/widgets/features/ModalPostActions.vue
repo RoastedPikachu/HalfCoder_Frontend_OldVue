@@ -5,13 +5,11 @@
   >
     <button>
       <img src="@/assets/bookmark_icon.svg" alt="В закладки">
-
       <p>В закладки</p>
     </button>
 
     <button>
       <i class="fa-solid fa-flag"></i>
-
       <p>Репорт</p> 
     </button>
   </div>

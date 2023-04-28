@@ -1,10 +1,12 @@
 <template>
-  <HeaderComp/>
+  <TheHeaderComp/>
   <section id="MainBlock">
     <aside id="MainBlock_LeftOtherInfo">
       <ProfileMenuComp/>
-      <FooterComp/>
+
+      <TheFooterComp/>
     </aside>
+    
     <SettingsComp/>
   </section>
 </template>
@@ -13,8 +15,8 @@
   import { defineComponent } from 'vue';
   import { ref, watch } from 'vue';
   import store from '@/store/index';
-  import HeaderComp from '@/widgets/shared/HeaderComp.vue';
-  import FooterComp from '@/widgets/shared/FooterComp.vue';
+  import TheHeaderComp from '@/widgets/shared/TheHeaderComp.vue';
+  import TheFooterComp from '@/widgets/shared/TheFooterComp.vue';
   import ProfileMenuComp from '@/widgets/features/ProfileMenuComp.vue';
   import SettingsComp from '@/widgets/SettingsPage/SettingsComp.vue';
 
@@ -34,9 +36,9 @@
       }
     },
     components: {
-      HeaderComp,
+      TheHeaderComp,
       ProfileMenuComp,
-      FooterComp,
+      TheFooterComp,
       SettingsComp
     }
   })
